@@ -1,11 +1,11 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
+body, html {
     margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 #game {
-    border: 2px solid #000;
+    display: block;
+    width: 100vw;
+    height: 100vh;
 }
