@@ -14,10 +14,19 @@ const dragon = {
 
 const obstacles = [];
 let level = 1;
+let obstacleSpawnTime = 3000; // 3 seconds
+let lastObstacleTime = 0;
+let gameTime = 0;
+const levelDuration = 20000; // 20 seconds
 
 function draw() {
     // Clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw level
+    context.font = "40px 'MedievalSharp', cursive"; // Example medieval font
+    context.fillStyle = 'black';
+    context.fillText("Level " + level, 10, 40);
 
     // Draw dragon (placeholder rectangle)
     context.fillStyle = 'red';
@@ -32,6 +41,10 @@ function draw() {
 }
 
 function update() {
+    const now = Date.now();
+    const deltaTime = now - lastObstacleTime;
+    gameTime += deltaTime;
+
     // Update dragon's position
     dragon.velocity += 1; // Gravity
     dragon.y += dragon.velocity;
@@ -42,11 +55,32 @@ function update() {
     });
 
     // Generate new obstacles
-    if (obstacles.length < level) {
+    if (deltaTime >= obstacleSpawnTime) {
         const height = Math.random() * 200 + 100; // Random height
-        const gap = 200; // Gap between top and bottom obstacles
+        const gap = 250; // Gap between top and bottom obstacles
         obstacles.push({ x: canvas.width, y: 0, width: 50, height: height, gap: gap });
+        lastObstacleTime = now;
+        obstacleSpawnTime -= 10; // Subtract 0.01 second from spawn interval
     }
+
+    // Check collisions
+    // ... collision detection code ...
+
+    // Level progression
+    if (gameTime >= levelDuration) {
+        level++;
+        gameTime = 0;
+    }
+
+    draw();
+}
+
+// Event listener for player input
+// ... input code ...
+
+// Game loop
+setInterval(update, 1000 / 60);
+
 
     // Check collisions
     obstacles.forEach(obstacle => {
