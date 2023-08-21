@@ -9,3 +9,8 @@ body, html {
     width: 100vw;
     height: 100vh;
 }
+
+// Event listener for player input (touch)
+window.addEventListener('touchstart', () => {
+    dragon.velocity = -10; // Flap
+});
