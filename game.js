@@ -4,10 +4,13 @@ const context = canvas.getContext('2d');
 const dragon = {
     x: 100,
     y: 300,
+    width: 50,
+    height: 50,
     velocity: 0
 };
 
 const obstacles = [];
+let level = 1;
 
 function draw() {
     // Clear canvas
@@ -15,7 +18,7 @@ function draw() {
 
     // Draw dragon (placeholder rectangle)
     context.fillStyle = 'red';
-    context.fillRect(dragon.x, dragon.y, 50, 50);
+    context.fillRect(dragon.x, dragon.y, dragon.width, dragon.height);
 
     // Draw obstacles (placeholder rectangles)
     obstacles.forEach(obstacle => {
@@ -30,10 +33,29 @@ function update() {
     dragon.y += dragon.velocity;
 
     // Update obstacles
-    // TODO: Add logic to move obstacles and generate new ones
+    obstacles.forEach(obstacle => {
+        obstacle.x -= 5; // Move obstacles to the left
+    });
+
+    // Generate new obstacles
+    if (obstacles.length < level) {
+        const height = Math.random() * 200 + 100; // Random height
+        obstacles.push({ x: canvas.width, y: canvas.height - height, width: 50, height: height });
+    }
 
     // Check collisions
-    // TODO: Add collision detection
+    obstacles.forEach(obstacle => {
+        if (
+            dragon.x < obstacle.x + obstacle.width &&
+            dragon.x + dragon.width > obstacle.x &&
+            dragon.y < obstacle.y + obstacle.height &&
+            dragon.y + dragon.height > obstacle.y
+        ) {
+            // Collision detected
+            console.log('Game Over, Bro!');
+            // TODO: Handle game over or restart level
+        }
+    });
 
     draw();
 }
