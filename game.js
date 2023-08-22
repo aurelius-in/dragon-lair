@@ -34,6 +34,12 @@ function draw() {
         context.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
         context.fillRect(obstacle.x, obstacle.y + obstacle.gap + obstacle.height, obstacle.width, canvas.height - (obstacle.y + obstacle.gap + obstacle.height));
     });
+
+    // Draw score
+    context.font = "100px sans-serif"; // Large sans-serif font
+    context.fillStyle = "rgba(0, 0, 0, 0.5)"; // Semi-transparent black
+    context.textAlign = "center"; // Center alignment
+    context.fillText(score, canvas.width / 2, canvas.height / 2); // Draw score in the center
 }
 
 function update() {
