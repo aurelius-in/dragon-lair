@@ -26,7 +26,6 @@ const dragon = {
     velocity: 0
 };
 
-
 const obstacles = [];
 let gameTime = 0;
 const levelDuration = 20000; // 20 seconds
@@ -39,9 +38,8 @@ function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     // Animate dragon
-    if (gameTime % 5 === 0) { // Speed up the animation
+    if (gameTime % 3 === 0) { // Speed up the animation without fading
         currentFrame = (currentFrame + 1) % dragonImages.length;
-        context.globalAlpha = (gameTime % 5) / 5; // Fade between images
     }
     context.drawImage(
         dragonImages[currentFrame],
@@ -50,14 +48,12 @@ function draw() {
         180,
         180
     );
-    context.globalAlpha = 1; // Reset opacity
 
-    // Draw obstacles (placeholder rectangles)
+    // Draw obstacles
     const gap = 96; // Gap between top and bottom obstacles
     obstacles.forEach(obstacle => {
         context.fillStyle = 'green';
         context.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-        context.fillRect(obstacle.x, obstacle.y + obstacle.height + gap, obstacle.width, canvas.height - (obstacle.y + obstacle.height + gap));
     });
 
     // Draw score
@@ -73,14 +69,8 @@ function update() {
     gameTime += deltaTime;
 
     // Update dragon's position
-    dragon.velocity += 0.3; // Reduced gravity even more
-    dragon.y += dragon.velocity * 0.4; // Slowed down the dragon even more
-
-    // Animate dragon
-    if (gameTime % 5 === 0) { // Speed up the animation
-        currentFrame = (currentFrame + 1) % dragonImages.length;
-        context.globalAlpha = (gameTime % 5) / 5; // Fade between images
-    }
+    dragon.velocity += 0.3; // Reduced gravity
+    dragon.y += dragon.velocity * 0.4; // Slowed down the dragon
 
     // Update obstacles
     obstacles.forEach(obstacle => {
@@ -91,8 +81,8 @@ function update() {
     if (deltaTime >= obstacleSpawnTime) {
         const x = canvas.width;
         const gap = 96; // One-inch gap, assuming 96 DPI
-        const y = topObstacle ? 0 : canvas.height - gap;
-        const height = gap;
+        const y = topObstacle ? 0 : canvas.height / 2 + gap / 2;
+        const height = canvas.height / 2 - gap / 2; // Extend to 1 inch from the center
         obstacles.push({ x: x, y: y, width: 50, height: height }); // Single obstacle
         lastObstacleTime = now;
         obstacleSpawnTime -= obstacleSpawnTime * 0.05; // Decrease spawn interval by 5%
