@@ -98,30 +98,6 @@ function update() {
     draw();
 }
 
-
-// Game loop
-setInterval(update, 1000 / 60);
-
-
-    // Check collisions
-    obstacles.forEach(obstacle => {
-        if (
-            (dragon.x < obstacle.x + obstacle.width && dragon.x + dragon.width > obstacle.x) &&
-            ((dragon.y < obstacle.y + obstacle.height && dragon.y + dragon.height > obstacle.y) ||
-            (dragon.y < obstacle.y + obstacle.gap + obstacle.height * 2 && dragon.y + dragon.height > obstacle.y + obstacle.gap + obstacle.height))
-        ) {
-            // Collision detected
-            console.log('Game Over, Bro!');
-            obstacles.length = 0; // Clear obstacles
-            dragon.y = canvas.height * 0.5; // Reset dragon position
-            dragon.velocity = 0; // Reset dragon velocity
-            level = 1; // Reset level
-        }
-    });
-
-    draw();
-}
-
 // Event listener for player input
 window.addEventListener('click', () => {
     dragon.velocity = -10; // Flap
