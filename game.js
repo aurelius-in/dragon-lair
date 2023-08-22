@@ -38,14 +38,19 @@ function draw() {
     // Clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw dragon (using individual images)
+    // Animate dragon
+    if (gameTime % 5 === 0) { // Speed up the animation
+        currentFrame = (currentFrame + 1) % dragonImages.length;
+        context.globalAlpha = (gameTime % 5) / 5; // Fade between images
+    }
     context.drawImage(
-        dragonImages[currentFrame], // Current image
-        dragon.x, // Destination x
-        dragon.y, // Destination y
-        180, // Destination width (size of the dragon images)
-        180 // Destination height (size of the dragon images)
+        dragonImages[currentFrame],
+        dragon.x,
+        dragon.y,
+        180,
+        180
     );
+    context.globalAlpha = 1; // Reset opacity
 
     // Draw obstacles (placeholder rectangles)
     const gap = 96; // Gap between top and bottom obstacles
