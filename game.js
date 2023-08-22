@@ -42,16 +42,6 @@ for (let i = 1; i <= 3; i++) {
 }
 
 let currentFrame = 0; // Current frame being displayed
-
-// Initialize dragon
-let dragon = {
-    x: dragonStartX,
-    y: dragonStartY,
-    width: 180,
-    height: 180,
-    velocity: 0
-};
-
 const obstacles = [];
 let gameTime = 0;
 let obstacleSpawnTime = 5000; // 5 seconds
@@ -81,8 +71,9 @@ function draw() {
         context.fillStyle = 'green';
         const perchWidth = 200; // Wider perch
         const perchHeight = 100;
-        const perchX = dragon.x + dragon.width / 2 - perchWidth / 2; // Centered with the dragon
-        const perchY = dragon.y + dragon.height;
+        const perchX = dragon.x + dragon.width / 2 - perchWidth / 2; // Adjust as needed
+const perchY = dragon.y + dragon.height; // Adjust as needed
+
         context.fillRect(perchX, perchY, perchWidth, perchHeight); // Taller perch
     }
 
@@ -123,12 +114,12 @@ function createObstacle() {
         : canvas.height - randomDistanceFromCenter - obstacleSize;
 
     // Create the obstacle object
-    const obstacle = {
-        x: obstacleX,
-        y: obstacleY,
-        width: obstacleSize,
-        height: obstacleSize
-    };
+   const obstacle = {
+    x: obstacleX,
+    y: obstacleY,
+    width: obstacleWidth, // Use obstacleWidth
+    height: obstacleHeight // Use obstacleHeight
+};
 
     // Add the obstacle to the obstacles array
     obstacles.push(obstacle);
