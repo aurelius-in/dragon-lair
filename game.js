@@ -143,7 +143,18 @@ const obstacleY = topObstacle
     obstacleSpawnTime *= 0.99;
 }
 
+// Update function
 function update() {
+    // Update the background positions
+    bgX -= 0.5; // Adjust speed as needed
+    fgX -= 1; // Adjust speed as needed
+    bgbgX -= 0.25; // Adjust speed as needed
+
+    // Loop the backgrounds
+    if (bgX <= -canvas.width) bgX = 0;
+    if (fgX <= -canvas.width) fgX = 0;
+    if (bgbgX <= -canvas.width) bgbgX = 0;
+
     if (gameStarted) {
         // Update dragon's velocity and position
         dragon.velocity += gravity;
