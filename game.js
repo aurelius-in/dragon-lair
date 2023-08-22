@@ -61,7 +61,11 @@ function draw() {
     // Draw perch if the game hasn't started
     if (!gameStarted) {
         context.fillStyle = 'green';
-        context.fillRect(dragon.x, dragon.y + dragon.height, 50, 100); // Taller perch
+        const perchWidth = 200; // Wider perch
+        const perchHeight = 100;
+        const perchX = dragon.x + dragon.width / 2 - perchWidth / 2; // Centered with the dragon
+        const perchY = dragon.y + dragon.height;
+        context.fillRect(perchX, perchY, perchWidth, perchHeight); // Taller perch
     }
 
     // Draw dragon
