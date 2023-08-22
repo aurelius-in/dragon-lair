@@ -1,9 +1,19 @@
 const canvas = document.getElementById('game');
+const context = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let score = 0;
 
-const context = canvas.getContext('2d');
+// Create an array to hold the dragon images and load them
+const dragonImages = [];
+for (let i = 1; i <= 3; i++) {
+    for (let j = 1; j <= (i === 1 ? 4 : 3); j++) {
+        const char = String.fromCharCode(96 + j);
+        const image = new Image();
+        image.src = `images/dragon${i}${char}.png`;
+        dragonImages.push(image);
+    }
+}
 
 const dragon = {
     x: canvas.width * 0.1,
@@ -24,9 +34,14 @@ function draw() {
     // Clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw dragon (placeholder rectangle)
-    context.fillStyle = 'red';
-    context.fillRect(dragon.x, dragon.y, dragon.width, dragon.height);
+    // Draw dragon (using individual images)
+    context.drawImage(
+        dragonImages[currentFrame], // Current image
+        dragon.x, // Destination x
+        dragon.y, // Destination y
+        180, // Destination width (size of the dragon images)
+        180 // Destination height (size of the dragon images)
+    );
 
     // Draw obstacles (placeholder rectangles)
     obstacles.forEach(obstacle => {
@@ -50,6 +65,11 @@ function update() {
     // Update dragon's position
     dragon.velocity += 1; // Gravity
     dragon.y += dragon.velocity;
+
+    // Animate dragon
+    if (gameTime % 10 === 0) { // Change frame every 10 game ticks, or whatever interval you prefer
+        currentFrame = (currentFrame + 1) % dragonImages.length;
+    }
 
     // Update obstacles
     obstacles.forEach(obstacle => {
