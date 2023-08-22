@@ -4,6 +4,10 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let score = 0;
 
+// Gravity and obstacle speed
+const gravity = 0.5; // Adjust as needed
+const obstacleSpeed = 5; // Adjust as needed
+
 // Create an array to hold the dragon images and load them
 const dragonImages = [];
 for (let i = 1; i <= 3; i++) {
@@ -82,6 +86,29 @@ function draw() {
     context.fillText(score, canvas.width / 2, canvas.height / 2);
 }
 
+function createObstacle() {
+    // Determine the height and position of the obstacle
+    const obstacleHeight = 100; // You can adjust this value
+    const obstacleY = topObstacle ? 0 : canvas.height - obstacleHeight;
+
+    // Create the obstacle object
+    const obstacle = {
+        x: canvas.width,
+        y: obstacleY,
+        width: 50, // You can adjust this value
+        height: obstacleHeight
+    };
+
+    // Add the obstacle to the obstacles array
+    obstacles.push(obstacle);
+
+    // Alternate between top and bottom obstacles
+    topObstacle = !topObstacle;
+
+    // Reduce the spawn time for the next obstacle by 5%
+    obstacleSpawnTime *= 0.95;
+}
+
 function update() {
     // Only update obstacles and dragon if the game has started
     if (gameStarted) {
@@ -89,6 +116,13 @@ function update() {
         dragon.velocity += gravity; // Apply gravity
         dragon.y += dragon.velocity; // Update y position
 
+// Check if it's time to spawn a new obstacle
+    const currentTime = Date.now();
+    if (currentTime - lastObstacleTime >= obstacleSpawnTime) {
+        createObstacle(); // Create a new obstacle
+        lastObstacleTime = currentTime; // Update the last obstacle time
+    }
+        
         // Check for collision with ground
         if (dragon.y + dragon.height > canvas.height) {
             // Reset dragon to starting position
