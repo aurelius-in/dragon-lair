@@ -46,21 +46,22 @@ function update() {
 
     // Update obstacles
     obstacles.forEach(obstacle => {
-        obstacle.x -= 5; // Move obstacles to the left
+        if (obstacle.direction === 'left') {
+            obstacle.x += 5; // Move obstacles to the right
+        } else {
+            obstacle.x -= 5; // Move obstacles to the left
+        }
     });
 
     // Generate new obstacles
     if (deltaTime >= obstacleSpawnTime) {
+        const height = Math.random() * (canvas.height - 200) + 100; // Random height
         const width = 50; // Obstacle width
-        const direction = Math.random() < 0.5 ? 'top' : 'bottom'; // Random direction
-        const x = canvas.width;
-        const y = direction === 'top' ? 0 : canvas.height - 200; // Top or bottom of the screen
-
-        obstacles.push({ x: x, y: y, width: width, height: 200, direction: direction }); // Single obstacle
-
-        // Randomize spawn time between 5 and 7 seconds
-        obstacleSpawnTime = (Math.random() * 2 + 5) * 1000;
+        const direction = Math.random() < 0.5 ? 'left' : 'right'; // Random direction
+        const x = direction === 'left' ? -width : canvas.width;
+        obstacles.push({ x: x, y: height, width: width, height: 200, direction: direction }); // Single obstacle
         lastObstacleTime = now;
+        obstacleSpawnTime -= obstacleSpawnTime * 0.1; // Decrease spawn interval by 10% of the current interval
     }
 
     // Check collisions
@@ -76,11 +77,18 @@ function update() {
             obstacles.length = 0; // Clear obstacles
             dragon.y = canvas.height * 0.5; // Reset dragon position
             dragon.velocity = 0; // Reset dragon velocity
-            obstacleSpawnTime = (Math.random() * 2 + 5) * 1000; // Reset obstacle spawn time
+            level = 1; // Reset level
+            obstacleSpawnTime = 3000; // Reset obstacle spawn time
             lastObstacleTime = now; // Reset last obstacle time
             gameTime = 0; // Reset game time
         }
     });
+
+    // Level progression
+    if (gameTime >= levelDuration) {
+        level++;
+        gameTime = 0;
+    }
 
     draw();
 }
