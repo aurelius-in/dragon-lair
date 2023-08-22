@@ -126,6 +126,7 @@ function draw() {
     context.fillText(score, canvas.width / 2, canvas.height / 2);
 }
 
+// Function to create obstacles
 function createObstacle() {
     // Determine the position of the obstacle
     const obstacleSize = 50; // 50px x 50px square
