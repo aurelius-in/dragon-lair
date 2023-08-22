@@ -42,27 +42,14 @@ function draw() {
         currentFrame = (currentFrame + 1) % dragonImages.length;
     }
 
-    // Save context state
-    context.save();
-
-    // Translate to dragon's center
-    context.translate(dragon.x + 90, dragon.y + 90);
-
-    // Rotate based on velocity
-    const tiltAngle = Math.atan2(dragon.velocity, 10);
-    context.rotate(tiltAngle);
-
-    // Draw dragon with rotation
+    // Draw dragon without rotation
     context.drawImage(
         dragonImages[currentFrame],
-        -90,
-        -90,
+        dragon.x,
+        dragon.y,
         180,
         180
     );
-
-    // Restore context state
-    context.restore();
 
     // Draw obstacles
     const gap = 96; // Gap between top and bottom obstacles
@@ -77,8 +64,6 @@ function draw() {
     context.textAlign = "center"; // Center alignment
     context.fillText(score, canvas.width / 2, canvas.height / 2); // Draw score in the center
 }
-
-
 
 function update() {
     const now = Date.now();
