@@ -15,8 +15,6 @@ for (let i = 1; i <= 9; i++) {
     obstacleImages.push(image);
 }
 
-let score = 0;
-
 // Constants for dragon size and starting position
 const dragonWidth = 150;
 const dragonHeight = 150;
