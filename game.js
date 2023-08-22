@@ -15,6 +15,9 @@ for (let i = 1; i <= 3; i++) {
     }
 }
 
+let currentFrame = 0; // Current frame being displayed
+
+
 const dragon = {
     x: canvas.width * 0.1,
     y: canvas.height * 0.5,
@@ -44,10 +47,11 @@ function draw() {
     );
 
     // Draw obstacles (placeholder rectangles)
+    const gap = 96; // Gap between top and bottom obstacles
     obstacles.forEach(obstacle => {
         context.fillStyle = 'green';
         context.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-        context.fillRect(obstacle.x, obstacle.y + obstacle.gap + obstacle.height, obstacle.width, canvas.height - (obstacle.y + obstacle.gap + obstacle.height));
+        context.fillRect(obstacle.x, obstacle.y + obstacle.height + gap, obstacle.width, canvas.height - (obstacle.y + obstacle.height + gap));
     });
 
     // Draw score
@@ -56,6 +60,7 @@ function draw() {
     context.textAlign = "center"; // Center alignment
     context.fillText(score, canvas.width / 2, canvas.height / 2); // Draw score in the center
 }
+
 
 function update() {
     const now = Date.now();
