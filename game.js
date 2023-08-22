@@ -122,8 +122,6 @@ function createObstacle() {
     obstacleSpawnTime *= 0.99;
 }
 
-let gameTime = 0;
-
 function update() {
     if (gameStarted) {
         // Update dragon's velocity and position
