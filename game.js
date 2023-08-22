@@ -92,14 +92,15 @@ function draw() {
 
 function createObstacle() {
     // Determine the height and position of the obstacle
-    const obstacleHeight = 100; // You can adjust this value
+    const obstacleWidth = 50; // You can adjust this value
+    const obstacleHeight = canvas.height / 2 - 96; // 1 inch from the center, adjust as needed
     const obstacleY = topObstacle ? 0 : canvas.height - obstacleHeight;
 
     // Create the obstacle object
     const obstacle = {
         x: canvas.width,
         y: obstacleY,
-        width: 50, // You can adjust this value
+        width: obstacleWidth,
         height: obstacleHeight
     };
 
