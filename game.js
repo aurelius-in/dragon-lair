@@ -4,8 +4,44 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 let score = 0;
 
+// Constants for dragon size and starting position
+const dragonWidth = 150;
+const dragonHeight = 150;
+const dragonStartX = canvas.width * 0.1 - 50; // Move back by 50 pixels
+const dragonStartY = canvas.height * 0.5;
+
+// Constants for gravity and jump strength
+const gravity = 0.2; // Reduce gravity
+const jump = -4; // Reduce jump strength
+
+// Constants for obstacle size
+const obstacleWidth = 25;
+const obstacleHeight = 25;
+
+// Dragon object
+const dragon = {
+    x: dragonStartX,
+    y: dragonStartY,
+    width: dragonWidth,
+    height: dragonHeight,
+    velocity: 0
+};
+
+// Function to create obstacles
+function createObstacle() {
+    const obstacleY = Math.random() * (canvas.height - obstacleHeight);
+    const obstacle = {
+        x: canvas.width,
+        y: obstacleY,
+        width: obstacleWidth,
+        height: obstacleHeight
+    };
+    obstacles.push(obstacle);
+}
+
+
+
 // Gravity and obstacle speed
-const gravity = 0.5; // Adjust as needed
 const obstacleSpeed = 5; // Adjust as needed
 
 // Create an array to hold the dragon images and load them
