@@ -90,18 +90,22 @@ function draw() {
     context.fillText(score, canvas.width / 2, canvas.height / 2);
 }
 
+let obstacleDistanceFromCenter = canvas.height / 2 - 192; // Start 2 inches from the center, adjust as needed
+
 function createObstacle() {
-    // Determine the height and position of the obstacle
-    const obstacleWidth = 50; // You can adjust this value
-    const obstacleHeight = canvas.height / 2 - 96; // 1 inch from the center, adjust as needed
-    const obstacleY = topObstacle ? 0 : canvas.height - obstacleHeight;
+    // Determine the position of the obstacle
+    const obstacleSize = 50; // 50px x 50px square
+    const obstacleX = canvas.width;
+    const obstacleY = topObstacle
+        ? obstacleDistanceFromCenter
+        : canvas.height - obstacleDistanceFromCenter - obstacleSize;
 
     // Create the obstacle object
     const obstacle = {
-        x: canvas.width,
+        x: obstacleX,
         y: obstacleY,
-        width: obstacleWidth,
-        height: obstacleHeight
+        width: obstacleSize,
+        height: obstacleSize
     };
 
     // Add the obstacle to the obstacles array
@@ -112,6 +116,9 @@ function createObstacle() {
 
     // Reduce the spawn time for the next obstacle by 5%
     obstacleSpawnTime *= 0.95;
+
+    // Move the obstacle 5% closer to the center
+    obstacleDistanceFromCenter *= 0.95;
 }
 
 function update() {
