@@ -23,11 +23,6 @@ function draw() {
     // Clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Draw level
-    context.font = "40px 'MedievalSharp', cursive"; // Example medieval font
-    context.fillStyle = 'black';
-    context.fillText("Level " + level, 10, 40);
-
     // Draw dragon (placeholder rectangle)
     context.fillStyle = 'red';
     context.fillRect(dragon.x, dragon.y, dragon.width, dragon.height);
