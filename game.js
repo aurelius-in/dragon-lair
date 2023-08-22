@@ -36,6 +36,7 @@ function draw() {
 }
 
 function update() {
+function update() {
     const now = Date.now();
     const deltaTime = now - lastObstacleTime;
     gameTime += deltaTime;
@@ -55,13 +56,12 @@ function update() {
 
     // Generate new obstacles
     if (deltaTime >= obstacleSpawnTime) {
-        const height = Math.random() * (canvas.height - 200) + 100; // Random height
-        const width = 50; // Obstacle width
         const direction = Math.random() < 0.5 ? 'left' : 'right'; // Random direction
-        const x = direction === 'left' ? -width : canvas.width;
-        obstacles.push({ x: x, y: height, width: width, height: 200, direction: direction }); // Single obstacle
+        const x = direction === 'left' ? -50 : canvas.width;
+        const y = Math.random() < 0.5 ? 0 : canvas.height - 200; // Random top or bottom
+        obstacles.push({ x: x, y: y, width: 50, height: 200, direction: direction }); // Single obstacle
         lastObstacleTime = now;
-        obstacleSpawnTime -= obstacleSpawnTime * 0.1; // Decrease spawn interval by 10% of the current interval
+        obstacleSpawnTime -= obstacleSpawnTime * 0.15; // Decrease spawn interval by 15% of the current interval
     }
 
     // Check collisions
@@ -78,7 +78,7 @@ function update() {
             dragon.y = canvas.height * 0.5; // Reset dragon position
             dragon.velocity = 0; // Reset dragon velocity
             level = 1; // Reset level
-            obstacleSpawnTime = 3000; // Reset obstacle spawn time
+            obstacleSpawnTime = 6000; // Reset obstacle spawn time to 6 seconds
             lastObstacleTime = now; // Reset last obstacle time
             gameTime = 0; // Reset game time
         }
