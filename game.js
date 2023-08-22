@@ -17,18 +17,21 @@ for (let i = 1; i <= 3; i++) {
 
 let currentFrame = 0; // Current frame being displayed
 
+// Dragon's starting position
+const dragonStartX = 50;
+const dragonStartY = 200;
 
-const dragon = {
-    x: canvas.width * 0.1,
-    y: canvas.height * 0.5,
-    width: 180, // Updated width to match dragon image
-    height: 180, // Updated height to match dragon image
+// Initialize dragon
+let dragon = {
+    x: dragonStartX,
+    y: dragonStartY,
+    width: 180,
+    height: 180,
     velocity: 0
 };
 
 const obstacles = [];
 let gameTime = 0;
-const levelDuration = 20000; // 20 seconds
 let obstacleSpawnTime = 5000; // 5 seconds
 let lastObstacleTime = Date.now();
 let topObstacle = true; // To alternate between top and bottom obstacles
@@ -46,19 +49,6 @@ window.addEventListener('touchstart', () => {
     dragon.velocity = -5; // Reduced flap strength
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
-
-// Dragon's starting position
-const dragonStartX = 50;
-const dragonStartY = 200;
-
-// Initialize dragon
-let dragon = {
-    x: dragonStartX,
-    y: dragonStartY,
-    width: 180,
-    height: 180,
-    velocity: 0
-};
 
 function draw() {
     // Clear canvas
@@ -138,16 +128,6 @@ function update() {
 
     draw(); // Draw the updated game state
 }
-    
-// Event listener for player input
-window.addEventListener('click', () => {
-    gameStarted = true; // Start the game
-    dragon.velocity = -5; // Reduced flap strength
-});
-window.addEventListener('touchstart', () => {
-    gameStarted = true; // Start the game
-    dragon.velocity = -5; // Reduced flap strength
-});
 
 // Game loop
 setInterval(update, 1000 / 60);
