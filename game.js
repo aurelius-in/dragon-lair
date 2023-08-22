@@ -91,14 +91,21 @@ function draw() {
 }
 
 let obstacleDistanceFromCenter = canvas.height / 2 - 192; // Start 2 inches from the center, adjust as needed
+let obstacleSpawnTime = 5000; // 5 seconds
 
 function createObstacle() {
     // Determine the position of the obstacle
     const obstacleSize = 50; // 50px x 50px square
     const obstacleX = canvas.width;
+
+    // Random distance from the center, never closer than an inch from the center
+    const minDistanceFromCenter = 96; // 1 inch from the center, adjust as needed
+    const maxDistanceFromCenter = canvas.height / 2 - minDistanceFromCenter;
+    const randomDistanceFromCenter = Math.random() * (maxDistanceFromCenter - minDistanceFromCenter) + minDistanceFromCenter;
+
     const obstacleY = topObstacle
-        ? obstacleDistanceFromCenter
-        : canvas.height - obstacleDistanceFromCenter - obstacleSize;
+        ? randomDistanceFromCenter
+        : canvas.height - randomDistanceFromCenter - obstacleSize;
 
     // Create the obstacle object
     const obstacle = {
@@ -114,12 +121,10 @@ function createObstacle() {
     // Alternate between top and bottom obstacles
     topObstacle = !topObstacle;
 
-    // Reduce the spawn time for the next obstacle by 5%
-    obstacleSpawnTime *= 0.95;
-
-    // Move the obstacle 5% closer to the center
-    obstacleDistanceFromCenter *= 0.95;
+    // Reduce the spawn time for the next obstacle by 1%
+    obstacleSpawnTime *= 0.99;
 }
+
 
 function update() {
     // Only update obstacles and dragon if the game has started
