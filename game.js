@@ -37,8 +37,8 @@ function draw() {
     // Clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Animate dragon
-    if (gameTime % 3 === 0) { // Speed up the animation without fading
+    // Animate dragon only if ascending or stationary
+    if (dragon.velocity >= 0 && gameTime % 3 === 0) {
         currentFrame = (currentFrame + 1) % dragonImages.length;
     }
     context.drawImage(
