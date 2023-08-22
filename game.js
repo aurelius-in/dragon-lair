@@ -13,11 +13,11 @@ const dragon = {
 };
 
 const obstacles = [];
-let level = 1;
-let obstacleSpawnTime = 3000; // 3 seconds
-let lastObstacleTime = 0;
 let gameTime = 0;
 const levelDuration = 20000; // 20 seconds
+let obstacleSpawnTime = 5000; // 5 seconds
+let lastObstacleTime = Date.now();
+let topObstacle = true; // To alternate between top and bottom obstacles
 
 function draw() {
     // Clear canvas
@@ -53,12 +53,12 @@ function update() {
     if (deltaTime >= obstacleSpawnTime) {
         const x = canvas.width;
         const gap = 96; // One-inch gap, assuming 96 DPI
-        const isTopObstacle = Math.random() < 0.33; // Top obstacles appear half as frequently
-        const y = isTopObstacle ? 0 : canvas.height / 2 + gap / 2;
-        const height = isTopObstacle ? canvas.height / 2 - gap / 2 : canvas.height / 2 - gap / 2;
+        const y = topObstacle ? 0 : canvas.height / 2 + gap / 2;
+        const height = canvas.height / 2 - gap / 2;
         obstacles.push({ x: x, y: y, width: 50, height: height }); // Single obstacle
         lastObstacleTime = now;
-        obstacleSpawnTime -= obstacleSpawnTime * 0.15; // Decrease spawn interval by 15% of the current interval
+        obstacleSpawnTime -= obstacleSpawnTime * 0.07; // Decrease spawn interval by 7%
+        topObstacle = !topObstacle; // Alternate between top and bottom obstacles
     }
 
     // Check collisions
@@ -75,7 +75,7 @@ function update() {
             dragon.y = canvas.height * 0.5; // Reset dragon position
             dragon.velocity = 0; // Reset dragon velocity
             level = 1; // Reset level
-            obstacleSpawnTime = 6000; // Reset obstacle spawn time to 6 seconds
+            obstacleSpawnTime = 5000; // Reset obstacle spawn time to 5 seconds
             lastObstacleTime = now; // Reset last obstacle time
             gameTime = 0; // Reset game time
         }
