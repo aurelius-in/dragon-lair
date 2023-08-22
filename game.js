@@ -109,9 +109,9 @@ function createObstacle() {
     const maxDistanceFromCenter = canvas.height / 2 - minDistanceFromCenter;
     const randomDistanceFromCenter = Math.random() * (maxDistanceFromCenter - minDistanceFromCenter) + minDistanceFromCenter;
 
-    const obstacleY = topObstacle
-        ? randomDistanceFromCenter
-        : canvas.height - randomDistanceFromCenter - obstacleSize;
+const obstacleY = topObstacle
+    ? randomDistanceFromCenter
+    : canvas.height - randomDistanceFromCenter - obstacleHeight; // Use obstacleHeight
 
     // Create the obstacle object
    const obstacle = {
