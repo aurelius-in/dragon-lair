@@ -52,10 +52,10 @@ function update() {
     // Update obstacles
     obstacles.forEach(obstacle => {
         if (obstacle.direction === 'left') {
-            obstacle.x += 5; // Move obstacles to the right
-        } else {
-            obstacle.x -= 5; // Move obstacles to the left
-        }
+    obstacle.x -= 5; // Move obstacles to the left
+} else {
+    obstacle.x += 5; // Move obstacles to the right
+}
     });
 
     // Generate new obstacles
