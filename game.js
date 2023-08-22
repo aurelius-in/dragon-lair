@@ -47,10 +47,10 @@ function update() {
     // Update obstacles
     obstacles.forEach(obstacle => {
         if (obstacle.direction === 'left') {
-    obstacle.x -= 5; // Move obstacles to the left
-} else {
-    obstacle.x += 5; // Move obstacles to the right
-}
+            obstacle.x -= 5; // Move obstacles to the left
+        } else {
+            obstacle.x += 5; // Move obstacles to the right
+        }
     });
 
     // Generate new obstacles
@@ -59,7 +59,7 @@ function update() {
         const width = 50; // Obstacle width
         const direction = Math.random() < 0.5 ? 'left' : 'right'; // Random direction
         const x = direction === 'left' ? -width : canvas.width;
-        obstacles.push({ x: x, y: height, width: width, height: 200, direction: direction }); // Single obstacle
+        obstacles.push({ x: x, y: height, width: width, height: 200, gap: 150, direction: direction }); // Single obstacle
         lastObstacleTime = now;
         obstacleSpawnTime -= 10; // Subtract 0.01 second from spawn interval
     }
@@ -77,7 +77,6 @@ function update() {
             obstacles.length = 0; // Clear obstacles
             dragon.y = canvas.height * 0.5; // Reset dragon position
             dragon.velocity = 0; // Reset dragon velocity
-            level = 1; // Reset level
             obstacleSpawnTime = 3000; // Reset obstacle spawn time
             lastObstacleTime = now; // Reset last obstacle time
             gameTime = 0; // Reset game time
