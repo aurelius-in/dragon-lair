@@ -1,6 +1,7 @@
 const canvas = document.getElementById('game');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+let score = 0;
 
 const context = canvas.getContext('2d');
 
@@ -58,7 +59,8 @@ function update() {
         obstacles.push({ x: x, y: y, width: 50, height: height }); // Single obstacle
         lastObstacleTime = now;
         obstacleSpawnTime -= obstacleSpawnTime * 0.07; // Decrease spawn interval by 7%
-        topObstacle = !topObstacle; // Alternate between top and bottom obstacles
+        topObstacle = !topObstacle; // Alternate between top and bottom obstacles.
+        score++;
     }
 
     // Check collisions
