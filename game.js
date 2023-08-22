@@ -36,7 +36,6 @@ function draw() {
 }
 
 function update() {
-function update() {
     const now = Date.now();
     const deltaTime = now - lastObstacleTime;
     gameTime += deltaTime;
@@ -47,19 +46,14 @@ function update() {
 
     // Update obstacles
     obstacles.forEach(obstacle => {
-        if (obstacle.direction === 'left') {
-            obstacle.x += 5; // Move obstacles to the right
-        } else {
-            obstacle.x -= 5; // Move obstacles to the left
-        }
+        obstacle.x -= 5; // Move obstacles to the left
     });
 
     // Generate new obstacles
     if (deltaTime >= obstacleSpawnTime) {
-        const direction = Math.random() < 0.5 ? 'left' : 'right'; // Random direction
-        const x = direction === 'left' ? -50 : canvas.width;
+        const x = canvas.width;
         const y = Math.random() < 0.5 ? 0 : canvas.height - 200; // Random top or bottom
-        obstacles.push({ x: x, y: y, width: 50, height: 200, direction: direction }); // Single obstacle
+        obstacles.push({ x: x, y: y, width: 50, height: 200 }); // Single obstacle
         lastObstacleTime = now;
         obstacleSpawnTime -= obstacleSpawnTime * 0.15; // Decrease spawn interval by 15% of the current interval
     }
