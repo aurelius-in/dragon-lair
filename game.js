@@ -33,12 +33,20 @@ let obstacleSpawnTime = 5000; // 5 seconds
 let lastObstacleTime = Date.now();
 let topObstacle = true; // To alternate between top and bottom obstacles
 
+let gameStarted = false; // Track if the game has started
+
 function draw() {
     // Clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Animate dragon only if ascending (velocity is negative)
-    if (dragon.velocity < 0 && gameTime % 3 === 0) {
+    // Draw perch if the game hasn't started
+    if (!gameStarted) {
+        context.fillStyle = 'green';
+        context.fillRect(dragon.x + dragon.width, dragon.y + dragon.height - 50, 50, 50); // Perch
+    }
+
+    // Animate dragon only if ascending (velocity is negative) and game started
+    if (gameStarted && dragon.velocity < 0 && gameTime % 3 === 0) {
         currentFrame = (currentFrame + 1) % dragonImages.length;
     }
 
@@ -52,20 +60,21 @@ function draw() {
     );
 
     // Draw obstacles
-    const gap = 96; // Gap between top and bottom obstacles
     obstacles.forEach(obstacle => {
         context.fillStyle = 'green';
         context.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
     });
 
     // Draw score
-    context.font = "100px sans-serif"; // Large sans-serif font
-    context.fillStyle = "rgba(0, 0, 0, 0.5)"; // Semi-transparent black
-    context.textAlign = "center"; // Center alignment
-    context.fillText(score, canvas.width / 2, canvas.height / 2); // Draw score in the center
+    context.font = "100px sans-serif";
+    context.fillStyle = "rgba(0, 0, 0, 0.5)";
+    context.textAlign = "center";
+    context.fillText(score, canvas.width / 2, canvas.height / 2);
 }
 
 function update() {
+    // Only update obstacles and dragon if the game has started
+    if (gameStarted) {
     const now = Date.now();
     const deltaTime = now - lastObstacleTime;
     gameTime += deltaTime;
@@ -110,15 +119,16 @@ function update() {
             gameTime = 0; // Reset game time
         }
     });
-
+    }
     draw();
 }
-
 // Event listener for player input
 window.addEventListener('click', () => {
+    gameStarted = true; // Start the game
     dragon.velocity = -5; // Reduced flap strength
 });
 window.addEventListener('touchstart', () => {
+    gameStarted = true; // Start the game
     dragon.velocity = -5; // Reduced flap strength
 });
 
