@@ -35,6 +35,18 @@ let topObstacle = true; // To alternate between top and bottom obstacles
 
 let gameStarted = false; // Track if the game has started
 
+// Event listener for player input
+window.addEventListener('click', () => {
+    gameStarted = true; // Start the game
+    dragon.velocity = -5; // Reduced flap strength
+    currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
+});
+window.addEventListener('touchstart', () => {
+    gameStarted = true; // Start the game
+    dragon.velocity = -5; // Reduced flap strength
+    currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
+});
+
 function draw() {
     // Clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
