@@ -62,19 +62,19 @@ function draw() {
     context.fillText(score, canvas.width / 2, canvas.height / 2); // Draw score in the center
 }
 
-
 function update() {
     const now = Date.now();
     const deltaTime = now - lastObstacleTime;
     gameTime += deltaTime;
 
     // Update dragon's position
-    dragon.velocity += 0.5; // Reduced gravity
-    dragon.y += dragon.velocity * 0.5; // Slowed down the dragon
+    dragon.velocity += 0.3; // Reduced gravity even more
+    dragon.y += dragon.velocity * 0.4; // Slowed down the dragon even more
 
     // Animate dragon
-    if (gameTime % 10 === 0) { // Change frame every 10 game ticks, or whatever interval you prefer
+    if (gameTime % 5 === 0) { // Speed up the animation
         currentFrame = (currentFrame + 1) % dragonImages.length;
+        context.globalAlpha = (gameTime % 5) / 5; // Fade between images
     }
 
     // Update obstacles
@@ -86,11 +86,11 @@ function update() {
     if (deltaTime >= obstacleSpawnTime) {
         const x = canvas.width;
         const gap = 96; // One-inch gap, assuming 96 DPI
-        const y = topObstacle ? 0 : canvas.height / 2 + gap / 2;
-        const height = canvas.height / 2 - gap / 2;
+        const y = topObstacle ? 0 : canvas.height - gap;
+        const height = gap;
         obstacles.push({ x: x, y: y, width: 50, height: height }); // Single obstacle
         lastObstacleTime = now;
-        obstacleSpawnTime -= obstacleSpawnTime * 0.07; // Decrease spawn interval by 7%
+        obstacleSpawnTime -= obstacleSpawnTime * 0.05; // Decrease spawn interval by 5%
         topObstacle = !topObstacle; // Alternate between top and bottom obstacles.
         score++;
     }
@@ -100,10 +100,8 @@ function update() {
         if (
             dragon.x < obstacle.x + obstacle.width &&
             dragon.x + dragon.width > obstacle.x &&
-            (
-                (dragon.y < obstacle.y + obstacle.height && dragon.y + dragon.height > obstacle.y) ||
-                (dragon.y < obstacle.y + obstacle.height + gap + obstacle.height && dragon.y + dragon.height > obstacle.y + obstacle.height + gap)
-            )
+            dragon.y < obstacle.y + obstacle.height &&
+            dragon.y + dragon.height > obstacle.y
         ) {
             // Collision detected
             console.log('Game Over, Bro!');
@@ -118,7 +116,6 @@ function update() {
 
     draw();
 }
-
 
 // Event listener for player input
 window.addEventListener('click', () => {
