@@ -46,22 +46,21 @@ function update() {
 
     // Update obstacles
     obstacles.forEach(obstacle => {
-        if (obstacle.direction === 'left') {
-            obstacle.x -= 5; // Move obstacles to the left
-        } else {
-            obstacle.x += 5; // Move obstacles to the right
-        }
+        obstacle.x -= 5; // Move obstacles to the left
     });
 
     // Generate new obstacles
     if (deltaTime >= obstacleSpawnTime) {
-        const height = Math.random() * (canvas.height - 200) + 100; // Random height
         const width = 50; // Obstacle width
-        const direction = Math.random() < 0.5 ? 'left' : 'right'; // Random direction
-        const x = direction === 'left' ? -width : canvas.width;
-        obstacles.push({ x: x, y: height, width: width, height: 200, gap: 150, direction: direction }); // Single obstacle
+        const direction = Math.random() < 0.5 ? 'top' : 'bottom'; // Random direction
+        const x = canvas.width;
+        const y = direction === 'top' ? 0 : canvas.height - 200; // Top or bottom of the screen
+
+        obstacles.push({ x: x, y: y, width: width, height: 200, direction: direction }); // Single obstacle
+
+        // Randomize spawn time between 5 and 7 seconds
+        obstacleSpawnTime = (Math.random() * 2 + 5) * 1000;
         lastObstacleTime = now;
-        obstacleSpawnTime -= 10; // Subtract 0.01 second from spawn interval
     }
 
     // Check collisions
@@ -77,7 +76,7 @@ function update() {
             obstacles.length = 0; // Clear obstacles
             dragon.y = canvas.height * 0.5; // Reset dragon position
             dragon.velocity = 0; // Reset dragon velocity
-            obstacleSpawnTime = 3000; // Reset obstacle spawn time
+            obstacleSpawnTime = (Math.random() * 2 + 5) * 1000; // Reset obstacle spawn time
             lastObstacleTime = now; // Reset last obstacle time
             gameTime = 0; // Reset game time
         }
