@@ -90,8 +90,6 @@ function draw() {
     context.fillText(score, canvas.width / 2, canvas.height / 2);
 }
 
-let obstacleSpawnTime = 5000; // 5 seconds
-
 function createObstacle() {
     // Determine the position of the obstacle
     const obstacleSize = 50; // 50px x 50px square
