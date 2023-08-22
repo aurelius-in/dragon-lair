@@ -180,4 +180,10 @@ function update() {
 }
 
 // Game loop
-setInterval(update, 1000 / 60);
+function gameLoop() {
+    update();
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop(); // Start the game loop
+
