@@ -52,8 +52,11 @@ function update() {
     // Generate new obstacles
     if (deltaTime >= obstacleSpawnTime) {
         const x = canvas.width;
-        const y = Math.random() < 0.5 ? 0 : canvas.height - 200; // Random top or bottom
-        obstacles.push({ x: x, y: y, width: 50, height: 200 }); // Single obstacle
+        const gap = 96; // One-inch gap, assuming 96 DPI
+        const isTopObstacle = Math.random() < 0.33; // Top obstacles appear half as frequently
+        const y = isTopObstacle ? 0 : canvas.height / 2 + gap / 2;
+        const height = isTopObstacle ? canvas.height / 2 - gap / 2 : canvas.height / 2 - gap / 2;
+        obstacles.push({ x: x, y: y, width: 50, height: height }); // Single obstacle
         lastObstacleTime = now;
         obstacleSpawnTime -= obstacleSpawnTime * 0.15; // Decrease spawn interval by 15% of the current interval
     }
