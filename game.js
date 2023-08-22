@@ -73,9 +73,15 @@ window.addEventListener('touchstart', () => {
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
 
+// Draw function
 function draw() {
-    // Draw background
-    context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+    // Draw the backgrounds
+    context.drawImage(bgbgImage, bgbgX, 0, canvas.width, canvas.height);
+    context.drawImage(bgbgImage, bgbgX + canvas.width, 0, canvas.width, canvas.height);
+    context.drawImage(bgImage, bgX, 0, canvas.width, canvas.height);
+    context.drawImage(bgImage, bgX + canvas.width, 0, canvas.width, canvas.height);
+    context.drawImage(fgImage, fgX, 0, canvas.width, canvas.height);
+    context.drawImage(fgImage, fgX + canvas.width, 0, canvas.width, canvas.height);
 
     // Draw perch if the game hasn't started
     if (!gameStarted) {
