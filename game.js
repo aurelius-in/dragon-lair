@@ -27,20 +27,6 @@ const dragon = {
     velocity: 0
 };
 
-// Function to create obstacles
-function createObstacle() {
-    const obstacleY = Math.random() * (canvas.height - obstacleHeight);
-    const obstacle = {
-        x: canvas.width,
-        y: obstacleY,
-        width: obstacleWidth,
-        height: obstacleHeight
-    };
-    obstacles.push(obstacle);
-}
-
-
-
 // Gravity and obstacle speed
 const obstacleSpeed = 5; // Adjust as needed
 
@@ -56,10 +42,6 @@ for (let i = 1; i <= 3; i++) {
 }
 
 let currentFrame = 0; // Current frame being displayed
-
-// Dragon's starting position
-const dragonStartX = 50;
-const dragonStartY = 200;
 
 // Initialize dragon
 let dragon = {
@@ -129,7 +111,6 @@ function draw() {
 // Function to create obstacles
 function createObstacle() {
     // Determine the position of the obstacle
-    const obstacleSize = 50; // 50px x 50px square
     const obstacleX = canvas.width;
 
     // Random distance from the center, never closer than an inch from the center
