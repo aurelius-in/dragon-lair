@@ -90,7 +90,6 @@ function draw() {
     context.fillText(score, canvas.width / 2, canvas.height / 2);
 }
 
-let obstacleDistanceFromCenter = canvas.height / 2 - 192; // Start 2 inches from the center, adjust as needed
 let obstacleSpawnTime = 5000; // 5 seconds
 
 function createObstacle() {
