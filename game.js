@@ -84,12 +84,6 @@ function update() {
         }
     });
 
-    // Level progression
-    if (gameTime >= levelDuration) {
-        level++;
-        gameTime = 0;
-    }
-
     draw();
 }
 
