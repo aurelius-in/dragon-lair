@@ -29,6 +29,19 @@ const jump = -4; // Reduce jump strength
 const obstacleWidth = 25;
 const obstacleHeight = 25;
 
+// Load the images
+const bgImage = new Image();
+bgImage.src = 'images/bg.png';
+const fgImage = new Image();
+fgImage.src = 'images/fg.png';
+const bgbgImage = new Image();
+bgbgImage.src = 'images/bgbg.png';
+
+// Initial positions
+let bgX = 0;
+let fgX = 0;
+let bgbgX = 0;
+
 // Dragon object
 const dragon = {
     x: dragonStartX,
