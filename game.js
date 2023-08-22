@@ -2,6 +2,19 @@ const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+
+// Load background, perch, and obstacle images
+const bgImage = new Image();
+bgImage.src = 'images/bg.png';
+const perchImage = new Image();
+perchImage.src = 'images/perch.png';
+const obstacleImages = [];
+for (let i = 1; i <= 9; i++) {
+    const image = new Image();
+    image.src = `images/obstacle${i}.png`;
+    obstacleImages.push(image);
+}
+
 let score = 0;
 
 // Constants for dragon size and starting position
@@ -63,40 +76,22 @@ window.addEventListener('touchstart', () => {
 });
 
 function draw() {
-    // Clear canvas
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    // Draw background
+    context.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
 
     // Draw perch if the game hasn't started
     if (!gameStarted) {
-        context.fillStyle = 'green';
-        const perchWidth = 200; // Wider perch
-        const perchHeight = 100;
-        const perchX = dragon.x + dragon.width / 2 - perchWidth / 2; // Adjust as needed
-const perchY = dragon.y + dragon.height; // Adjust as needed
-
-        context.fillRect(perchX, perchY, perchWidth, perchHeight); // Taller perch
+        context.drawImage(perchImage, dragon.x + dragon.width / 2 - 25, dragon.y + dragon.height, 50, 100);
     }
 
     // Draw dragon
-    context.drawImage(
-        dragonImages[currentFrame],
-        dragon.x,
-        dragon.y,
-        dragon.width,
-        dragon.height
-    );
+    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
 
-    // Draw obstacles
+    // Draw obstacles using images
     obstacles.forEach(obstacle => {
-        context.fillStyle = 'green';
-        context.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+        const randomImage = obstacleImages[Math.floor(Math.random() * obstacleImages.length)];
+        context.drawImage(randomImage, obstacle.x, obstacle.y, 35, 35);
     });
-
-    // Draw score
-    context.font = "100px sans-serif";
-    context.fillStyle = "rgba(0, 0, 0, 0.5)";
-    context.textAlign = "center";
-    context.fillText(score, canvas.width / 2, canvas.height / 2);
 }
 
 // Function to create obstacles
