@@ -62,7 +62,7 @@ function draw() {
         currentFrame = (currentFrame + 1) % dragonImages.length;
     }
 
-    // Draw dragon without rotation
+  // Draw dragon without automatic animation
     context.drawImage(
         dragonImages[currentFrame],
         dragon.x,
