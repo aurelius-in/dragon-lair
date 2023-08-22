@@ -47,6 +47,19 @@ window.addEventListener('touchstart', () => {
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
 
+// Dragon's starting position
+const dragonStartX = 50;
+const dragonStartY = 200;
+
+// Initialize dragon
+let dragon = {
+    x: dragonStartX,
+    y: dragonStartY,
+    width: 180,
+    height: 180,
+    velocity: 0
+};
+
 function draw() {
     // Clear canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -54,21 +67,16 @@ function draw() {
     // Draw perch if the game hasn't started
     if (!gameStarted) {
         context.fillStyle = 'green';
-        context.fillRect(dragon.x + dragon.width, dragon.y + dragon.height - 50, 50, 50); // Perch
+        context.fillRect(dragon.x, dragon.y + dragon.height, 50, 100); // Taller perch
     }
 
-    // Animate dragon only if ascending (velocity is negative) and game started
-    if (gameStarted && dragon.velocity < 0 && gameTime % 3 === 0) {
-        currentFrame = (currentFrame + 1) % dragonImages.length;
-    }
-
-  // Draw dragon without automatic animation
+    // Draw dragon
     context.drawImage(
         dragonImages[currentFrame],
         dragon.x,
         dragon.y,
-        180,
-        180
+        dragon.width,
+        dragon.height
     );
 
     // Draw obstacles
@@ -87,53 +95,50 @@ function draw() {
 function update() {
     // Only update obstacles and dragon if the game has started
     if (gameStarted) {
-    const now = Date.now();
-    const deltaTime = now - lastObstacleTime;
-    gameTime += deltaTime;
+        // Update dragon's position
+        dragon.velocity += gravity; // Apply gravity
+        dragon.y += dragon.velocity; // Update y position
 
-    // Update dragon's position
-    dragon.velocity += 0.3; // Reduced gravity
-    dragon.y += dragon.velocity * 0.4; // Slowed down the dragon
-
-    // Update obstacles
-    obstacles.forEach(obstacle => {
-        obstacle.x -= 5; // Move obstacles to the left
-    });
-
-    // Generate new obstacles
-    if (deltaTime >= obstacleSpawnTime) {
-        const x = canvas.width;
-        const gap = 96; // One-inch gap, assuming 96 DPI
-        const y = topObstacle ? 0 : canvas.height / 2 + gap / 2;
-        const height = canvas.height / 2 - gap / 2; // Extend to 1 inch from the center
-        obstacles.push({ x: x, y: y, width: 50, height: height }); // Single obstacle
-        lastObstacleTime = now;
-        obstacleSpawnTime -= obstacleSpawnTime * 0.05; // Decrease spawn interval by 5%
-        topObstacle = !topObstacle; // Alternate between top and bottom obstacles.
-        score++;
-    }
-
-    // Check collisions
-    obstacles.forEach(obstacle => {
-        if (
-            dragon.x < obstacle.x + obstacle.width &&
-            dragon.x + dragon.width > obstacle.x &&
-            dragon.y < obstacle.y + obstacle.height &&
-            dragon.y + dragon.height > obstacle.y
-        ) {
-            // Collision detected
-            console.log('Game Over, Bro!');
-            obstacles.length = 0; // Clear obstacles
-            dragon.y = canvas.height * 0.5; // Reset dragon position
-            dragon.velocity = 0; // Reset dragon velocity
-            obstacleSpawnTime = 5000; // Reset obstacle spawn time to 5 seconds
-            lastObstacleTime = now; // Reset last obstacle time
-            gameTime = 0; // Reset game time
+        // Check for collision with ground
+        if (dragon.y + dragon.height > canvas.height) {
+            // Reset dragon to starting position
+            dragon.x = dragonStartX;
+            dragon.y = dragonStartY;
+            dragon.velocity = 0;
+            gameStarted = false; // Reset game state
+            currentFrame = 0; // Reset animation frame
         }
-    });
+
+        // Update obstacles
+        obstacles.forEach((obstacle, index) => {
+            obstacle.x -= obstacleSpeed; // Move obstacle to the left
+
+            // Check for collision with dragon
+            if (
+                dragon.x < obstacle.x + obstacle.width &&
+                dragon.x + dragon.width > obstacle.x &&
+                dragon.y < obstacle.y + obstacle.height &&
+                dragon.y + dragon.height > obstacle.y
+            ) {
+                // Reset dragon to starting position
+                dragon.x = dragonStartX;
+                dragon.y = dragonStartY;
+                dragon.velocity = 0;
+                gameStarted = false; // Reset game state
+                currentFrame = 0; // Reset animation frame
+            }
+
+            // Remove off-screen obstacles and create new ones
+            if (obstacle.x + obstacle.width < 0) {
+                obstacles.splice(index, 1);
+                createObstacle(); // Function to create a new obstacle
+            }
+        });
     }
-    draw();
+
+    draw(); // Draw the updated game state
 }
+    
 // Event listener for player input
 window.addEventListener('click', () => {
     gameStarted = true; // Start the game
