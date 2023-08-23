@@ -88,8 +88,9 @@ let gameStarted = false; // Track if the game has started
 window.addEventListener('touchstart', () => {
     if (!gameStarted) {
         gameStarted = true; // Start the game
+        dragon.velocity = jump; // Use the jump constant
+        dragon.y += dragon.velocity; // Update the dragon's position
     }
-    dragon.velocity = jump; // Use the jump constant
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
 
