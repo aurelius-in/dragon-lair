@@ -99,15 +99,21 @@ window.addEventListener('touchstart', () => {
 
 // Draw function
 function draw() {
-    // Draw the background images
-    context.drawImage(bgImage, bgX, 0, imageWidth, canvas.height);
-    context.drawImage(bgImage, bgX + imageWidth, 0, imageWidth, canvas.height);
-    context.drawImage(fgImage, fgX, 0, imageWidth, canvas.height);
-    context.drawImage(fgImage, fgX + imageWidth, 0, imageWidth, canvas.height);
+    // Draw the bgbg image first (furthest back)
     context.drawImage(bgbgImage, bgbgX, 0, imageWidth, canvas.height);
     context.drawImage(bgbgImage, bgbgX + imageWidth, 0, imageWidth, canvas.height);
 
-    
+    // Draw the bg image (middle)
+    context.drawImage(bgImage, bgX, 0, imageWidth, canvas.height);
+    context.drawImage(bgImage, bgX + imageWidth, 0, imageWidth, canvas.height);
+
+    // Draw the fg image (closest)
+    context.drawImage(fgImage, fgX, 0, imageWidth, canvas.height);
+    context.drawImage(fgImage, fgX + imageWidth, 0, imageWidth, canvas.height);
+
+    // Draw the perch
+    context.drawImage(perchImage, perchX, perchY, 150, 250);
+
      // Draw perch
     context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
 
@@ -175,15 +181,18 @@ function createObstacle() {
 
 // Update function
 function update() {
-    // Update the positions
-    bgX -= 0.5;
-    fgX -= 1;
-    bgbgX -= 0.25;
+    // Update the positions only if the dragon has started flying
+    if (dragonFlying) {
+        bgbgX -= 0.1; // Slowest movement for the furthest back
+        bgX -= 0.2; // Almost as slow as bgbg
+        fgX -= 0.3; // Slow but not quite as slowly as bg
+        perchX -= 5; // Move the perch with the obstacles
 
-    // Reset positions if they go off-screen
-    if (bgX <= -imageWidth) bgX = 0;
-    if (fgX <= -imageWidth) fgX = 0;
-    if (bgbgX <= -imageWidth) bgbgX = 0;
+        // Reset positions if they go off-screen
+        if (bgbgX <= -imageWidth) bgbgX = 0;
+        if (bgX <= -imageWidth) bgX = 0;
+        if (fgX <= -imageWidth) fgX = 0;
+    }
 
     if (gameStarted) {
         // Update dragon's velocity and position
