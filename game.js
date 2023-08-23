@@ -134,13 +134,33 @@ function createObstacle() {
         obstacleY = Math.random() * (centerDistance - minDistance) + centerDistance;
     }
 
-    const obstacle = {
-        type: randomType,
-        x: canvas.width,
-        y: obstacleY,
-        width: obstacleWidth,
-        height: obstacleHeight
-    };
+    let obstacle;
+    switch (randomType) {
+        case 'arrow':
+            obstacle = createArrowObstacle(canvas.width, obstacleY);
+            break;
+        case 'lightningStrike':
+            obstacle = createLightningStrikeObstacle(canvas.width, obstacleY);
+            break;
+        case 'batSwarm':
+            obstacle = createBatSwarmObstacle(canvas.width, obstacleY);
+            break;
+        case 'tornado':
+            obstacle = createTornadoObstacle(canvas.width, obstacleY);
+            break;
+        case 'wraith':
+            obstacle = createWraithObstacle(canvas.width, obstacleY);
+            break;
+        case 'zombieDragon':
+            obstacle = createZombieDragonObstacle(canvas.width, obstacleY);
+            break;
+        case 'thundercloud':
+            obstacle = createThundercloudObstacle(canvas.width, obstacleY);
+            break;
+        case 'fireball':
+            obstacle = createFireballObstacle(canvas.width, obstacleY);
+            break;
+    }
 
     // Add the obstacle to the obstacles array
     obstacles.push(obstacle);
