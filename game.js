@@ -243,8 +243,8 @@ function update() {
 // Game loop
 function gameLoop() {
     update();
+    draw();
     requestAnimationFrame(gameLoop);
 }
 
-gameLoop(); // Start the game loop
-
+gameLoop();
