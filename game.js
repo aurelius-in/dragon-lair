@@ -30,12 +30,12 @@ const dragonStartX = canvas.width * 0.1 - 50; // Move back by 50 pixels
 const dragonStartY = canvas.height * 0.5;
 
 // Constants for gravity and jump strength
-const gravity = 0.2; // Reduce gravity
-const jump = -4; // Reduce jump strength
+const gravity = 0.4; // Medium gravity
+const jump = -8; // Medium jump strength
 
 // Constants for obstacle size
-const obstacleWidth = 25;
-const obstacleHeight = 25;
+const obstacleWidth = 30;
+let obstacleHeight = 30;
 
 // Load the images
 const bgImage = new Image();
@@ -188,29 +188,33 @@ function update() {
         dragon.velocity += gravity;
         dragon.y += dragon.velocity;
 
-        // Update the positions only if the dragon has started flying
+                // Update the positions only if the dragon has started flying
         if (gameStarted) {
-            bgbgX -= 0.05; // Slowest movement for the furthest back
-            bgX -= 0.06; // Almost as slow as bgbg
-            fgX -= 0.07; // Slow but not quite as slowly as bg
+            bgbgX -= 0.1; // Increase speed for the furthest back
+            bgX -= 0.12; // Increase speed for the middle
+            fgX -= 0.14; // Increase speed for the closest
             perchX -= obstacleVelocity; // Move the perch with the obstacles
-
+        }
             // Reset positions if they go off-screen
             if (bgbgX <= -imageWidth) bgbgX = 0;
             if (bgX <= -imageWidth) bgX = 0;
             if (fgX <= -imageWidth) fgX = 0;
         }
 
-        // Check for collision with ground or ceiling
-if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) {
-    // Reset dragon and obstacles
-    dragon.x = dragonStartX;
-    dragon.y = dragonStartY;
-    dragon.velocity = 0;
-    gameStarted = false;
-    currentFrame = 0;
-    obstacles.length = 0; // Clear obstacles array
-}
+// Check for collision with ground or ceiling
+        if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) {
+            // Reset dragon and obstacles
+            dragon.x = dragonStartX;
+            dragon.y = dragonStartY;
+            dragon.velocity = 0;
+            gameStarted = false;
+            currentFrame = 0;
+            obstacles.length = 0; // Clear obstacles array
+            bgX = 0; // Reset background positions
+            fgX = 0;
+            bgbgX = 0;
+        }
+        
         // Check if it's time to spawn a new obstacle
         gameTime += 1000 / 60; // Increment game time by frame duration
         if (gameTime >= obstacleSpawnTime) {
