@@ -63,9 +63,6 @@ function createLightningStrikeObstacle(x, y) {
     };
 }
 
-Sure thing, bro! Here's the rest of the obstacle functions for your rad game:
-
-```javascript
 // Tornadoes
 function createTornadoObstacle(x, y) {
     return {
