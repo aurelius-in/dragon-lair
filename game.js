@@ -122,13 +122,12 @@ function draw() {
     // Draw dragon
     context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
  
-    // Draw the "TAP TO FLY!" text
-  if (tapToFlyAlpha > 0) {
-    ctx.fillStyle = `rgba(255, 255, 255, ${tapToFlyAlpha})`; // White text with alpha for fading
-    ctx.font = '40px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
-  }
+// Draw the "TAP TO FLY!" text
+if (tapToFlyAlpha > 0) {
+  context.fillStyle = `rgba(255, 255, 255, ${tapToFlyAlpha})`; // White text with alpha for fading
+  context.font = '40px sans-serif';
+  context.textAlign = 'center';
+  context.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
 }
 
 function createObstacle() {
