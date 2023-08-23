@@ -116,10 +116,34 @@ function draw() {
     // Draw dragon
     context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
 
-    // Draw obstacles using images
+    // Draw obstacles using functions from obstacles.js
     obstacles.forEach(obstacle => {
-        const randomImage = obstacleImages[Math.floor(Math.random() * obstacleImages.length)];
-        context.drawImage(randomImage, obstacle.x, obstacle.y, 35, 35);
+        switch (obstacle.type) {
+            case 'arrow':
+                createArrowObstacle(obstacle.x, obstacle.y);
+                break;
+            case 'lightningStrike':
+                createLightningStrikeObstacle(obstacle.x, obstacle.y);
+                break;
+            case 'batSwarm':
+                createBatSwarmObstacle(obstacle.x, obstacle.y);
+                break;
+            case 'tornado':
+                createTornadoObstacle(obstacle.x, obstacle.y);
+                break;
+            case 'wraith':
+                createWraithObstacle(obstacle.x, obstacle.y);
+                break;
+            case 'zombieDragon':
+                createZombieDragonObstacle(obstacle.x, obstacle.y);
+                break;
+            case 'thundercloud':
+                createThundercloudObstacle(obstacle.x, obstacle.y);
+                break;
+            case 'fireball':
+                createFireballObstacle(obstacle.x, obstacle.y);
+                break;
+        }
     });
 }
 
