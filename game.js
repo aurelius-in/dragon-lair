@@ -273,11 +273,11 @@ window.onload = () => {
   }, 2000);
 
   setTimeout(() => {
-    dragon.velocity = JUMP; // Simulate the first tap
+    dragon.velocity = jump; // Simulate the first tap
   }, 2100);
 
   setTimeout(() => {
-    dragon.velocity = JUMP; // Simulate the second tap
+    dragon.velocity = jump; // Simulate the second tap
     gameStarted = true; // Start the game
   }, 2300);
 };
