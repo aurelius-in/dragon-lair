@@ -111,9 +111,6 @@ function draw() {
     context.drawImage(fgImage, fgX, 0, imageWidth, canvas.height);
     context.drawImage(fgImage, fgX + imageWidth, 0, imageWidth, canvas.height);
 
-    // Draw the perch
-    context.drawImage(perchImage, perchX, perchY, 150, 250);
-
      // Draw perch
     context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
 
