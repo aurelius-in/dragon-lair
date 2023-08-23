@@ -113,8 +113,8 @@ function draw() {
             case 'arrow':
                 obstacleObject = createArrowObstacle(obstacle.x, obstacle.y);
                 break;
-            case 'lightning':
-                obstacleObject = createLightningObstacle(obstacle.x, obstacle.y);
+            case 'lightningStrike':
+                obstacleObject = createLightningStrikeObstacle(obstacle.x, obstacle.y);
                 break;
             case 'bats':
                 obstacleObject = createBatSwarmObstacle(obstacle.x, obstacle.y);
