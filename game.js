@@ -86,9 +86,9 @@ let topObstacle = true; // To alternate between top and bottom obstacles
 let gameStarted = false; // Track if the game has started
 
 // Event listener for player input
-window.addEventListener('click', () => {
+window.addEventListener('touchstart', () => {
     gameStarted = true; // Start the game
-    dragon.velocity = -5; // Reduced flap strength
+    dragon.velocity = jump; // Use the jump constant
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
 window.addEventListener('touchstart', () => {
@@ -178,6 +178,11 @@ function createObstacle() {
 
 // Update function
 function update() {
+    if (gameStarted) {
+        // Update dragon's velocity and position
+        dragon.velocity += gravity;
+        dragon.y += dragon.velocity;
+
     // Update the positions only if the dragon has started flying
     if (gameStarted) { // Change from dragonFlying to gameStarted
         bgbgX -= 0.05; // Slowest movement for the furthest back
@@ -190,11 +195,6 @@ function update() {
         if (bgX <= -imageWidth) bgX = 0;
         if (fgX <= -imageWidth) fgX = 0;
     }
-
-    if (gameStarted) {
-        // Update dragon's velocity and position
-        dragon.velocity += gravity;
-        dragon.y += dragon.velocity;
 
         // Check for collision with ground or ceiling
         if (dragon.y <= 0 || dragon.y + dragon.height >= canvas.height) {
