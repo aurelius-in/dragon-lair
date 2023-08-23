@@ -122,10 +122,21 @@ function draw() {
 function createObstacle() {
     const obstacleType = ['arrow', 'lightningStrike', 'batSwarm', 'tornado', 'wraith', 'zombieDragon', 'thundercloud', 'fireball'];
     const randomType = obstacleType[Math.floor(Math.random() * obstacleType.length)];
+
+    const minDistance = canvas.height * 0.1; // 1 inch from the top or bottom
+    const centerDistance = canvas.height * 0.5; // Center of the screen
+
+    let obstacleY;
+    if (topObstacle) {
+        obstacleY = Math.random() * (centerDistance - minDistance) + minDistance;
+    } else {
+        obstacleY = Math.random() * (centerDistance - minDistance) + centerDistance;
+    }
+
     const obstacle = {
         type: randomType,
         x: canvas.width,
-        y: topObstacle ? 0 : canvas.height - obstacleHeight,
+        y: obstacleY,
         width: obstacleWidth,
         height: obstacleHeight
     };
