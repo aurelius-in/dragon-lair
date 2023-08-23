@@ -18,6 +18,11 @@ canvas.height = window.innerHeight;
 const perchImage = new Image();
 perchImage.src = 'images/perch.png';
 
+const perchX = 50; // Adjust as needed
+const perchY = canvas.height - 250; // Perch extends from the bottom
+const perchWidth = 150; // Width of the perch
+const perchHeight = 250; // Height of the perch
+
 // Constants for dragon size and starting position
 const dragonWidth = 150;
 const dragonHeight = 150;
@@ -45,12 +50,12 @@ let bgX = 0;
 let fgX = 0;
 let bgbgX = 0;
 
-// Dragon object
+// Dragon player object
 const dragon = {
-    x: dragonStartX,
-    y: dragonStartY,
-    width: dragonWidth,
-    height: dragonHeight,
+    x: perchX, // Adjust as needed
+    y: perchY - 150, // Dragon sits on top of the perch
+    width: 150,
+    height: 150,
     velocity: 0
 };
 
@@ -97,6 +102,9 @@ function draw() {
     context.drawImage(fgImage, fgX + canvas.width, 0, canvas.width, canvas.height);
     context.drawImage(bgbgImage, bgbgX, 0, canvas.width, canvas.height);
     context.drawImage(bgbgImage, bgbgX + canvas.width, 0, canvas.width, canvas.height);
+    
+     // Draw perch
+    context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
 
     // Draw obstacles using functions from obstacles.js
     obstacles.forEach(obstacle => {
