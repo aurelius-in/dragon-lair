@@ -17,12 +17,6 @@ canvas.height = window.innerHeight;
 // Load background, perch, and obstacle images
 const perchImage = new Image();
 perchImage.src = 'images/perch.png';
-const obstacleImages = [];
-for (let i = 1; i <= 9; i++) {
-    const image = new Image();
-    image.src = `images/obstacle${i}.png`;
-    obstacleImages.push(image);
-}
 
 // Constants for dragon size and starting position
 const dragonWidth = 150;
