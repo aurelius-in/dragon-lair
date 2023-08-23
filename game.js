@@ -157,7 +157,6 @@ function draw() {
     obstacleSpawnTime *= 0.99;
 }
 
-// Update function
 function update() {
     // Update the background positions
     bgX -= 0.5; // Adjust speed as needed
