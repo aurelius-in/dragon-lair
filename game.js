@@ -160,16 +160,15 @@ function update() {
         }
 
         // Check for collision with ground or ceiling
-        if (dragon.y <= 0 || dragon.y + dragon.height >= canvas.height) {
-            // Reset dragon and obstacles
-            dragon.x = dragonStartX;
-            dragon.y = dragonStartY;
-            dragon.velocity = 0;
-            gameStarted = false;
-            currentFrame = 0;
-            obstacles.length = 0; // Clear obstacles array
-        }
-
+if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) {
+    // Reset dragon and obstacles
+    dragon.x = dragonStartX;
+    dragon.y = dragonStartY;
+    dragon.velocity = 0;
+    gameStarted = false;
+    currentFrame = 0;
+    obstacles.length = 0; // Clear obstacles array
+}
         // Check if it's time to spawn a new obstacle
         gameTime += 1000 / 60; // Increment game time by frame duration
         if (gameTime >= obstacleSpawnTime) {
