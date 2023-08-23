@@ -182,11 +182,11 @@ function createObstacle() {
 // Update function
 function update() {
     // Update the positions only if the dragon has started flying
-    if (dragonFlying) {
-        bgbgX -= 0.1; // Slowest movement for the furthest back
-        bgX -= 0.2; // Almost as slow as bgbg
-        fgX -= 0.3; // Slow but not quite as slowly as bg
-        perchX -= 5; // Move the perch with the obstacles
+    if (gameStarted) { // Change from dragonFlying to gameStarted
+        bgbgX -= 0.05; // Slowest movement for the furthest back
+        bgX -= 0.1; // Almost as slow as bgbg
+        fgX -= 0.2; // Slow but not quite as slowly as bg
+        perchX -= obstacleSpeed; // Move the perch with the obstacles
 
         // Reset positions if they go off-screen
         if (bgbgX <= -imageWidth) bgbgX = 0;
