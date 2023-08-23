@@ -149,7 +149,6 @@ function createFireballObstacle(x, y) {
     };
 }
 
-// Export the functions if you're using modules
 export {
     createArrowObstacle,
     createLightningStrikeObstacle,
