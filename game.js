@@ -85,9 +85,10 @@ let topObstacle = true; // To alternate between top and bottom obstacles
 
 let gameStarted = false; // Track if the game has started
 
-// Event listener for player input
 window.addEventListener('touchstart', () => {
-    gameStarted = true; // Start the game
+    if (!gameStarted) {
+        gameStarted = true; // Start the game
+    }
     dragon.velocity = jump; // Use the jump constant
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
