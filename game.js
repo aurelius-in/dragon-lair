@@ -140,25 +140,24 @@ function createObstacle() {
     obstacleSpawnTime *= 0.99;
 }
 
-// Update function
 function update() {
     if (gameStarted) {
         // Update dragon's velocity and position
         dragon.velocity += gravity;
         dragon.y += dragon.velocity;
 
-    // Update the positions only if the dragon has started flying
-    if (gameStarted) { // Change from dragonFlying to gameStarted
-        bgbgX -= 0.05; // Slowest movement for the furthest back
-        bgX -= 0.1; // Almost as slow as bgbg
-        fgX -= 0.2; // Slow but not quite as slowly as bg
-        perchX -= obstacleSpeed; // Move the perch with the obstacles
+        // Update the positions only if the dragon has started flying
+        if (gameStarted) {
+            bgbgX -= 0.05; // Slowest movement for the furthest back
+            bgX -= 0.1; // Almost as slow as bgbg
+            fgX -= 0.2; // Slow but not quite as slowly as bg
+            perchX -= obstacleSpeed; // Move the perch with the obstacles
 
-        // Reset positions if they go off-screen
-        if (bgbgX <= -imageWidth) bgbgX = 0;
-        if (bgX <= -imageWidth) bgX = 0;
-        if (fgX <= -imageWidth) fgX = 0;
-    }
+            // Reset positions if they go off-screen
+            if (bgbgX <= -imageWidth) bgbgX = 0;
+            if (bgX <= -imageWidth) bgX = 0;
+            if (fgX <= -imageWidth) fgX = 0;
+        }
 
         // Check for collision with ground or ceiling
         if (dragon.y <= 0 || dragon.y + dragon.height >= canvas.height) {
@@ -180,39 +179,36 @@ function update() {
         }
 
         // Check for collision with obstacles
-obstacles.forEach((obstacle, index) => {
-    // Reduce the dragon's boundary box
-    const boundaryReductionX = dragon.width * 0.1;
-    const boundaryReductionY = dragon.height * 0.2;
+        obstacles.forEach((obstacle, index) => {
+            // Reduce the dragon's boundary box
+            const boundaryReductionX = dragon.width * 0.1;
+            const boundaryReductionY = dragon.height * 0.2;
 
-    // Check for collision with dragon
-    if (
-        dragon.x + boundaryReductionX < obstacle.x + obstacle.width &&
-        dragon.x + dragon.width - boundaryReductionX > obstacle.x &&
-        dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
-        dragon.y + dragon.height - boundaryReductionY > obstacle.y
-    ) {
-        // Reset dragon and obstacles
-        dragon.x = dragonStartX;
-        dragon.y = dragonStartY;
-        dragon.velocity = 0;
-        gameStarted = false;
-        currentFrame = 0;
-        obstacles.length = 0; // Clear obstacles array
+            // Check for collision with dragon
+            if (
+                dragon.x + boundaryReductionX < obstacle.x + obstacle.width &&
+                dragon.x + dragon.width - boundaryReductionX > obstacle.x &&
+                dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
+                dragon.y + dragon.height - boundaryReductionY > obstacle.y
+            ) {
+                // Reset dragon and obstacles
+                dragon.x = dragonStartX;
+                dragon.y = dragonStartY;
+                dragon.velocity = 0;
+                gameStarted = false;
+                currentFrame = 0;
+                obstacles.length = 0; // Clear obstacles array
+            }
+
+            // Move obstacle to the left
+            obstacle.x -= obstacleSpeed;
+
+            // Remove off-screen obstacles
+            if (obstacle.x + obstacle.width < 0) {
+                obstacles.splice(index, 1);
+            }
+        });
     }
-
-    // Move obstacle to the left
-    obstacle.x -= obstacleSpeed;
-
-    // Remove off-screen obstacles
-    if (obstacle.x + obstacle.width < 0) {
-        obstacles.splice(index, 1);
-    }
-});
-
-    }
-
-    draw();
 }
 
 // Game loop
