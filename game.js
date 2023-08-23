@@ -106,25 +106,17 @@ function draw() {
     context.drawImage(fgImage, fgX, 0, imageWidth, canvas.height);
     context.drawImage(fgImage, fgX + imageWidth, 0, imageWidth, canvas.height);
 
-     // Draw perch
+    // Draw perch
     context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
-
-function draw() {
-    // ... other drawing code ...
 
     // Drawing obstacles using functions from obstacles.js
     obstacles.forEach(obstacle => {
         obstacle.draw(context);
     });
-}
 
-   // Draw dragon
-    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height); // Use currentFrame instead of dragonFrame
+    // Draw dragon
+    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
 
-    // Draw perch
-    context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
-
-    // Draw other game elements if needed
 }
 
 function createObstacle() {
