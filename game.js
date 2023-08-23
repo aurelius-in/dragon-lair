@@ -91,9 +91,9 @@ let gameStarted = false; // Track if the game has started
 window.addEventListener('touchstart', () => {
     if (!gameStarted) {
         gameStarted = true; // Start the game
-        dragon.velocity = jump; // Use the jump constant
-        dragon.y += dragon.velocity; // Update the dragon's position
     }
+    dragon.velocity = jump; // Use the jump constant
+    dragon.y += dragon.velocity; // Update the dragon's position
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
 
@@ -190,9 +190,9 @@ function update() {
 
                 // Update the positions only if the dragon has started flying
         if (gameStarted) {
-            bgbgX -= 0.1; // Increase speed for the furthest back
-            bgX -= 0.12; // Increase speed for the middle
-            fgX -= 0.14; // Increase speed for the closest
+            bgbgX -= 0.1; // Slowest speed for the furthest back background
+            bgX -= 0.15; // Slower speed for the middle background
+            fgX -= 0.2; // Fastest speed for the closest backhground
             perchX -= obstacleVelocity; // Move the perch with the obstacles
         }
             // Reset positions if they go off-screen
@@ -201,9 +201,13 @@ function update() {
             if (fgX <= -imageWidth) fgX = 0;
         }
 
-// Check for collision with ground or ceiling
-        if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) {
+        // Check for collision with ground or ceiling
+        if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) || (dragon.y > canvas.height + 200 || dragon.y < -300) {
             // Reset dragon and obstacles
+            obstacles = [];
+            perchX = 50; // Reset the perch's X position
+            dragon.y = perchY - 25; // Reset the dragon's Y position
+            dragon.velocity = 0; // Reset the dragon's velocity
             dragon.x = dragonStartX;
             dragon.y = dragonStartY;
             dragon.velocity = 0;
