@@ -56,7 +56,7 @@ const imageWidth = canvas.height * 4;
 // Dragon player object
 const dragon = {
     x: perchX, // Adjust as needed
-    y: perchY - 150, // Dragon sits on top of the perch
+    y: perchY - 125, // Dragon sits on top of the perch
     width: 150,
     height: 150,
     velocity: 0
