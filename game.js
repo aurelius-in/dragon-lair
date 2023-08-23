@@ -180,31 +180,36 @@ function update() {
         }
 
         // Check for collision with obstacles
-        obstacles.forEach((obstacle, index) => {
-            // Check for collision with dragon
-            if (
-                dragon.x < obstacle.x + obstacle.width &&
-                dragon.x + dragon.width > obstacle.x &&
-                dragon.y < obstacle.y + obstacle.height &&
-                dragon.y + dragon.height > obstacle.y
-            ) {
-                // Reset dragon and obstacles
-                dragon.x = dragonStartX;
-                dragon.y = dragonStartY;
-                dragon.velocity = 0;
-                gameStarted = false;
-                currentFrame = 0;
-                obstacles.length = 0; // Clear obstacles array
-            }
+obstacles.forEach((obstacle, index) => {
+    // Reduce the dragon's boundary box
+    const boundaryReductionX = dragon.width * 0.1;
+    const boundaryReductionY = dragon.height * 0.2;
 
-            // Move obstacle to the left
-            obstacle.x -= obstacleSpeed;
+    // Check for collision with dragon
+    if (
+        dragon.x + boundaryReductionX < obstacle.x + obstacle.width &&
+        dragon.x + dragon.width - boundaryReductionX > obstacle.x &&
+        dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
+        dragon.y + dragon.height - boundaryReductionY > obstacle.y
+    ) {
+        // Reset dragon and obstacles
+        dragon.x = dragonStartX;
+        dragon.y = dragonStartY;
+        dragon.velocity = 0;
+        gameStarted = false;
+        currentFrame = 0;
+        obstacles.length = 0; // Clear obstacles array
+    }
 
-            // Remove off-screen obstacles
-            if (obstacle.x + obstacle.width < 0) {
-                obstacles.splice(index, 1);
-            }
-        });
+    // Move obstacle to the left
+    obstacle.x -= obstacleSpeed;
+
+    // Remove off-screen obstacles
+    if (obstacle.x + obstacle.width < 0) {
+        obstacles.splice(index, 1);
+    }
+});
+
     }
 
     draw();
