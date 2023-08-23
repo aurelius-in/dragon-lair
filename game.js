@@ -129,7 +129,7 @@ if (tapToFlyAlpha > 0) {
   context.textAlign = 'center';
   context.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
 }
-
+}
 function createObstacle() {
     const obstacleType = ['arrow', 'lightningStrike', 'batSwarm', 'tornado', 'wraith', 'zombieDragon', 'thundercloud', 'fireball'];
     const randomType = obstacleType[Math.floor(Math.random() * obstacleType.length)];
