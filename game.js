@@ -201,23 +201,20 @@ function update() {
             if (fgX <= -imageWidth) fgX = 0;
         }
 
-        // Check for collision with ground or ceiling
-        if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) || (dragon.y > canvas.height + 200 || dragon.y < -300) {
-            // Reset dragon and obstacles
-            obstacles = [];
-            perchX = 50; // Reset the perch's X position
-            dragon.y = perchY - 25; // Reset the dragon's Y position
-            dragon.velocity = 0; // Reset the dragon's velocity
-            dragon.x = dragonStartX;
-            dragon.y = dragonStartY;
-            dragon.velocity = 0;
-            gameStarted = false;
-            currentFrame = 0;
-            obstacles.length = 0; // Clear obstacles array
-            bgX = 0; // Reset background positions
-            fgX = 0;
-            bgbgX = 0;
-        }
+       // Check for collision with ground or ceiling
+if ((dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) || (dragon.y > canvas.height + 200 || dragon.y < -300)) {
+    // Reset dragon and obstacles
+    obstacles.length = 0; // Clear obstacles array
+    perchX = 50; // Reset the perch's X position
+    dragon.x = dragonStartX;
+    dragon.y = dragonStartY;
+    dragon.velocity = 0;
+    gameStarted = false;
+    currentFrame = 0;
+    bgX = 0; // Reset background positions
+    fgX = 0;
+    bgbgX = 0;
+}
         
         // Check if it's time to spawn a new obstacle
         gameTime += 1000 / 60; // Increment game time by frame duration
