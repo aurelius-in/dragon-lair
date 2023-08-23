@@ -114,37 +114,14 @@ function draw() {
      // Draw perch
     context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
 
-    // Draw obstacles using functions from obstacles.js
+function draw() {
+    // ... other drawing code ...
+
+    // Drawing obstacles using functions from obstacles.js
     obstacles.forEach(obstacle => {
-        let obstacleObject;
-        switch (obstacle.type) {
-            case 'arrow':
-                obstacleObject = createArrowObstacle(obstacle.x, obstacle.y);
-                break;
-            case 'lightningStrike':
-                obstacleObject = createLightningStrikeObstacle(obstacle.x, obstacle.y);
-                break;
-            case 'bats':
-                obstacleObject = createBatSwarmObstacle(obstacle.x, obstacle.y);
-                break;
-            case 'tornado':
-                obstacleObject = createTornadoObstacle(obstacle.x, obstacle.y);
-                break;
-            case 'wraith':
-                obstacleObject = createWraithObstacle(obstacle.x, obstacle.y);
-                break;
-            case 'zombieDragon':
-                obstacleObject = createZombieDragonObstacle(obstacle.x, obstacle.y);
-                break;
-            case 'thundercloud':
-                obstacleObject = createThundercloudObstacle(obstacle.x, obstacle.y);
-                break;
-            case 'fireball':
-                obstacleObject = createFireballObstacle(obstacle.x, obstacle.y);
-                break;
-        }
-        obstacleObject.draw(context);
+        obstacle.draw(context);
     });
+}
 
    // Draw dragon
     context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height); // Use currentFrame instead of dragonFrame
