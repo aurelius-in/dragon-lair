@@ -147,59 +147,6 @@ function draw() {
     });
 }
 
-// Function to create obstacles
-function createObstacle() {
-    // Determine the position of the obstacle
-    const obstacleX = canvas.width;
-
-    // Random distance from the center, never closer than an inch from the center
-    const minDistanceFromCenter = 96; // 1 inch from the center, adjust as needed
-    const maxDistanceFromCenter = canvas.height / 2 - minDistanceFromCenter;
-    const randomDistanceFromCenter = Math.random() * (maxDistanceFromCenter - minDistanceFromCenter) + minDistanceFromCenter;
-
-    const obstacleY = topObstacle
-        ? randomDistanceFromCenter
-        : canvas.height - randomDistanceFromCenter - obstacleHeight; // Use obstacleHeight
-
-    // Create the obstacle object based on the type
-    let obstacle;
-    switch (Math.floor(Math.random() * 9)) {
-        case 0:
-            obstacle = createArrowObstacle(obstacleX, obstacleY);
-            break;
-        case 1:
-            obstacle = createLightningStrikeObstacle(obstacleX, obstacleY);
-            break;
-        case 2:
-            obstacle = createBatSwarmObstacle(obstacleX, obstacleY);
-            break;
-        case 3:
-            obstacle = createTornadoObstacle(obstacleX, obstacleY);
-            break;
-        case 4:
-            obstacle = createWraithObstacle(obstacleX, obstacleY);
-            break;
-        case 5:
-            obstacle = createZombieDragonObstacle(obstacleX, obstacleY);
-            break;
-        case 6:
-            obstacle = createThundercloudObstacle(obstacleX, obstacleY);
-            break;
-        case 7:
-            obstacle = createFireballObstacle(obstacleX, obstacleY);
-            break;
-    }
-
-    // Add the obstacle to the obstacles array
-    obstacles.push(obstacle);
-
-    // Alternate between top and bottom obstacles
-    topObstacle = !topObstacle;
-
-    // Reduce the spawn time for the next obstacle by 1%
-    obstacleSpawnTime *= 0.99;
-}
-
     // Add the obstacle to the obstacles array
     obstacles.push(obstacle);
 
