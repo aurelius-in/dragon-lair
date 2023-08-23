@@ -45,6 +45,9 @@ fgImage.src = 'images/fg.png';
 const bgbgImage = new Image();
 bgbgImage.src = 'images/bgbg.png';
 
+// Start flying before tapping
+let tapToFlyAlpha = 1;
+
 // Initial positions
 let bgX = 0;
 let fgX = 0;
@@ -118,7 +121,14 @@ function draw() {
 
     // Draw dragon
     context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
-
+ 
+    // Draw the "TAP TO FLY!" text
+  if (tapToFlyAlpha > 0) {
+    ctx.fillStyle = `rgba(255, 255, 255, ${tapToFlyAlpha})`; // White text with alpha for fading
+    ctx.font = '40px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
+  }
 }
 
 function createObstacle() {
@@ -241,6 +251,10 @@ if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.heigh
             }
         });
     }
+    // Fade the "TAP TO FLY!" text
+  if (tapToFlyAlpha > 0) {
+    tapToFlyAlpha -= 0.01
+  }
 }
 
 // Game loop
@@ -251,3 +265,19 @@ function gameLoop() {
 }
 
 gameLoop();
+
+// Add this code to the end of your file
+window.onload = () => {
+  setTimeout(() => {
+    tapToFlyAlpha = 0; // Hide the text
+  }, 2000);
+
+  setTimeout(() => {
+    dragon.velocity = JUMP; // Simulate the first tap
+  }, 2100);
+
+  setTimeout(() => {
+    dragon.velocity = JUMP; // Simulate the second tap
+    gameStarted = true; // Start the game
+  }, 2300);
+};
