@@ -91,11 +91,6 @@ window.addEventListener('touchstart', () => {
     dragon.velocity = jump; // Use the jump constant
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
-window.addEventListener('touchstart', () => {
-    gameStarted = true; // Start the game
-    dragon.velocity = -5; // Reduced flap strength
-    currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
-});
 
 // Draw function
 function draw() {
