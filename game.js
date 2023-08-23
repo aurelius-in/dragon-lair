@@ -50,6 +50,9 @@ let bgX = 0;
 let fgX = 0;
 let bgbgX = 0;
 
+// Calculate the width based on the canvas height and 4:1 aspect ratio
+const imageWidth = canvas.height * 4;
+
 // Dragon player object
 const dragon = {
     x: perchX, // Adjust as needed
@@ -94,14 +97,16 @@ window.addEventListener('touchstart', () => {
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
 
+// Draw function
 function draw() {
-    // Draw background images
-    context.drawImage(bgImage, bgX, 0, canvas.width, canvas.height);
-    context.drawImage(bgImage, bgX + canvas.width, 0, canvas.width, canvas.height);
-    context.drawImage(fgImage, fgX, 0, canvas.width, canvas.height);
-    context.drawImage(fgImage, fgX + canvas.width, 0, canvas.width, canvas.height);
-    context.drawImage(bgbgImage, bgbgX, 0, canvas.width, canvas.height);
-    context.drawImage(bgbgImage, bgbgX + canvas.width, 0, canvas.width, canvas.height);
+    // Draw the background images
+    context.drawImage(bgImage, bgX, 0, imageWidth, canvas.height);
+    context.drawImage(bgImage, bgX + imageWidth, 0, imageWidth, canvas.height);
+    context.drawImage(fgImage, fgX, 0, imageWidth, canvas.height);
+    context.drawImage(fgImage, fgX + imageWidth, 0, imageWidth, canvas.height);
+    context.drawImage(bgbgImage, bgbgX, 0, imageWidth, canvas.height);
+    context.drawImage(bgbgImage, bgbgX + imageWidth, 0, imageWidth, canvas.height);
+
     
      // Draw perch
     context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
@@ -168,16 +173,17 @@ function createObstacle() {
     obstacleSpawnTime *= 0.99;
 }
 
+// Update function
 function update() {
-    // Update the background positions
-    bgX -= 0.5; // Adjust speed as needed
-    fgX -= 1; // Adjust speed as needed
-    bgbgX -= 0.25; // Adjust speed as needed
+    // Update the positions
+    bgX -= 0.5;
+    fgX -= 1;
+    bgbgX -= 0.25;
 
-    // Loop the backgrounds
-    if (bgX <= -canvas.width) bgX = 0;
-    if (fgX <= -canvas.width) fgX = 0;
-    if (bgbgX <= -canvas.width) bgbgX = 0;
+    // Reset positions if they go off-screen
+    if (bgX <= -imageWidth) bgX = 0;
+    if (fgX <= -imageWidth) fgX = 0;
+    if (bgbgX <= -imageWidth) bgbgX = 0;
 
     if (gameStarted) {
         // Update dragon's velocity and position
