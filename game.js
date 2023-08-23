@@ -98,63 +98,54 @@ window.addEventListener('touchstart', () => {
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
 
-// Draw function
 function draw() {
-    // Draw the backgrounds
-    context.drawImage(bgbgImage, bgbgX, 0, canvas.width, canvas.height);
-    context.drawImage(bgbgImage, bgbgX + canvas.width, 0, canvas.width, canvas.height);
-    context.drawImage(bgIImage, bgX, 0, canvas.width, canvas.height);
+    // Draw background images
+    context.drawImage(bgImage, bgX, 0, canvas.width, canvas.height);
     context.drawImage(bgImage, bgX + canvas.width, 0, canvas.width, canvas.height);
     context.drawImage(fgImage, fgX, 0, canvas.width, canvas.height);
     context.drawImage(fgImage, fgX + canvas.width, 0, canvas.width, canvas.height);
-
-    // Draw perch if the game hasn't started
-    if (!gameStarted) {
-        context.drawImage(perchImage, dragon.x + dragon.width / 2 - 25, dragon.y + dragon.height, 50, 100);
-    }
-
-    // Draw dragon
-    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
+    context.drawImage(bgbgImage, bgbgX, 0, canvas.width, canvas.height);
+    context.drawImage(bgbgImage, bgbgX + canvas.width, 0, canvas.width, canvas.height);
 
     // Draw obstacles using functions from obstacles.js
     obstacles.forEach(obstacle => {
+        let obstacleObject;
         switch (obstacle.type) {
             case 'arrow':
-                createArrowObstacle(obstacle.x, obstacle.y);
+                obstacleObject = createArrowObstacle(obstacle.x, obstacle.y);
                 break;
-            case 'lightningStrike':
-                createLightningStrikeObstacle(obstacle.x, obstacle.y);
+            case 'lightning':
+                obstacleObject = createLightningObstacle(obstacle.x, obstacle.y);
                 break;
-            case 'batSwarm':
-                createBatSwarmObstacle(obstacle.x, obstacle.y);
+            case 'bats':
+                obstacleObject = createBatSwarmObstacle(obstacle.x, obstacle.y);
                 break;
             case 'tornado':
-                createTornadoObstacle(obstacle.x, obstacle.y);
+                obstacleObject = createTornadoObstacle(obstacle.x, obstacle.y);
                 break;
             case 'wraith':
-                createWraithObstacle(obstacle.x, obstacle.y);
+                obstacleObject = createWraithObstacle(obstacle.x, obstacle.y);
                 break;
             case 'zombieDragon':
-                createZombieDragonObstacle(obstacle.x, obstacle.y);
+                obstacleObject = createZombieDragonObstacle(obstacle.x, obstacle.y);
                 break;
             case 'thundercloud':
-                createThundercloudObstacle(obstacle.x, obstacle.y);
+                obstacleObject = createThundercloudObstacle(obstacle.x, obstacle.y);
                 break;
             case 'fireball':
-                createFireballObstacle(obstacle.x, obstacle.y);
+                obstacleObject = createFireballObstacle(obstacle.x, obstacle.y);
                 break;
         }
+        obstacleObject.draw(context);
     });
-}
 
-    // Add the obstacle to the obstacles array
-    obstacles.push(obstacle);
+    // Draw dragon
+    context.drawImage(dragonImages[dragonFrame], dragon.x, dragon.y, dragon.width, dragon.height);
 
-    // Alternate between top and bottom obstacles
-    topObstacle = !topObstacle;
+    // Draw perch
+    context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
 
-    // Reduce the spawn time for the next obstacle by 1%
-    obstacleSpawnTime *= 0.99;
+    // Draw other game elements if needed
 }
 
 function createObstacle() {
