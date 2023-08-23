@@ -66,7 +66,7 @@ const dragon = {
 };
 
 // Gravity and obstacle speed
-const obstacleSpeed = 5; // Adjust as needed
+let obstacleSpeed = 5; // Adjust as needed
 
 // Create an array to hold the dragon images and load them
 const dragonImages = [];
