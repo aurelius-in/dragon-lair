@@ -103,7 +103,7 @@ function draw() {
     // Draw the backgrounds
     context.drawImage(bgbgImage, bgbgX, 0, canvas.width, canvas.height);
     context.drawImage(bgbgImage, bgbgX + canvas.width, 0, canvas.width, canvas.height);
-    context.drawImage(bgImage, bgX, 0, canvas.width, canvas.height);
+    context.drawImage(bgIImage, bgX, 0, canvas.width, canvas.height);
     context.drawImage(bgImage, bgX + canvas.width, 0, canvas.width, canvas.height);
     context.drawImage(fgImage, fgX, 0, canvas.width, canvas.height);
     context.drawImage(fgImage, fgX + canvas.width, 0, canvas.width, canvas.height);
@@ -146,6 +146,27 @@ function draw() {
         }
     });
 }
+
+    // Add the obstacle to the obstacles array
+    obstacles.push(obstacle);
+
+    // Alternate between top and bottom obstacles
+    topObstacle = !topObstacle;
+
+    // Reduce the spawn time for the next obstacle by 1%
+    obstacleSpawnTime *= 0.99;
+}
+
+function createObstacle() {
+    const obstacleType = ['arrow', 'lightningStrike', 'batSwarm', 'tornado', 'wraith', 'zombieDragon', 'thundercloud', 'fireball'];
+    const randomType = obstacleType[Math.floor(Math.random() * obstacleType.length)];
+    const obstacle = {
+        type: randomType,
+        x: canvas.width,
+        y: topObstacle ? 0 : canvas.height - obstacleHeight,
+        width: obstacleWidth,
+        height: obstacleHeight
+    };
 
     // Add the obstacle to the obstacles array
     obstacles.push(obstacle);
