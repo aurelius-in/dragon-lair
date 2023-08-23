@@ -138,8 +138,8 @@ function draw() {
         obstacleObject.draw(context);
     });
 
-    // Draw dragon
-    context.drawImage(dragonImages[dragonFrame], dragon.x, dragon.y, dragon.width, dragon.height);
+   // Draw dragon
+    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height); // Use currentFrame instead of dragonFrame
 
     // Draw perch
     context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
