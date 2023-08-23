@@ -15,8 +15,6 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 // Load background, perch, and obstacle images
-const bgImage = new Image();
-bgImage.src = 'images/bg.png';
 const perchImage = new Image();
 perchImage.src = 'images/perch.png';
 const obstacleImages = [];
