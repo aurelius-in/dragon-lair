@@ -66,7 +66,7 @@ const dragon = {
 };
 
 // Gravity and obstacle speed
-let obstacleSpeed = 5; // Adjust as needed
+let obstacleVelocity = 5; // Adjust as needed
 
 // Create an array to hold the dragon images and load them
 const dragonImages = [];
@@ -193,7 +193,7 @@ function update() {
             bgbgX -= 0.05; // Slowest movement for the furthest back
             bgX -= 0.06; // Almost as slow as bgbg
             fgX -= 0.07; // Slow but not quite as slowly as bg
-            perchX -= obstacleSpeed; // Move the perch with the obstacles
+            perchX -= obstacleVelocity; // Move the perch with the obstacles
 
             // Reset positions if they go off-screen
             if (bgbgX <= -imageWidth) bgbgX = 0;
@@ -242,7 +242,7 @@ if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.heigh
             }
 
             // Move obstacle to the left
-            obstacle.x -= obstacleSpeed;
+            obstacle.x -= obstacleVelocity;
 
             // Remove off-screen obstacles
             if (obstacle.x + obstacle.width < 0) {
