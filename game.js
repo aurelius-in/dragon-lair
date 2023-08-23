@@ -18,7 +18,7 @@ canvas.height = window.innerHeight;
 const perchImage = new Image();
 perchImage.src = 'images/perch.png';
 
-const perchX = 50; // Adjust as needed
+let perchX = 50; // Adjust as needed
 const perchY = canvas.height - 250; // Perch extends from the bottom
 const perchWidth = 150; // Width of the perch
 const perchHeight = 250; // Height of the perch
