@@ -14,7 +14,7 @@ const context = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-// Load background, perch, and obstacle images
+// Load perch
 const perchImage = new Image();
 perchImage.src = 'images/perch.png';
 
