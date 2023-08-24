@@ -221,7 +221,7 @@ function update() {
         if (gameTime >= obstacleSpawnTime) {
             createObstacle(); // Create a new obstacle
             gameTime = 0; // Reset game time
-            obstacleSpawnTime *= 0.99; // Reduce spawn time by 1%
+            obstacleSpawnTime *= 0.999; // Reduce spawn time by 1%
          } else {
             // If the dragon is not out of bounds, allow it to respond to tapping
             dragon.velocity += gravity; // Apply gravity continuously
@@ -272,7 +272,6 @@ function gameLoop() {
 
 gameLoop();
 
-// Add this code to the end of your file
 window.onload = () => {
   setTimeout(() => {
     tapToFlyAlpha = 0; // Hide the text
