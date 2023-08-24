@@ -31,7 +31,7 @@ for (let i = 1; i <= 3; i++) {
 }
 
 // End of game
-let currentFrame = 0;
+export let currentFrame = 0;
 export { currentFrame };
 export let life = 100;
 export let screenFadeAlpha = 0;
