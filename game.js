@@ -265,12 +265,11 @@ function update() {
         dragon.y += dragon.velocity;
 
         // Update the positions only if the dragon has started flying
-        if (gameStarted) {
-            bgbgX -= 0.05; // Slowest speed for the furthest back background
-            bgX -= 0.1; // Slower speed for the middle background
-            fgX -= 0.15; // Slow speed for the closest background
-            perchX -= obstacleVelocity; // Move the perch with the obstacles
-        }
+        bgbgX -= 0.05; // Slowest speed for the furthest back background
+        bgX -= 0.1; // Slower speed for the middle background
+        fgX -= 0.15; // Slow speed for the closest background
+        perchX -= obstacleVelocity; // Move the perch with the obstacles
+
         // Reset positions if they go off-screen
         if (bgbgX <= -imageWidth) bgbgX = 0;
         if (bgX <= -imageWidth) bgX = 0;
@@ -281,16 +280,29 @@ function update() {
         if (gameTime >= obstacleSpawnTime) {
             createObstacle(); // Create a new obstacle
             gameTime = 0; // Reset game time
-            obstacleSpawnTime *= 0.999; // Reduce spawn time by 1%
-        } else {
-            // If the dragon is not out of bounds, allow it to respond to tapping
-            dragon.velocity += gravity; // Apply gravity continuously
         }
 
         obstacles.forEach((obstacle, index) => {
             obstacle.update();
             if (obstacle.x + obstacle.width < 0) {
                 obstacles.splice(index, 1);
+            }
+
+            // Check for collision with obstacles
+            const boundaryReductionX = dragon.width * 0.1;
+            const boundaryReductionY = dragon.height * 0.2;
+
+            if (
+                dragon.x + boundaryReductionX < obstacle.x + obstacle.width &&
+                dragon.x + dragon.width - boundaryReductionX > obstacle.x &&
+                dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
+                dragon.y + dragon.height - boundaryReductionY > obstacle.y
+            ) {
+                life -= 10; // Reduce life by 10%
+                if (life <= 0) {
+                    resetGame(); // Reset the game if life reaches 0
+                }
+                obstacles.splice(index, 1); // Remove collided obstacle
             }
         });
 
@@ -299,6 +311,7 @@ function update() {
             resetGame();
         }
     }
+
     if (!endGame && fgX + imageWidth <= canvas.width) {
         endGame = true;
     }
@@ -328,30 +341,6 @@ function update() {
     }
 }
 
-// Check for collision with obstacles
-obstacles.forEach((obstacle, index) => {
-    const boundaryReductionX = dragon.width * 0.1;
-    const boundaryReductionY = dragon.height * 0.2;
-
-    if (
-        dragon.x + boundaryReductionX < obstacle.x + obstacle.width &&
-        dragon.x + dragon.width - boundaryReductionX > obstacle.x &&
-        dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
-        dragon.y + dragon.height - boundaryReductionY > obstacle.y
-    ) {
-        life -= 10; // Reduce life by 10%
-        if (life <= 0) {
-            resetGame(); // Reset the game if life reaches 0
-        }
-        obstacles.splice(index, 1); // Remove collided obstacle
-    }
-
-    // Moving and removing off-screen obstacles
-    obstacle.x -= obstacleVelocity;
-    if (obstacle.x + obstacle.width < 0) {
-        obstacles.splice(index, 1);
-    }
-});
 
 // Fade the "TAP TO FLY!" text
 if (tapToFlyAlpha > 0) {
