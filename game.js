@@ -330,7 +330,6 @@ function update() {
         framesPerFlap++;
     }
 }
-}
 
 // Fade the "TAP TO FLY!" text
 if (tapToFlyAlpha > 0) {
