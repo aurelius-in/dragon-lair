@@ -123,8 +123,9 @@ function resetGame() {
 // Draw objects
 function draw() {
 // Draw the life bar border
-context.fillStyle = 'blue-grey';
+context.fillStyle = '#708090'; // Hex code for blue-grey border
 context.fillRect(10, 10, 400, 15);
+
 
 // Determine the fill color based on life
 let fillColor = life <= 20 ? 'red' : 'green';
@@ -233,12 +234,12 @@ function update() {
         dragon.y += dragon.velocity;
 
                 // Update the positions only if the dragon has started flying
-        if (gameStarted) {
-            bgbgX -= 0.04; // Slowest speed for the furthest back background
-            bgX -= 0.05; // Slower speed for the middle background
-            fgX -= 0.2; // Fastest speed for the closest backhground
-            perchX -= obstacleVelocity; // Move the perch with the obstacles
-        }
+       if (gameStarted) {
+    bgbgX -= 0.02; // Slowest speed for the furthest back background
+    bgX -= 0.03; // Slower speed for the middle background
+    fgX -= 0.1; // Slower speed for the closest background
+    perchX -= obstacleVelocity; // Move the perch with the obstacles
+}
             // Reset positions if they go off-screen
             if (bgbgX <= -imageWidth) bgbgX = 0;
             if (bgX <= -imageWidth) bgX = 0;
