@@ -319,6 +319,15 @@ function update() {
             setTimeout(resetGame, 2000);
         }
     }
+// Gradually reduce the flap speed when not tapping
+    if (gameLoopCounter % framesPerFlap === 0) {
+        currentFrame = (currentFrame + 1) % dragonImages.length; // Cycle through the frames
+    }
+
+    // Gradually increase framesPerFlap to slow down the animation when not tapping
+    if (gameLoopCounter % 60 === 0 && framesPerFlap < 30) { // Every second
+        framesPerFlap++;
+    }
 }
 
 // Fade the "TAP TO FLY!" text
