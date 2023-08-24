@@ -102,6 +102,14 @@ window.addEventListener('touchstart', () => {
     dragon.y += dragon.velocity; // Update the dragon's position
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
+window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+        handleInput();
+    }
+});
+
+window.addEventListener('click', handleInput);
+
 
 function resetGame() {
     // Reset dragon and obstacles
