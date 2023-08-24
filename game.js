@@ -127,7 +127,7 @@ function draw() {
     dragonFrame = (dragonFrame + 1) % 3;
   } else {
     // If the dragon is not jumping, use the default wing position
-    dragonFrame += 1;
+    dragonFrame = 0;
   }
   context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
  
