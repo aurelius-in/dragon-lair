@@ -202,7 +202,7 @@ function update() {
         }
 
       // Check for collision with ground or ceiling
-        if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) {
+        if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300) {
     // Reset dragon and obstacles
     obstacles.length = 0; // Clear obstacles array
     perchX = 50; // Reset the perch's X position
