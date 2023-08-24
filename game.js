@@ -131,6 +131,12 @@ function resetGame() {
     bgbgX = 0;
     life = 100; // Reset life to 100%
     obstacleSpawnTime = 4000; // Reset obstacle spawn time to 4 seconds
+    endGame = false;
+    endGameTime = 0;
+    dragonScale = 1;
+    dragonAlpha = 1;
+    screenFadeAlpha = 0;
+    imageWidth = canvas.height * 4; // Reset image width
 }
 
 // Draw objects
