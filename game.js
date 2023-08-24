@@ -320,15 +320,16 @@ function update() {
             setTimeout(resetGame, 2000);
         }
     }
-    // Gradually reduce the flap speed when not tapping
-    if (gameLoopCounter % framesPerFlap === 0) {
-        currentFrame = (currentFrame + 1) % dragonImages.length; // Cycle through the frames
+    // control the non-tapping animation speed
+    if (!gameStarted) {
+        framesPerFlap = 30; // 2 frames per second (60 frames / 2)
     }
 
-// Gradually increase framesPerFlap to slow down the animation when not tapping
-if (gameLoopCounter % 30 === 0 && framesPerFlap < 40) { // Every half second
-    framesPerFlap += 2; // Increment by 2
-}
+    // Gradually increase framesPerFlap to slow down the animation when not tapping
+    if (gameLoopCounter % 30 === 0 && framesPerFlap < 40) { // Every half second
+        framesPerFlap += 2; // Increment by 2
+    }
+
 
 }
 
