@@ -320,7 +320,7 @@ function update() {
             setTimeout(resetGame, 2000);
         }
     }
-// Gradually reduce the flap speed when not tapping
+    // Gradually reduce the flap speed when not tapping
     if (gameLoopCounter % framesPerFlap === 0) {
         currentFrame = (currentFrame + 1) % dragonImages.length; // Cycle through the frames
     }
@@ -330,17 +330,24 @@ function update() {
         framesPerFlap++;
     }
 }
+}
 
 // Fade the "TAP TO FLY!" text
 if (tapToFlyAlpha > 0) {
     tapToFlyAlpha -= 0.01
 }
 
-// Game loop
 function gameLoop() {
     update();
     draw();
-    gameLoopCounter++; // Increment the game loop counter
+
+    // Increment the game loop counter
+    gameLoopCounter++;
+
+    // Update the current frame based on the framesPerFlap variable
+    if (gameLoopCounter % framesPerFlap === 0) {
+        currentFrame = (currentFrame + 1) % dragonImages.length; // Cycle through the frames
+    }
     requestAnimationFrame(gameLoop);
 }
 
