@@ -119,10 +119,7 @@ function resetGame() {
     obstacleSpawnTime = 4000; // Reset obstacle spawn time to 4 seconds
 }
 
-// Check for collision with ground or ceiling
-if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300 || life <= 0) {
-    resetGame();
-}
+
 // Draw objects
 function draw() {
 // Draw the life bar border
@@ -257,6 +254,10 @@ function update() {
             // If the dragon is not out of bounds, allow it to respond to tapping
             dragon.velocity += gravity; // Apply gravity continuously
         }
+        // Check for collision with ground or ceiling
+if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300 || life <= 0) {
+    resetGame();
+}
           }
       }
 
