@@ -190,8 +190,8 @@ function update() {
 
                 // Update the positions only if the dragon has started flying
         if (gameStarted) {
-            bgbgX -= 0.1; // Slowest speed for the furthest back background
-            bgX -= 0.15; // Slower speed for the middle background
+            bgbgX -= 0.04; // Slowest speed for the furthest back background
+            bgX -= 0.05; // Slower speed for the middle background
             fgX -= 0.2; // Fastest speed for the closest backhground
             perchX -= obstacleVelocity; // Move the perch with the obstacles
         }
