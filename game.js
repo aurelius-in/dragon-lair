@@ -47,7 +47,7 @@ const obstacleWidth = 40;
 let obstacleHeight = 40;
 
 let dragonFrame = 0; // Define dragonFrame
-const framesPerFlap = 12; // Increase the frames per flap to slow down the animation
+let framesPerFlap = 12; // Increase the frames per flap to slow down the animation
 
 // Load the images
 const bgImage = new Image();
