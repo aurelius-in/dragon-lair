@@ -119,13 +119,6 @@ function resetGame() {
     obstacleSpawnTime = 4000; // Reset obstacle spawn time to 4 seconds
 }
 
-
-// Draw objects
-function draw() {
-// Draw the life bar border
-context.fillStyle = '#708090'; // Hex code for blue-grey border
-context.fillRect(10, 10, 400, 15);
-
 // Draw objects
 function draw() {
     // Draw the life bar border
@@ -160,26 +153,26 @@ function draw() {
     });
     
 // Draw the dragon
-if (gameStarted && dragon.velocity < 0) {
-  // If the dragon is jumping, cycle through three frames for one full flap
-  dragonFrame = (dragonFrame + 1) % framesPerFlap; // Use framesPerFlap to control the speed
-  currentFrame = Math.floor(dragonFrame / 4); // Use dragonFrame to set the current frame
-} else {
-  // If the dragon is not jumping, use the default wing position
-  dragonFrame = 0;
-  currentFrame = dragonFrame; // Use dragonFrame to set the current frame
-}
-context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
+    if (gameStarted && dragon.velocity < 0) {
+        // If the dragon is jumping, cycle through three frames for one full flap
+        dragonFrame = (dragonFrame + 1) % framesPerFlap; // Use framesPerFlap to control the speed
+        currentFrame = Math.floor(dragonFrame / 4); // Use dragonFrame to set the current frame
+    } else {
+        // If the dragon is not jumping, use the default wing position
+        dragonFrame = 0;
+        currentFrame = dragonFrame; // Use dragonFrame to set the current frame
+    }
+    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
 
+    // Draw the "TAP TO FLY!" text
+    if (tapToFlyAlpha > 0) {
+        context.fillStyle = `rgba(255, 255, 255, ${tapToFlyAlpha})`; // White text with alpha for fading
+        context.font = '40px sans-serif';
+        context.textAlign = 'center';
+        context.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
+    }
+}
 
-// Draw the "TAP TO FLY!" text
-if (tapToFlyAlpha > 0) {
-  context.fillStyle = `rgba(255, 255, 255, ${tapToFlyAlpha})`; // White text with alpha for fading
-  context.font = '40px sans-serif';
-  context.textAlign = 'center';
-  context.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
-}
-}
 function createObstacle() {
     const obstacleType = ['arrow', 'lightningStrike', 'batSwarm', 'tornado', 'wraith', 'zombieDragon', 'thundercloud', 'fireball'];
     const randomType = obstacleType[Math.floor(Math.random() * obstacleType.length)];
