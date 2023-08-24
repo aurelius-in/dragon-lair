@@ -26,6 +26,12 @@ const perchHeight = 250; // Height of the perch
 // Life bar
 let life = 100;
 
+let endGame = false;
+let endGameTime = 0;
+let dragonScale = 1;
+let dragonAlpha = 1;
+let screenFadeAlpha = 0;
+
 // Constants for dragon size and starting position
 const dragonWidth = 150;
 const dragonHeight = 150;
