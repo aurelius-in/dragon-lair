@@ -247,11 +247,6 @@ function update() {
             if (bgX <= -imageWidth) bgX = 0;
             if (fgX <= -imageWidth) fgX = 0;
         }
-
-      // Check for collision with ground or ceiling
-        if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300) {
-    // Reset dragon and obstacles
-    resetGame();
 }
         
         // Check if it's time to spawn a new obstacle
@@ -273,19 +268,17 @@ function update() {
 
             // Check for collision with dragon
             if (
-                dragon.x + boundaryReductionX < obstacle.x + obstacle.width &&
-                dragon.x + dragon.width - boundaryReductionX > obstacle.x &&
-                dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
-                dragon.y + dragon.height - boundaryReductionY > obstacle.y
-            ) {
-                // Reset dragon and obstacles
-                dragon.x = dragonStartX;
-                dragon.y = dragonStartY;
-                dragon.velocity = 0;
-                gameStarted = false;
-                currentFrame = 0;
-                obstacles.length = 0; // Clear obstacles array
-            }
+        dragon.x + boundaryReductionX < obstacle.x + obstacle.width &&
+        dragon.x + dragon.width - boundaryReductionX > obstacle.x &&
+        dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
+        dragon.y + dragon.height - boundaryReductionY > obstacle.y
+    ) {
+        life -= 10; // Reduce life by 10%
+        if (life <= 0) {
+            resetGame(); // Reset the game if life reaches 0
+        }
+        obstacles.splice(index, 1); // Remove collided obstacle
+    }
 
             // Move obstacle to the left
             obstacle.x -= obstacleVelocity;
