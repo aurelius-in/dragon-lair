@@ -124,7 +124,7 @@ function draw() {
 // Draw the dragon
 if (gameStarted && dragon.velocity < 0) { // Use dragon.velocity instead of dragonVelocity
   // If the dragon is jumping, cycle through three frames for one full flap
-  dragonFrame = (dragonFrame + 1) % 3;
+  dragonFrame = (dragonFrame + 1) % 6 ;
 } else {
   // If the dragon is not jumping, use the default wing position
   dragonFrame = 0;
