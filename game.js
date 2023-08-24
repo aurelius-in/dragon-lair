@@ -24,7 +24,7 @@ const perchWidth = 150; // Width of the perch
 const perchHeight = 250; // Height of the perch
 
 let life = 100;
-let gameLoopCounter = 0; 
+let gameLoopCounter = 0;
 let endGame = false;
 let endGameTime = 0;
 let dragonScale = 1;
@@ -366,7 +366,6 @@ function gameLoop() {
 
     requestAnimationFrame(gameLoop);
 }
-
 
 gameLoop();
 
