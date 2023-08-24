@@ -122,14 +122,15 @@ function draw() {
     });
     
 // Draw the dragon
-  if (gameStarted && dragonVelocity < 0) {
-    // If the dragon is jumping, cycle through three frames for one full flap
-    dragonFrame = (dragonFrame + 1) % 3;
-  } else {
-    // If the dragon is not jumping, use the default wing position
-    dragonFrame = 0;
-  }
-  context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
+if (gameStarted && dragon.velocity < 0) { // Use dragon.velocity instead of dragonVelocity
+  // If the dragon is jumping, cycle through three frames for one full flap
+  dragonFrame = (dragonFrame + 1) % 3;
+} else {
+  // If the dragon is not jumping, use the default wing position
+  dragonFrame = 0;
+}
+context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
+
  
 // Draw the "TAP TO FLY!" text
 if (tapToFlyAlpha > 0) {
