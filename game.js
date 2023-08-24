@@ -141,26 +141,15 @@ function resetGame() {
 
 // Draw objects
 function draw() {
-    // Draw the life bar border
-    context.fillStyle = '#708090'; // Hex code for blue-grey border
-    context.fillRect(10, 10, 400, 15);
-
-    // Determine the fill color based on life
-    let fillColor = life <= 20 ? 'red' : 'green';
-
-    // Draw the life bar fill
-    context.fillStyle = fillColor;
-    context.fillRect(12, 12, (life / 100) * 396, 11);
-
-    // Draw the bgbg image first (furthest back)
+    // Draw the furthest back background (bgbg)
     context.drawImage(bgbgImage, bgbgX, 0, imageWidth, canvas.height);
     context.drawImage(bgbgImage, bgbgX + imageWidth, 0, imageWidth, canvas.height);
 
-    // Draw the bg image (middle)
+    // Draw the middle background (bg)
     context.drawImage(bgImage, bgX, 0, imageWidth, canvas.height);
     context.drawImage(bgImage, bgX + imageWidth, 0, imageWidth, canvas.height);
 
-    // Draw the fg image (closest)
+    // Draw the closest background (fg)
     context.drawImage(fgImage, fgX, 0, imageWidth, canvas.height);
     context.drawImage(fgImage, fgX + imageWidth, 0, imageWidth, canvas.height);
 
@@ -172,17 +161,25 @@ function draw() {
         obstacle.draw(context);
     });
 
-    // Draw the dragon
-    if (gameStarted && dragon.velocity < 0) {
-        // If the dragon is jumping, cycle through three frames for one full flap
-        dragonFrame = (dragonFrame + 1) % framesPerFlap; // Use framesPerFlap to control the speed
-        currentFrame = Math.floor(dragonFrame / 4); // Use dragonFrame to set the current frame
-    } else {
-        // If the dragon is not jumping, use the default wing position
-        dragonFrame = 0;
-        currentFrame = dragonFrame; // Use dragonFrame to set the current frame
-    }
+    // Draw the dragon with scaling and fading
+    context.save();
+    context.globalAlpha = dragonAlpha;
+    context.translate(dragon.x + dragon.width / 2, dragon.y + dragon.height / 2);
+    context.scale(dragonScale, dragonScale);
+    context.translate(-(dragon.x + dragon.width / 2), -(dragon.y + dragon.height / 2));
     context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
+    context.restore();
+
+    // Draw the life bar border
+    context.fillStyle = '#708090'; // Hex code for blue-grey border
+    context.fillRect(10, 10, 400, 15);
+
+    // Determine the fill color based on life
+    let fillColor = life <= 20 ? 'red' : 'green';
+
+    // Draw the life bar fill
+    context.fillStyle = fillColor;
+    context.fillRect(12, 12, (life / 100) * 396, 11);
 
     // Draw the "TAP TO FLY!" text
     if (tapToFlyAlpha > 0) {
@@ -191,15 +188,6 @@ function draw() {
         context.textAlign = 'center';
         context.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
     }
-
-    // Apply dragon scaling and fading
-    context.save();
-    context.globalAlpha = dragonAlpha;
-    context.translate(dragon.x + dragon.width / 2, dragon.y + dragon.height / 2);
-    context.scale(dragonScale, dragonScale);
-    context.translate(-(dragon.x + dragon.width / 2), -(dragon.y + dragon.height / 2));
-    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
-    context.restore();
 
     // Draw black fade overlay
     context.fillStyle = `rgba(0, 0, 0, ${screenFadeAlpha})`;
