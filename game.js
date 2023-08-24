@@ -34,8 +34,8 @@ const gravity = 0.4; // Medium gravity
 const jump = -8; // Medium jump strength
 
 // Constants for obstacle size
-const obstacleWidth = 30;
-let obstacleHeight = 30;
+const obstacleWidth = 40;
+let obstacleHeight = 40;
 
 // Load the images
 const bgImage = new Image();
