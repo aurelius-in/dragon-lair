@@ -94,22 +94,22 @@ let topObstacle = true; // To alternate between top and bottom obstacles
 
 let gameStarted = false; // Track if the game has started
 
-window.addEventListener('touchstart', () => {
+function handleInput() {
     if (!gameStarted) {
         gameStarted = true; // Start the game
     }
     dragon.velocity = jump; // Use the jump constant
     dragon.y += dragon.velocity; // Update the dragon's position
-    currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
-});
+    currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on input
+}
+// Touch, Click and Keydown Listeners
+window.addEventListener('click', handleInput);
+window.addEventListener('touchstart', handleInput);
 window.addEventListener('keydown', (e) => {
     if (e.code === 'Space') {
         handleInput();
     }
 });
-
-window.addEventListener('click', handleInput);
-
 
 function resetGame() {
     // Reset dragon and obstacles
