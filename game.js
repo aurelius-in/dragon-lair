@@ -171,8 +171,8 @@ function draw() {
     obstacles.forEach(obstacle => {
         obstacle.draw(context);
     });
-    
-// Draw the dragon
+
+    // Draw the dragon
     if (gameStarted && dragon.velocity < 0) {
         // If the dragon is jumping, cycle through three frames for one full flap
         dragonFrame = (dragonFrame + 1) % framesPerFlap; // Use framesPerFlap to control the speed
@@ -258,23 +258,23 @@ function createObstacle() {
     obstacleSpawnTime *= 0.999;
 }
 
-function update() {  
+function update() {
     if (gameStarted) {
         // Update dragon's velocity and position
-        dragon.velocity += gravity; 
+        dragon.velocity += gravity;
         dragon.y += dragon.velocity;
 
-                // Update the positions only if the dragon has started flying
-       if (gameStarted) {
-    bgbgX -= 0.05; // Slowest speed for the furthest back background
-    bgX -= 0.1; // Slower speed for the middle background
-    fgX -= 0.15; // Slow speed for the closest background
-    perchX -= obstacleVelocity; // Move the perch with the obstacles
-}
-            // Reset positions if they go off-screen
-            if (bgbgX <= -imageWidth) bgbgX = 0;
-            if (bgX <= -imageWidth) bgX = 0;
-            if (fgX <= -imageWidth) fgX = 0;
+        // Update the positions only if the dragon has started flying
+        if (gameStarted) {
+            bgbgX -= 0.05; // Slowest speed for the furthest back background
+            bgX -= 0.1; // Slower speed for the middle background
+            fgX -= 0.15; // Slow speed for the closest background
+            perchX -= obstacleVelocity; // Move the perch with the obstacles
+        }
+        // Reset positions if they go off-screen
+        if (bgbgX <= -imageWidth) bgbgX = 0;
+        if (bgX <= -imageWidth) bgX = 0;
+        if (fgX <= -imageWidth) fgX = 0;
 
         // Check if it's time to spawn a new obstacle
         gameTime += 1000 / 60; // Increment game time by frame duration
@@ -282,24 +282,51 @@ function update() {
             createObstacle(); // Create a new obstacle
             gameTime = 0; // Reset game time
             obstacleSpawnTime *= 0.999; // Reduce spawn time by 1%
-         } else {
+        } else {
             // If the dragon is not out of bounds, allow it to respond to tapping
             dragon.velocity += gravity; // Apply gravity continuously
         }
 
-  obstacles.forEach((obstacle, index) => {
-    obstacle.update();
-    if (obstacle.x + obstacle.width < 0) {
-      obstacles.splice(index, 1);
-    }
-  });
-        
+        obstacles.forEach((obstacle, index) => {
+            obstacle.update();
+            if (obstacle.x + obstacle.width < 0) {
+                obstacles.splice(index, 1);
+            }
+        });
+
         // Check for collision with ground or ceiling
-if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300 || life <= 0) {
-    resetGame();
+        if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300 || life <= 0) {
+            resetGame();
+        }
+    }
+    if (!endGame && fgX + imageWidth <= canvas.width) {
+        endGame = true;
+    }
+
+    if (endGame) {
+        endGameTime += 1;
+
+        // Stretch the background images
+        const stretchFactor = 1 + endGameTime * 0.001;
+        imageWidth *= stretchFactor;
+        canvas.width *= stretchFactor;
+        canvas.height *= stretchFactor;
+
+        // Shrink and fade the dragon
+        dragonScale -= 0.005;
+        dragonAlpha -= 0.005;
+
+        // Fade to black
+        if (dragonAlpha <= 0.5) {
+            screenFadeAlpha += 0.01;
+        }
+
+        // Restart the game after 2 seconds of black screen
+        if (screenFadeAlpha >= 1) {
+            setTimeout(resetGame, 2000);
+        }
+    }
 }
-          }
-      }
 
 // Check for collision with obstacles
 obstacles.forEach((obstacle, index) => {
@@ -326,10 +353,10 @@ obstacles.forEach((obstacle, index) => {
     }
 });
 
-    // Fade the "TAP TO FLY!" text
-  if (tapToFlyAlpha > 0) {
+// Fade the "TAP TO FLY!" text
+if (tapToFlyAlpha > 0) {
     tapToFlyAlpha -= 0.01
-  }
+}
 
 // Game loop
 function gameLoop() {
@@ -341,18 +368,18 @@ function gameLoop() {
 gameLoop();
 
 window.onload = () => {
-  setTimeout(() => {
-    tapToFlyAlpha = 0; // Hide the text
-  }, 2000);
+    setTimeout(() => {
+        tapToFlyAlpha = 0; // Hide the text
+    }, 2000);
 
-  setTimeout(() => {
-    dragon.velocity = jump; // Simulate the first tap
-    dragon.y += dragon.velocity; // Update the dragon's position
-  }, 2100);
+    setTimeout(() => {
+        dragon.velocity = jump; // Simulate the first tap
+        dragon.y += dragon.velocity; // Update the dragon's position
+    }, 2100);
 
-  setTimeout(() => {
-    dragon.velocity = jump; // Simulate the second tap
-    dragon.y += dragon.velocity; // Update the dragon's position
-    gameStarted = true; // Start the game
-  }, 2300);
+    setTimeout(() => {
+        dragon.velocity = jump; // Simulate the second tap
+        dragon.y += dragon.velocity; // Update the dragon's position
+        gameStarted = true; // Start the game
+    }, 2300);
 };
