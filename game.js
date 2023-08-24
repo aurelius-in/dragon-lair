@@ -191,6 +191,19 @@ function draw() {
         context.textAlign = 'center';
         context.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
     }
+
+    // Apply dragon scaling and fading
+    context.save();
+    context.globalAlpha = dragonAlpha;
+    context.translate(dragon.x + dragon.width / 2, dragon.y + dragon.height / 2);
+    context.scale(dragonScale, dragonScale);
+    context.translate(-(dragon.x + dragon.width / 2), -(dragon.y + dragon.height / 2));
+    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
+    context.restore();
+
+    // Draw black fade overlay
+    context.fillStyle = `rgba(0, 0, 0, ${screenFadeAlpha})`;
+    context.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function createObstacle() {
