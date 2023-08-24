@@ -37,6 +37,8 @@ const jump = -8; // Medium jump strength
 const obstacleWidth = 40;
 let obstacleHeight = 40;
 
+let dragonFrame = 0; // Define dragonFrame
+
 // Load the images
 const bgImage = new Image();
 bgImage.src = 'images/bg.png';
