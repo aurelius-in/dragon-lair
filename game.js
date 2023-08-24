@@ -262,7 +262,6 @@ function update() {
   if (tapToFlyAlpha > 0) {
     tapToFlyAlpha -= 0.01
   }
-}
 
 // Game loop
 function gameLoop() {
