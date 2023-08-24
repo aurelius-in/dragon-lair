@@ -255,6 +255,14 @@ function update() {
             // If the dragon is not out of bounds, allow it to respond to tapping
             dragon.velocity += gravity; // Apply gravity continuously
         }
+
+  obstacles.forEach((obstacle, index) => {
+    obstacle.update();
+    if (obstacle.x + obstacle.width < 0) {
+      obstacles.splice(index, 1);
+    }
+  });
+        
         // Check for collision with ground or ceiling
 if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300 || life <= 0) {
     resetGame();
