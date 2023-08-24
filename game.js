@@ -30,7 +30,7 @@ const dragonStartX = canvas.width * 0.1 - 50; // Move back by 50 pixels
 const dragonStartY = canvas.height * 0.5;
 
 // Constants for gravity and jump strength
-const gravity = 0.4; // Medium gravity
+const gravity = 0.3; // Medium gravity
 const jump = -8; // Medium jump strength
 
 // Constants for obstacle size
@@ -38,6 +38,7 @@ const obstacleWidth = 40;
 let obstacleHeight = 40;
 
 let dragonFrame = 0; // Define dragonFrame
+const framesPerFlap = 12; // Increase the frames per flap to slow down the animation
 
 // Load the images
 const bgImage = new Image();
@@ -124,8 +125,8 @@ function draw() {
 // Draw the dragon
 if (gameStarted && dragon.velocity < 0) {
   // If the dragon is jumping, cycle through three frames for one full flap
-  dragonFrame = (dragonFrame + 1) % 6;
-  currentFrame = dragonFrame; // Use dragonFrame to set the current frame
+  dragonFrame = (dragonFrame + 1) % framesPerFlap; // Use framesPerFlap to control the speed
+  currentFrame = Math.floor(dragonFrame / 4); // Use dragonFrame to set the current frame
 } else {
   // If the dragon is not jumping, use the default wing position
   dragonFrame = 0;
@@ -134,7 +135,6 @@ if (gameStarted && dragon.velocity < 0) {
 context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
 
 
- 
 // Draw the "TAP TO FLY!" text
 if (tapToFlyAlpha > 0) {
   context.fillStyle = `rgba(255, 255, 255, ${tapToFlyAlpha})`; // White text with alpha for fading
@@ -198,7 +198,7 @@ function createObstacle() {
 function update() {
     if (gameStarted) {
         // Update dragon's velocity and position
-        dragon.velocity += gravity;
+        dragon.velocity += gravity; 
         dragon.y += dragon.velocity;
 
                 // Update the positions only if the dragon has started flying
