@@ -1,4 +1,4 @@
-import { dragonImages, obstacles, canvas, context, bgbgImage, bgImage, fgImage, perchImage, perchX, perchY, perchWidth, perchHeight, dragon, currentFrame, dragonAlpha, dragonScale, life, tapToFlyAlpha, screenFadeAlpha } from './init.js';
+import { dragonImages, currentFrame, obstacles, canvas, context, bgbgImage, bgImage, fgImage, perchImage, perchX, perchY, perchWidth, perchHeight, dragon, currentFrame, dragonAlpha, dragonScale, life, tapToFlyAlpha, screenFadeAlpha } from './init.js';
 
 // Draw objects
 export function draw() {
