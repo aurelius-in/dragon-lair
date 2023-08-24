@@ -338,6 +338,9 @@ if (tapToFlyAlpha > 0) {
     tapToFlyAlpha -= 0.01
 }
 
+// Add a new variable to keep track of non-tapping frames
+let nonTappingFrameCounter = 0;
+
 function gameLoop() {
     update();
     draw();
@@ -345,12 +348,25 @@ function gameLoop() {
     // Increment the game loop counter
     gameLoopCounter++;
 
-    // Update the current frame based on the framesPerFlap variable
-    if (gameLoopCounter % framesPerFlap === 0) {
-        currentFrame = (currentFrame + 1) % dragonImages.length; // Cycle through the frames
+    // Check if the user is tapping or not
+    if (gameStarted) {
+        // If tapping, update the frame based on framesPerFlap
+        if (gameLoopCounter % framesPerFlap === 0) {
+            currentFrame = (currentFrame + 1) % dragonImages.length;
+        }
+    } else {
+        // If not tapping, increment the non-tapping frame counter
+        nonTappingFrameCounter++;
+
+        // Change the frame every 60 iterations (1 second)
+        if (nonTappingFrameCounter % 60 === 0) {
+            currentFrame = (currentFrame + 1) % dragonImages.length;
+        }
     }
+
     requestAnimationFrame(gameLoop);
 }
+
 
 gameLoop();
 
