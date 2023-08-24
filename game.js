@@ -82,7 +82,7 @@ for (let i = 1; i <= 3; i++) {
 let currentFrame = 0; // Current frame being displayed
 const obstacles = [];
 let gameTime = 0;
-let obstacleSpawnTime = 5000; // 5 seconds
+let obstacleSpawnTime = 4000; // 4 seconds
 let lastObstacleTime = Date.now();
 let topObstacle = true; // To alternate between top and bottom obstacles
 
