@@ -23,6 +23,9 @@ const perchY = canvas.height - 250; // Perch extends from the bottom
 const perchWidth = 150; // Width of the perch
 const perchHeight = 250; // Height of the perch
 
+// Life bar
+let life = 100;
+
 // Constants for dragon size and starting position
 const dragonWidth = 150;
 const dragonHeight = 150;
@@ -100,8 +103,19 @@ window.addEventListener('touchstart', () => {
     currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on tap
 });
 
-// Draw function
+// Draw objects
 function draw() {
+// Draw the life bar border
+context.fillStyle = 'blue-grey';
+context.fillRect(10, 10, 400, 15);
+
+// Determine the fill color based on life
+let fillColor = life <= 20 ? 'red' : 'green';
+
+// Draw the life bar fill
+context.fillStyle = fillColor;
+context.fillRect(12, 12, (life / 100) * 396, 11);
+
     // Draw the bgbg image first (furthest back)
     context.drawImage(bgbgImage, bgbgX, 0, imageWidth, canvas.height);
     context.drawImage(bgbgImage, bgbgX + imageWidth, 0, imageWidth, canvas.height);
@@ -195,7 +209,7 @@ function createObstacle() {
     obstacleSpawnTime *= 0.999;
 }
 
-function update() {
+function update() {  
     if (gameStarted) {
         // Update dragon's velocity and position
         dragon.velocity += gravity; 
