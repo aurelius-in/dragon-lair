@@ -100,7 +100,7 @@ let topObstacle = true; // To alternate between top and bottom obstacles
 
 let gameStarted = false; // Track if the game has started
 
-ffunction handleInput() {
+function handleInput() {
     if (!gameStarted) {
         gameStarted = true; // Start the game
     }
