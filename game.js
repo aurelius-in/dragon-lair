@@ -305,22 +305,14 @@ function update() {
     }
 
     if (endGame) {
-        endGameTime += 1;
+        // Gradually increase the scale for zooming effect
+        dragonScale += 0.005;
 
-        // Stretch the background images
-        const stretchFactor = 1 + endGameTime * 0.001;
-        imageWidth *= stretchFactor;
-        canvas.width *= stretchFactor;
-        canvas.height *= stretchFactor;
-
-        // Shrink and fade the dragon
-        dragonScale -= 0.005;
+        // Gradually decrease the alpha for fading effect
         dragonAlpha -= 0.005;
 
-        // Fade to black
-        if (dragonAlpha <= 0.5) {
-            screenFadeAlpha += 0.01;
-        }
+        // Gradually increase the alpha for screen fade to black
+        screenFadeAlpha += 0.01;
 
         // Restart the game after 2 seconds of black screen
         if (screenFadeAlpha >= 1) {
@@ -328,7 +320,6 @@ function update() {
         }
     }
 }
-
 
 // Fade the "TAP TO FLY!" text
 if (tapToFlyAlpha > 0) {
