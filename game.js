@@ -246,8 +246,6 @@ function update() {
             if (bgbgX <= -imageWidth) bgbgX = 0;
             if (bgX <= -imageWidth) bgX = 0;
             if (fgX <= -imageWidth) fgX = 0;
-        }
-}
 
         // Check if it's time to spawn a new obstacle
         gameTime += 1000 / 60; // Increment game time by frame duration
@@ -259,6 +257,8 @@ function update() {
             // If the dragon is not out of bounds, allow it to respond to tapping
             dragon.velocity += gravity; // Apply gravity continuously
         }
+          }
+      }
 
 // Check for collision with obstacles
 obstacles.forEach((obstacle, index) => {
