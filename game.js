@@ -260,14 +260,12 @@ function update() {
             dragon.velocity += gravity; // Apply gravity continuously
         }
 
-        // Check for collision with obstacles
-        obstacles.forEach((obstacle, index) => {
-            // Reduce the dragon's boundary box
-            const boundaryReductionX = dragon.width * 0.1;
-            const boundaryReductionY = dragon.height * 0.2;
+// Check for collision with obstacles
+obstacles.forEach((obstacle, index) => {
+    const boundaryReductionX = dragon.width * 0.1;
+    const boundaryReductionY = dragon.height * 0.2;
 
-            // Check for collision with dragon
-            if (
+    if (
         dragon.x + boundaryReductionX < obstacle.x + obstacle.width &&
         dragon.x + dragon.width - boundaryReductionX > obstacle.x &&
         dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
@@ -280,14 +278,13 @@ function update() {
         obstacles.splice(index, 1); // Remove collided obstacle
     }
 
-            // Move obstacle to the left
-            obstacle.x -= obstacleVelocity;
+    // Moving and removing off-screen obstacles
+    obstacle.x -= obstacleVelocity;
+    if (obstacle.x + obstacle.width < 0) {
+        obstacles.splice(index, 1);
+    }
+});
 
-            // Remove off-screen obstacles
-            if (obstacle.x + obstacle.width < 0) {
-                obstacles.splice(index, 1);
-            }
-        });
     }
     // Fade the "TAP TO FLY!" text
   if (tapToFlyAlpha > 0) {
