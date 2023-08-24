@@ -23,9 +23,8 @@ const perchY = canvas.height - 250; // Perch extends from the bottom
 const perchWidth = 150; // Width of the perch
 const perchHeight = 250; // Height of the perch
 
-// Life bar
 let life = 100;
-
+let gameLoopCounter = 0; 
 let endGame = false;
 let endGameTime = 0;
 let dragonScale = 1;
