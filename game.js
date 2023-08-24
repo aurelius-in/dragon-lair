@@ -286,7 +286,6 @@ obstacles.forEach((obstacle, index) => {
     }
 });
 
-    }
     // Fade the "TAP TO FLY!" text
   if (tapToFlyAlpha > 0) {
     tapToFlyAlpha -= 0.01
