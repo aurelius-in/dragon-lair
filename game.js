@@ -248,7 +248,7 @@ function update() {
             if (fgX <= -imageWidth) fgX = 0;
         }
 }
-}
+
         // Check if it's time to spawn a new obstacle
         gameTime += 1000 / 60; // Increment game time by frame duration
         if (gameTime >= obstacleSpawnTime) {
