@@ -17,7 +17,28 @@ window.addEventListener('touchstart', handleInput);
 window.addEventListener('keydown', (e) => { if (e.code === 'Space') handleInput(); });
 
 // Game reset
-function resetGame() { /* ... */ }
+function resetGame() {
+    // Reset dragon and obstacles
+    obstacles.length = 0; // Clear obstacles array
+    perchX = 50; // Reset the perch's X position
+    dragon.x = dragonStartX;
+    dragon.y = dragonStartY;
+    dragon.velocity = 0;
+    gameStarted = false;
+    currentFrame = 0;
+    bgX = 0; // Reset background positions
+    fgX = 0;
+    bgbgX = 0;
+    life = 100; // Reset life to 100%
+    obstacleSpawnTime = 4000; // Reset obstacle spawn time to 4 seconds
+    endGame = false;
+    endGameTime = 0;
+    dragonScale = 1;
+    dragonAlpha = 1;
+    screenFadeAlpha = 0;
+    imageWidth = canvas.height * 4; // Reset image width
+}
+
 
 // Obstacle creation
 function createObstacle() { /* ... */ }
