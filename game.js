@@ -46,7 +46,7 @@ const obstacleWidth = 40;
 let obstacleHeight = 40;
 
 let dragonFrame = 0; // Define dragonFrame
-let framesPerFlap = 12; // Increase the frames per flap to slow down the animation
+let framesPerFlap = 30; // Increase the frames per flap to slow down the animation
 
 // Load the images
 const bgImage = new Image();
@@ -105,8 +105,10 @@ function handleInput() {
     }
     dragon.velocity = jump; // Use the jump constant
     dragon.y += dragon.velocity; // Update the dragon's position
-currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on input
+    currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on input
+    framesPerFlap = Math.floor(Math.random() * 11) + 2; // Random number between 2 and 12
 }
+
 // Touch, Click and Keydown Listeners
 window.addEventListener('click', handleInput);
 window.addEventListener('touchstart', handleInput);
