@@ -178,8 +178,8 @@ function createObstacle() {
     // Alternate between top and bottom obstacles
     topObstacle = !topObstacle;
 
-    // Reduce the spawn time for the next obstacle by 1%
-    obstacleSpawnTime *= 0.99;
+    // Reduce the spawn time for the next obstacle by 0.1%
+    obstacleSpawnTime *= 0.999;
 }
 
 function update() {
