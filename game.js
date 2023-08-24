@@ -339,6 +339,7 @@ if (tapToFlyAlpha > 0) {
 function gameLoop() {
     update();
     draw();
+    gameLoopCounter++; // Increment the game loop counter
     requestAnimationFrame(gameLoop);
 }
 
