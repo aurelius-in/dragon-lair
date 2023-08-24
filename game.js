@@ -201,8 +201,8 @@ function update() {
             if (fgX <= -imageWidth) fgX = 0;
         }
 
-       // Check for collision with ground or ceiling
-if ((dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) || (dragon.y > canvas.height + 200 || dragon.y < -300)) {
+      // Check for collision with ground or ceiling
+        if (dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.height * 1.2) {
     // Reset dragon and obstacles
     obstacles.length = 0; // Clear obstacles array
     perchX = 50; // Reset the perch's X position
@@ -222,6 +222,9 @@ if ((dragon.y <= -canvas.height * 0.1 || dragon.y + dragon.height >= canvas.heig
             createObstacle(); // Create a new obstacle
             gameTime = 0; // Reset game time
             obstacleSpawnTime *= 0.99; // Reduce spawn time by 1%
+         } else {
+            // If the dragon is not out of bounds, allow it to respond to tapping
+            dragon.velocity += gravity; // Apply gravity continuously
         }
 
         // Check for collision with obstacles
