@@ -39,8 +39,8 @@ const dragonStartX = canvas.width * 0.1 - 50; // Move back by 50 pixels
 const dragonStartY = canvas.height * 0.5;
 
 // Constants for gravity and jump strength
-const gravity = 0.3; // Medium gravity
-const jump = -8; // Medium jump strength
+const gravity = 0.5; // Increased gravity
+const jump = -6; // Reduced jump strength
 
 // Constants for obstacle size
 const obstacleWidth = 40;
