@@ -320,17 +320,14 @@ function update() {
             setTimeout(resetGame, 2000);
         }
     }
-    // control the non-tapping animation speed
+       // Control the non-tapping animation speed
     if (!gameStarted) {
-        framesPerFlap = 30; // 2 frames per second (60 frames / 2)
-    }
+        framesPerFlap = 90; // 
 
     // Gradually increase framesPerFlap to slow down the animation when not tapping
     if (gameLoopCounter % 30 === 0 && framesPerFlap < 40) { // Every half second
         framesPerFlap += 2; // Increment by 2
     }
-
-
 }
 
 // Fade the "TAP TO FLY!" text
@@ -355,15 +352,11 @@ function gameLoop() {
             currentFrame = (currentFrame + 1) % dragonImages.length;
         }
     } else {
-        // If not tapping, increment the non-tapping frame counter
-        nonTappingFrameCounter++;
-
-        // Change the frame every 60 iterations (1 second)
-        if (nonTappingFrameCounter % 60 === 0) {
+        // If not tapping, change the frame every 60 iterations (1 second)
+        if (gameLoopCounter % framesPerFlap === 0) {
             currentFrame = (currentFrame + 1) % dragonImages.length;
         }
     }
-
     requestAnimationFrame(gameLoop);
 }
 
