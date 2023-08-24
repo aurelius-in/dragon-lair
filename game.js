@@ -118,9 +118,16 @@ function draw() {
     obstacles.forEach(obstacle => {
         obstacle.draw(context);
     });
-
-    // Draw dragon
-    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
+    
+// Draw the dragon
+  if (gameStarted && dragonVelocity < 0) {
+    // If the dragon is jumping, cycle through three frames for one full flap
+    dragonFrame = (dragonFrame + 1) % 3;
+  } else {
+    // If the dragon is not jumping, use the default wing position
+    dragonFrame += 1;
+  }
+  context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
  
 // Draw the "TAP TO FLY!" text
 if (tapToFlyAlpha > 0) {
