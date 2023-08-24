@@ -126,13 +126,18 @@ function draw() {
 context.fillStyle = '#708090'; // Hex code for blue-grey border
 context.fillRect(10, 10, 400, 15);
 
+// Draw objects
+function draw() {
+    // Draw the life bar border
+    context.fillStyle = '#708090'; // Hex code for blue-grey border
+    context.fillRect(10, 10, 400, 15);
 
-// Determine the fill color based on life
-let fillColor = life <= 20 ? 'red' : 'green';
+    // Determine the fill color based on life
+    let fillColor = life <= 20 ? 'red' : 'green';
 
-// Draw the life bar fill
-context.fillStyle = fillColor;
-context.fillRect(12, 12, (life / 100) * 396, 11);
+    // Draw the life bar fill
+    context.fillStyle = fillColor;
+    context.fillRect(12, 12, (life / 100) * 396, 11);
 
     // Draw the bgbg image first (furthest back)
     context.drawImage(bgbgImage, bgbgX, 0, imageWidth, canvas.height);
