@@ -120,7 +120,7 @@ function createThundercloudObstacle(x, y) {
         x: x,
         y: y,
         update: function() {
-            // Stationary
+            this.x -= 2; // Move to the left
         },
         draw: function(context) {
             context.fillStyle = 'darkgray';
@@ -130,6 +130,7 @@ function createThundercloudObstacle(x, y) {
         }
     };
 }
+
 
 // Fireballs
 function createFireballObstacle(x, y) {
