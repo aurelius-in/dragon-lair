@@ -16,7 +16,6 @@ import {
   dragon,
   dragonAlpha,
   dragonScale,
-  life,
   tapToFly,
   perch,
   lifeBar,
@@ -52,13 +51,6 @@ export function draw() {
     context.translate(-(dragon.x + dragon.width / 2), -(dragon.y + dragon.height / 2));
     context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
     context.restore();
-
-    // Draw the life bar border
-    context.fillStyle = '#708090';
-    context.fillRect(10, 10, 400, 15);
-
-    // Determine the fill color based on life
-    let fillColor = life <= 20 ? 'red' : 'green';
 
    // Draw the life bar
     for (let i = 0; i < lifeBar.segments; i++) {
