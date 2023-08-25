@@ -33,7 +33,8 @@ let endGame = false,
     obstacleHeight = 40, 
     dragonStartX = canvas.width * 0.1 - 50, 
     dragonStartY = canvas.height * 0.5, 
-    gravity = 0.5, jump = -6;
+    gravity = 0.5, jump = -6,
+     imageWidth = canvas.height * 4;
 
 // Input handling
 function handleInput() { /* ... */ }
