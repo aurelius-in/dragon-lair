@@ -17,7 +17,7 @@ export const perchWidth = 150;
 export const perchHeight = 250;
 
 // Dragon
-export const dragon = {collided: false, alpha: 1, scale: 1, x: perch.x, y: perchY - 125, width: 150, height: 150, velocity: 0 };
+export const dragon = {collided: false, alpha: 1, scale: 1, x: perch.x, y: perchY - 125, width: 150, height: 150, velocity: 0, update: function() {}};
 export const dragonImages = [];
 for (let i = 1; i <= 3; i++) {
     for (let j = 1; j <= (i === 1 ? 4 : 3); j++) {
