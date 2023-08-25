@@ -1,8 +1,6 @@
 import {
   imageWidth,
-  bgbgX,
-  bgX,
-  fgX,
+  backgrounds,
   dragonImages,
   currentFrame,
   obstacles,
@@ -27,17 +25,16 @@ import {
 // Draw objects
 function draw() {
     // Draw the furthest back background (bgbg)
-    context.drawImage(bgbgImage, bgbgX, 0, imageWidth, canvas.height);
-    context.drawImage(bgbgImage, bgbgX + imageWidth, 0, imageWidth, canvas.height);
+    context.drawImage(bgbgImage, backgrounds.bgbgX, 0, imageWidth, canvas.height);
+    context.drawImage(bgbgImage, backgrounds.bgbgX + imageWidth, 0, imageWidth, canvas.height);
 
     // Draw the middle background (bg)
-    context.drawImage(bgImage, bgX, 0, imageWidth, canvas.height);
-    context.drawImage(bgImage, bgX + imageWidth, 0, imageWidth, canvas.height);
+    context.drawImage(bgImage, backgrounds.bgX, 0, imageWidth, canvas.height);
+    context.drawImage(bgImage, backgrounds.bgX + imageWidth, 0, imageWidth, canvas.height);
 
     // Draw the closest background (fg)
-    context.drawImage(fgImage, fgX, 0, imageWidth, canvas.height);
-    context.drawImage(fgImage, fgX + imageWidth, 0, imageWidth, canvas.height);
-
+    context.drawImage(fgImage, backgrounds.fgX, 0, imageWidth, canvas.height);
+    context.drawImage(fgImage, backgrounds.fgX + imageWidth, 0, imageWidth, canvas.height);
     // Draw perch
     context.drawImage(perchImage, perch.x, perchY, perchWidth, perchHeight);
 
