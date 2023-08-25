@@ -1,4 +1,5 @@
 import {
+  imageWidth,
   bgbgX,
   bgX,
   fgX,
