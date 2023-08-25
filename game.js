@@ -134,37 +134,27 @@ function collisionDetected(dragon, obstacle) {
 }
 function update() {
   if (gameStarted) {
-    // Update dragon
     dragon.update();
-
-    // Update obstacles
     obstacles.forEach((obstacle, index) => {
       obstacle.update();
       if (obstacle.x + obstacle.width < 0) {
         obstacles.splice(index, 1);
       }
-
-      // Check for collision with obstacles using the collisionDetected function
       if (collisionDetected(dragon, obstacle)) {
         if (!dragon.collided) {
           lifeBar.segments--;
           if (lifeBar.segments <= 0) {
             resetGame();
           }
-          obstacles.splice(index, 1); // Remove collided obstacle
-          dragon.collided = true; // Set collision state
-
+          obstacles.splice(index, 1);
+          dragon.collided = true;
           setTimeout(() => {
             dragon.collided = false;
           }, 1000);
         }
       }
     });
-
-    // Update perch
     perch.update();
-
-    // Spawn new obstacles
     if (obstacleSpawnTimer > obstacleSpawnRate) {
       obstacles.push(new Obstacle());
       obstacleSpawnTimer = 0;
@@ -172,85 +162,52 @@ function update() {
       obstacleSpawnTimer++;
     }
   }
+  if (backgrounds.fgX + imageWidth <= canvas.width) {
+    levelEnd();
+  }
+  if (!gameStarted) {
+    framesPerFlap = 90;
+    if (gameLoopCounter % 30 === 0 && framesPerFlap < 40) {
+      framesPerFlap += 2;
+    }
+  }
 }
 
-    if (backgrounds.fgX + imageWidth <= canvas.width) {
-        levelEnd();
-    }
-
-   function levelEnd() {
-    // Gradually increase the scale for zooming effect
-    dragon.scale += 0.005;
-
-    // Gradually decrease the alpha for fading effect
-    dragon.alpha -= 0.005;
-
-    // Gradually increase the alpha for screen fade to black
-    screenFade.alpha += 0.01;
-
-    // Restart the game after 2 seconds of black screen
-    if (screenFade.alpha >= 1) {
-        setTimeout(resetGame, 2000);
-    }
-}
-
-     // Control the non-tapping animation speed
-    if (!gameStarted) {
-        framesPerFlap = 90; // 
-
-        // Gradually increase framesPerFlap to slow down the animation when not tapping
-        if (gameLoopCounter % 30 === 0 && framesPerFlap < 40) { // Every half second
-            framesPerFlap += 2; // Increment by 2
-        }
-    }
-}
-
-// Game loop
 function gameLoop() {
-    update();
-    draw();
-    if (collisionDetected(dragon, obstacle)) {
-  // Collision detected
-  dragon.collided = true;
-}
-    // Fade the "TAP TO FLY!" text
-    if (tapToFly.alpha > 0) {
-        tapToFly.alpha -= 0.01;
+  update();
+  draw();
+  if (collisionDetected(dragon, obstacle)) {
+    dragon.collided = true;
+  }
+  if (tapToFly.alpha > 0) {
+    tapToFly.alpha -= 0.01;
+  }
+  gameLoopCounter++;
+  if (gameStarted) {
+    if (gameLoopCounter % framesPerFlap === 0) {
+      currentFrame = (currentFrame + 1) % dragonImages.length;
     }
-
-    // Increment the game loop counter
-    gameLoopCounter++;
-
-    // Check if the user is tapping or not
-    if (gameStarted) {
-        // If tapping, update the frame based on framesPerFlap
-        if (gameLoopCounter % framesPerFlap === 0) {
-            currentFrame = (currentFrame + 1) % dragonImages.length;
-        }
-    } else {
-        // If not tapping, change the frame every 60 iterations (1 second)
-        if (gameLoopCounter % framesPerFlap === 0) {
-            currentFrame = (currentFrame + 1) % dragonImages.length;
-        }
+  } else {
+    if (gameLoopCounter % framesPerFlap === 0) {
+      currentFrame = (currentFrame + 1) % dragonImages.length;
     }
-    requestAnimationFrame(gameLoop);
+  }
+  requestAnimationFrame(gameLoop);
 }
 
 gameLoop();
 
 window.onload = () => {
-    setTimeout(() => {
-        tapToFly.alpha = 0; // Hide the text
-    }, 2000);
-
-    setTimeout(() => {
-        dragon.velocity = jump; // Simulate the first tap
-        dragon.y += dragon.velocity; // Update the dragon's position
-    }, 2100);
-
-    setTimeout(() => {
-        dragon.velocity = jump; // Simulate the second tap
-        dragon.y += dragon.velocity; // Update the dragon's position
-        gameStarted = true; // Start the game
-    }, 2300);
+  setTimeout(() => {
+    tapToFly.alpha = 0;
+  }, 2000);
+  setTimeout(() => {
+    dragon.velocity = jump;
+    dragon.y += dragon.velocity;
+  }, 2100);
+  setTimeout(() => {
+    dragon.velocity = jump;
+    dragon.y += dragon.velocity;
+    gameStarted = true;
+  }, 2300);
 };
