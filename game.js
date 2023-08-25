@@ -217,12 +217,15 @@ function update() {
     }
 }
 
-
-
 // Game loop
 function gameLoop() {
     update();
     draw();
+
+    // Fade the "TAP TO FLY!" text
+    if (tapToFly.alpha > 0) {
+        tapToFly.alpha -= 0.01;
+    }
 
     // Increment the game loop counter
     gameLoopCounter++;
