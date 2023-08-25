@@ -8,6 +8,8 @@ import {
     createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle
 } from './obstacles.js';
 
+let gameStarted = false;
+
 function handleInput() {
     if (!gameStarted) {
         gameStarted = true;
