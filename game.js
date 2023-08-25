@@ -117,22 +117,28 @@ function collisionDetected(dragon, obstacle) {
     dragonCollisionArea.x + dragonCollisionArea.width>obstacleCollisionArea.x && dragonCollisionArea.y<obstacleCollisionArea.y + obstacleCollisionArea.height &&
     dragonCollisionArea.y + dragonCollisionArea.height>obstacleCollisionArea.y);
 }
+
+let gravity = 0.25; // Gravity constant
+
 function update() {
     if (gameStarted) {
+        // Apply gravity to dragon
+        dragon.velocity += gravity;
+        dragon.y += dragon.velocity;
+        
         // Update dragon
         dragon.update();
 
         // Update backgrounds to make the dragon appear to move forward
-        backgrounds.bgX -= 1;
-        backgrounds.fgX -= 2;
-        backgrounds.bgbgX -= 0.5;
+        backgrounds.fgX -= 1;
+        backgrounds.bgX -= 0.5;
+        backgrounds.bgbgX -= 0.3;
 
+        
         // Update obstacles
         obstacles.forEach((obstacle, index) => {
+            obstacle.x -= 1;  // Obstacle speed
             obstacle.update();
-            if (obstacle.x + obstacle.width < 0) {
-                obstacles.splice(index, 1);
-            }
 
             if (collisionDetected(dragon, obstacle)) {
                 if (!dragon.collided) {
