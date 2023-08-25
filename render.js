@@ -24,11 +24,6 @@ import {
   screenFadeAlpha
 } from './init.js';
 
-function draw() {
-    // Draw perch
-    context.drawImage(perchImage, perch.x, perchY, perchWidth, perchHeight);
-   
-
 // Draw objects
 function draw() {
     // Draw the furthest back background (bgbg)
@@ -44,7 +39,7 @@ function draw() {
     context.drawImage(fgImage, fgX + imageWidth, 0, imageWidth, canvas.height);
 
     // Draw perch
-    context.drawImage(perchImage, perchX, perchY, perchWidth, perchHeight);
+    context.drawImage(perchImage, perch.x, perchY, perchWidth, perchHeight);
 
     // Drawing obstacles using functions from obstacles.js
     obstacles.forEach(obstacle => {
