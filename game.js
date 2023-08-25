@@ -144,12 +144,12 @@ function update() {
 
         perch.update();
 
-        if (spawnTimer > spawnRate) {
-            obstacles.push(new Obstacle());
-            spawnTimer = 0;
-        } else {
-            spawnTimer++;
-        }
+      if (spawnTimer > spawnRate) {
+    createObstacle(); // Call the createObstacle function to create a new obstacle
+    spawnTimer = 0;
+} else {
+    spawnTimer++;
+}
     }
 }
 
