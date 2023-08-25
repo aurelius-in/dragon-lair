@@ -30,7 +30,8 @@ for (let i = 1; i <= 3; i++) {
     }
 }
 
-export let tapToFlyAlpha = 1;
+// Fading intro text
+export const tapToFly = { alpha: 1 };
 
 // End of game
 export let currentFrame = 0; // Corrected export
