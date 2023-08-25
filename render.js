@@ -73,7 +73,6 @@ export function draw() {
         context.ctx.textAlign = 'center';
         context.ctx.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
     }
-}
 
     // Draw black fade overlay
     context.fillStyle = `rgba(0, 0, 0, ${screenFadeAlpha})`;
