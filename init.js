@@ -32,9 +32,9 @@ for (let i = 1; i <= 3; i++) {
 export const tapToFly = { alpha: 1 };
 
 // End of game
-export const frame {current = 0}; // Corrected export
-export const screenFade { alpha = 0};
-export const bg {width = canvas.height * 4}; 
+export const frame = {current: 0}; // Corrected export
+export const screenFade = { alpha: 0};
+export const bg = {width: canvas.height * 4};
 
 // Obstacles
 export const obstacles = [];
