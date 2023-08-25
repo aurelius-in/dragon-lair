@@ -38,10 +38,27 @@ let endGame = false,
      imageWidth = canvas.height * 4;
 
 // Input handling
-function handleInput() { /* ... */ }
+function handleInput() {
+    if (!gameStarted) {
+        gameStarted = true; // Start the game
+    }
+    dragon.velocity = jump; // Use the jump constant
+    dragon.y += dragon.velocity; // Update the dragon's position
+    currentFrame = (currentFrame + 1) % dragonImages.length; // Update the frame on input
+    framesPerFlap = Math.floor(Math.random() * 11) + 2; // Random number between 2 and 12
+}
 window.addEventListener('click', handleInput);
 window.addEventListener('touchstart', handleInput);
 window.addEventListener('keydown', (e) => { if (e.code === 'Space') handleInput(); });
+
+// Touch, Click and Keydown Listeners
+window.addEventListener('click', handleInput);
+window.addEventListener('touchstart', handleInput);
+window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space') {
+        handleInput();
+    }
+});
 
 // Game reset
 function resetGame() {
