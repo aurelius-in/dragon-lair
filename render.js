@@ -51,11 +51,17 @@ export function draw() {
     context.restore();
 
    // Draw the life bar
-    for (let i = 0; i < lifeBar.segments; i++) {
-        const color = lifeBar.segments <= 2 ? 'red' : 'green';
-        context.fillStyle = color;
-        context.fillRect(10 + i * 35, 10, 35, 30); // Draw from left
-    }
+for (let i = 0; i < lifeBar.segments; i++) {
+  // Determine the color of the segment
+  let color = 'green';
+  if (lifeBar.segments <= 2) {
+    color = 'red';
+  }
+  
+  // Draw the segment
+  context.fillStyle = color;
+  context.fillRect(10 + i * 35, 10, 35, 30);
+}
   // Draw the "TAP TO FLY!" text
 if (tapToFly.alpha > 0) {
     context.fillStyle = `rgba(255, 255, 255, ${tapToFly.alpha})`; // White text with alpha for fading
