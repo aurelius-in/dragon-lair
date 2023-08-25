@@ -20,7 +20,6 @@ let endGame = false,
     lastObstacleTime = Date.now(), 
     topObstacle = true, 
     gameStarted = false, 
-    tapToFlyAlpha = 1, 
     bgX = 0, 
     fgX = 0, 
     bgbgX = 0, 
@@ -249,7 +248,7 @@ gameLoop();
 
 window.onload = () => {
     setTimeout(() => {
-        tapToFlyAlpha = 0; // Hide the text
+        tapToFly.alpha = 0; // Hide the text
     }, 2000);
 
     setTimeout(() => {
