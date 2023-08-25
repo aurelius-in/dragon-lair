@@ -59,10 +59,12 @@ export function draw() {
     // Determine the fill color based on life
     let fillColor = life <= 20 ? 'red' : 'green';
 
-    // Draw the life bar fill
-    context.fillStyle = fillColor;
-    context.fillRect(12, 12, (life / 100) * 396, 11);
-
+   // Draw the life bar
+    for (let i = 0; i < lifeSegments; i++) {
+        const color = lifeSegments <= 2 ? 'red' : 'green';
+        context.fillStyle = color;
+        context.fillRect(10 + i * 35, 10, 35, 30); // Draw from left
+    }
     // Draw the "TAP TO FLY!" text
     if (tapToFlyAlpha > 0) {
         context.fillStyle = `rgba(255, 255, 255, ${tapToFlyAlpha})`;
