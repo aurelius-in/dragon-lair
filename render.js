@@ -23,7 +23,7 @@ import {
 } from './init.js';
 
 // Draw objects
-function draw() {
+export function draw() {
     // Draw the furthest back background (bgbg)
     context.drawImage(bgbgImage, backgrounds.bgbgX, 0, imageWidth, canvas.height);
     context.drawImage(bgbgImage, backgrounds.bgbgX + imageWidth, 0, imageWidth, canvas.height);
