@@ -60,8 +60,8 @@ export function draw() {
     let fillColor = life <= 20 ? 'red' : 'green';
 
    // Draw the life bar
-    for (let i = 0; i < lifeSegments; i++) {
-        const color = lifeSegments <= 2 ? 'red' : 'green';
+    for (let i = 0; i < lifeBar.segments; i++) {
+        const color = lifeBar.segments <= 2 ? 'red' : 'green';
         context.fillStyle = color;
         context.fillRect(10 + i * 35, 10, 35, 30); // Draw from left
     }
