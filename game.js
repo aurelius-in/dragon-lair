@@ -154,7 +154,7 @@ function update() {
     }
 }
 
-if (backgrounds.fgX + imageWidth <= canvas.width) {
+if (backgrounds.fgX + bg.width <= canvas.width) {
     levelEnd();
 }
 
