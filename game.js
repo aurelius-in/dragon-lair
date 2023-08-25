@@ -10,8 +10,6 @@ import {
 
 // EndGame
 let endGame = false, 
-    dragonAlpha = 1,
-    dragonScale = 1,
     gameLoopCounter = 0, 
     endGameTime = 0, 
     obstacleVelocity = 5, 
@@ -70,10 +68,10 @@ function resetGame() {
     obstacleSpawnTime = 4000; // Reset obstacle spawn time to 4 seconds
     endGame = false;
     endGameTime = 0;
-    dragonScale = 1;
-    dragonAlpha = 1;
-    screenFadeAlpha = 0;
-    imageWidth = canvas.height * 4; // Reset image width
+    dragon.scale = 1;
+    dragon.alpha = 1;
+    screenFade.alpha = 0;
+    bg.width = canvas.height * 4; // Reset image width
 }
 function createObstacle() {
     const obstacleType = ['arrow', 'lightningStrike', 'batSwarm', 'tornado', 'wraith', 'zombieDragon', 'thundercloud', 'fireball'];
@@ -164,10 +162,10 @@ function update() {
             ) {
     obstacles.splice(index, 1); // Remove collided obstacle
     lifeBar.segments--; // Decrement life bar segments
-    dragonCollided = true; // Set collision state
+    dragon.collided = true; // Set collision state
 
     setTimeout(() => {
-        dragonCollided = false;
+        dragon.collided = false;
     }, 1000);
 }
         });
@@ -184,10 +182,10 @@ function update() {
 
     if (endGame) {
         // Gradually increase the scale for zooming effect
-        dragonScale += 0.005;
+        dragon.scale += 0.005;
 
         // Gradually decrease the alpha for fading effect
-        dragonAlpha -= 0.005;
+        dragon.alpha -= 0.005;
 
         // Gradually increase the alpha for screen fade to black
         screenFadeAlpha += 0.01;
