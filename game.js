@@ -1,5 +1,5 @@
 import {
-    canvas, context, perchX, perchY, perchWidth, perchHeight, life, dragonScale, dragonAlpha, screenFadeAlpha,
+    canvas, context, perchY, perchWidth, perchHeight, life, dragonScale, dragonAlpha, screenFadeAlpha,
     dragon, dragonImages, obstacles, imageWidth
 } from './init.js';
 import { draw } from './render.js';
@@ -10,6 +10,7 @@ import {
 
 // EndGame
 let endGame = false, 
+    perchX = 50;
     gameLoopCounter = 0, 
     endGameTime = 0, 
     obstacleVelocity = 5, 
