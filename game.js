@@ -1,6 +1,6 @@
 import {
     bg, canvas, context, perchY, perchWidth, perchHeight, screenFade,
-    dragon, dragonImages, perch, obstacles, lifeBar, tapToFly, backgrounds, frame
+    dragon, dragonImages, perch, obhttps://github.com/aurelius-in/dragon-lair/deployments/github-pagesstacles, lifeBar, tapToFly, backgrounds, frame
 } from './init.js';
 import { draw } from './render.js';
 import {
@@ -8,7 +8,7 @@ import {
     createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle
 } from './obstacles.js';
 
-let spawnRate = 5, spawnTimer = 0, framesPerFlap = 100, gameLoopCounter = 0, gameStarted = false, jump = 8;
+let obstacleY, spawnRate = 5, spawnTimer = 0, framesPerFlap = 100, gameLoopCounter = 0, gameStarted = false, jump = 8;
 
 function handleInput() {
     if (!gameStarted) {
@@ -61,7 +61,6 @@ function createObstacle() {
     const minDistance = canvas.height * 0.1;
     const centerDistance = canvas.height * 0.5;
 
-    let obstacleY;
     if (topObstacle) {
         obstacleY = Math.random() * (centerDistance - minDistance) + minDistance;
     } else {
