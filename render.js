@@ -1,4 +1,7 @@
 import {
+  bgbgX,
+  bgX,
+  fgX,
   dragonImages,
   currentFrame,
   obstacles,
