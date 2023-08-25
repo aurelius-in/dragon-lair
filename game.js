@@ -1,6 +1,6 @@
 import {
     canvas, context, perchY, perchWidth, perchHeight,
-    dragon, dragonImages, obstacles
+    dragon, dragonImages, perch, obstacles
 } from './init.js';
 import { draw } from './render.js';
 import {
@@ -13,7 +13,6 @@ let endGame = false,
     dragonAlpha = 1,
     dragonScale = 1,
     life = 100,
-    perchX = 50,
     gameLoopCounter = 0, 
     endGameTime = 0, 
     obstacleVelocity = 5, 
@@ -64,7 +63,7 @@ window.addEventListener('keydown', (e) => {
 function resetGame() {
     // Reset dragon and obstacles
     obstacles.length = 0; // Clear obstacles array
-    perchX = 50; // Reset the perch's X position
+    perch.x = 50; // Reset the perch's X position
     dragon.x = dragonStartX;
     dragon.y = dragonStartY;
     dragon.velocity = 0;
@@ -144,7 +143,7 @@ function update() {
         bgbgX -= 0.05; // Slowest speed for the furthest back background
         bgX -= 0.1; // Slower speed for the middle background
         fgX -= 0.15; // Slow speed for the closest background
-        perchX -= obstacleVelocity; // Move the perch with the obstacles
+        perch.x -= obstacleVelocity; // Move the perch with the obstacles
 
         // Reset positions if they go off-screen
         if (bgbgX <= -imageWidth) bgbgX = 0;
