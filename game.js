@@ -164,6 +164,7 @@ function update() {
             ) {
                 obstacles.splice(index, 1); // Remove collided obstacle
                 lifeBar.segments--; // Decrement life bar segments
+                dragon.collided = true; // Set collision state
             }
         });
 
