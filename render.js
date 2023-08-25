@@ -50,17 +50,23 @@ export function draw() {
     context.drawImage(dragonImages[frame.current], dragon.x, dragon.y, dragon.width, dragon.height);
     context.restore();
 
-   // Draw the life bar
+ // Draw the life bar
 for (let i = 0; i < lifeBar.segments; i++) {
   // Determine the color of the segment
   let color = 'green';
   if (lifeBar.segments <= 2) {
     color = 'red';
   }
-  
-  // Draw the segment
-  context.fillStyle = color;
-  context.fillRect(10 + i * 35, 10, 35, 30);
+
+  if (dragon.collided) {
+  lifeBar.segments -= 1;
+  context.fillStyle = 'red';
+  context.fillRect(dragon.x - 5, dragon.y - 5, dragon.width + 10, dragon.height + 10);
+}
+ // Draw the segment
+ // context.fillStyle = color;
+ // context.fillRect(10 + i * 35, 10, 35, 30);
+
 }
   // Draw the "TAP TO FLY!" text
 if (tapToFly.alpha > 0) {
@@ -69,6 +75,9 @@ if (tapToFly.alpha > 0) {
     context.textAlign = 'center';
     context.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
 }
+
+
+  
 
     // Draw black fade overlay
     context.fillStyle = `rgba(0, 0, 0, ${screenFade.alpha})`;
