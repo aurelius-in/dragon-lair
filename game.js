@@ -8,7 +8,7 @@ import {
     createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle
 } from './obstacles.js';
 
-let framesPerFlap = 100, gameLoopCounter, gameStarted = false;
+let framesPerFlap = 100, gameLoopCounter = 0, gameStarted = false;
 
 function handleInput() {
     if (!gameStarted) {
