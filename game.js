@@ -1,6 +1,6 @@
 import {
     bg, canvas, context, perchY, perchWidth, perchHeight, screenFade,
-    dragon, dragonImages, perch, obhttps://github.com/aurelius-in/dragon-lair/deployments/github-pagesstacles, lifeBar, tapToFly, backgrounds, frame
+    dragon, dragonImages, perch, obstacles, lifeBar, tapToFly, backgrounds, frame
 } from './init.js';
 import { draw } from './render.js';
 import {
