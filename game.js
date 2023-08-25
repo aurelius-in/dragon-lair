@@ -16,7 +16,7 @@ function handleInput() {
     }
     dragon.velocity = jump;
     dragon.y += dragon.velocity;
-    currentFrame = (currentFrame + 1) % dragonImages.length;
+    frame.current = (frame.current + 1) % dragonImages.length;
     framesPerFlap = Math.floor(Math.random() * 11) + 2;
 }
 window.addEventListener('click', handleInput);
@@ -41,7 +41,7 @@ function resetGame() {
     dragon.y = dragonStartY;
     dragon.velocity = 0;
     gameStarted = false;
-    frame.current = 0;
+    .current = 0;
     backgrounds.bgX = 0;
     backgrounds.fgX = 0;
     backgrounds.bgbgX = 0;
@@ -176,10 +176,10 @@ function levelEnd() {
 }
 
 if (!gameStarted) {
-    framesPerFlap = 90;
+    sPerFlap = 90;
 
-    if (gameLoopCounter % 30 === 0 && framesPerFlap < 40) {
-        framesPerFlap += 2;
+    if (gameLoopCounter % 30 === 0 && sPerFlap < 40) {
+        sPerFlap += 2;
     }
 }
 
@@ -196,12 +196,12 @@ function gameLoop() {
     gameLoopCounter++;
 
     if (gameStarted) {
-        if (gameLoopCounter % framesPerFlap === 0) {
-            currentFrame = (currentFrame + 1) % dragonImages.length;
+        if (gameLoopCounter % sPerFlap === 0) {
+            current = (frame.current + 1) % dragonImages.length;
         }
     } else {
         if (gameLoopCounter % framesPerFlap === 0) {
-            currentFrame = (currentFrame + 1) % dragonImages.length;
+            frame.current = (frame.current + 1) % dragonImages.length;
         }
     }
     requestAnimationFrame(gameLoop);
