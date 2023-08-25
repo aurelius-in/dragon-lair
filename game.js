@@ -14,11 +14,12 @@ function handleInput() {
     if (!gameStarted) {
         gameStarted = true;
     }
-    dragon.velocity = jump;
+    dragon.velocity = -jump; // Make the dragon go up
     dragon.y += dragon.velocity;
     frame.current = (frame.current + 1) % dragonImages.length;
     framesPerFlap = Math.floor(Math.random() * 11) + 2;
 }
+
 window.addEventListener('click', handleInput);
 window.addEventListener('touchstart', handleInput);
 window.addEventListener('keydown', (e) => {
