@@ -124,6 +124,37 @@ function createObstacle() {
     obstacleSpawnTime *= 0.999;
 }
 
+function collisionDetected(dragon, obstacle) {
+  // Reduce the boundary by 5% of the width and 10% of the height
+  const boundaryReductionX = dragon.width * 0.05;
+  const boundaryReductionY = dragon.height * 0.1;
+
+  // Dragon's collision area
+  const dragonCollisionArea = {
+    x: dragon.x + boundaryReductionX,
+    y: dragon.y + boundaryReductionY,
+    width: dragon.width - (boundaryReductionX * 2),
+    height: dragon.height - (boundaryReductionY * 2),
+  };
+
+  // Obstacle's collision area (no reduction)
+  const obstacleCollisionArea = {
+    x: obstacle.x,
+    y: obstacle.y,
+    width: obstacle.width,
+    height: obstacle.height,
+  };
+
+  // Check for collision
+  return (
+    dragonCollisionArea.x < obstacleCollisionArea.x + obstacleCollisionArea.width &&
+    dragonCollisionArea.x + dragonCollisionArea.width > obstacleCollisionArea.x &&
+    dragonCollisionArea.y < obstacleCollisionArea.y + obstacleCollisionArea.height &&
+    dragonCollisionArea.y + dragonCollisionArea.height > obstacleCollisionArea.y
+  );
+}
+
+
 function update() {
     if (gameStarted) {
         // Update dragon's velocity and position
@@ -213,7 +244,10 @@ function update() {
 function gameLoop() {
     update();
     draw();
-
+    if (collisionDetected(dragon, obstacle)) {
+  // Collision detected
+  dragon.collided = true;
+}
     // Fade the "TAP TO FLY!" text
     if (tapToFly.alpha > 0) {
         tapToFly.alpha -= 0.01;
