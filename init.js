@@ -31,10 +31,10 @@ for (let i = 1; i <= 3; i++) {
 }
 
 // End of game
-export let currentFrame = 0;
-export { currentFrame };
+export let currentFrame = 0; // Corrected export
 export let life = 100;
 export let screenFadeAlpha = 0;
 
 // Obstacles
 export const obstacles = [];
+ 
