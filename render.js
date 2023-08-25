@@ -12,7 +12,6 @@ import {
   bgImage,
   fgImage,
   perchImage,
-  perchX,
   perchY,
   perchWidth,
   perchHeight,
@@ -21,11 +20,17 @@ import {
   dragonScale,
   life,
   tapToFlyAlpha,
+  perch,
   screenFadeAlpha
 } from './init.js';
 
+function draw() {
+    // Draw perch
+    context.drawImage(perchImage, perch.x, perchY, perchWidth, perchHeight);
+   
+
 // Draw objects
-export function draw() {
+function draw() {
     // Draw the furthest back background (bgbg)
     context.drawImage(bgbgImage, bgbgX, 0, imageWidth, canvas.height);
     context.drawImage(bgbgImage, bgbgX + imageWidth, 0, imageWidth, canvas.height);
