@@ -17,7 +17,7 @@ import {
   dragonAlpha,
   dragonScale,
   life,
-  tapToFlyAlpha,
+  tapToFly,
   perch,
   lifeBar,
   screenFadeAlpha
@@ -66,13 +66,14 @@ export function draw() {
         context.fillStyle = color;
         context.fillRect(10 + i * 35, 10, 35, 30); // Draw from left
     }
-    // Draw the "TAP TO FLY!" text
-    if (tapToFlyAlpha > 0) {
-        context.fillStyle = `rgba(255, 255, 255, ${tapToFlyAlpha})`;
-        context.font = '40px sans-serif';
-        context.textAlign = 'center';
-        context.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
+  // Draw the "TAP TO FLY!" text
+    if (tapToFly.alpha > 0) {
+        context.ctx.fillStyle = `rgba(255, 255, 255, ${tapToFly.alpha})`; // White text with alpha for fading
+        context.ctx.font = '40px sans-serif';
+        context.ctx.textAlign = 'center';
+        context.ctx.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
     }
+}
 
     // Draw black fade overlay
     context.fillStyle = `rgba(0, 0, 0, ${screenFadeAlpha})`;
