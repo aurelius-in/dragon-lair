@@ -12,7 +12,6 @@ import {
 let endGame = false, 
     dragonAlpha = 1,
     dragonScale = 1,
-    life = 100,
     gameLoopCounter = 0, 
     endGameTime = 0, 
     obstacleVelocity = 5, 
@@ -71,7 +70,6 @@ function resetGame() {
     bgX = 0; // Reset background positions
     fgX = 0;
     bgbgX = 0;
-    life = 100; // Reset life to 100%
     obstacleSpawnTime = 4000; // Reset obstacle spawn time to 4 seconds
     endGame = false;
     endGameTime = 0;
@@ -172,16 +170,12 @@ function update() {
                 dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
                 dragon.y + dragon.height - boundaryReductionY > obstacle.y
             ) {
-                life -= 10; // Reduce life by 10%
-                if (life <= 0) {
-                    resetGame(); // Reset the game if life reaches 0
-                }
                 obstacles.splice(index, 1); // Remove collided obstacle
             }
         });
 
         // Check for collision with ground or ceiling
-        if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300 || life <= 0) {
+        if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300 ) {
             resetGame();
         }
     }
