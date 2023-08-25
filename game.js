@@ -162,10 +162,14 @@ function update() {
                 dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
                 dragon.y + dragon.height - boundaryReductionY > obstacle.y
             ) {
-                obstacles.splice(index, 1); // Remove collided obstacle
-                lifeBar.segments--; // Decrement life bar segments
-                dragon.collided = true; // Set collision state
-            }
+    obstacles.splice(index, 1); // Remove collided obstacle
+    lifeBar.segments--; // Decrement life bar segments
+    dragonCollided = true; // Set collision state
+
+    setTimeout(() => {
+        dragonCollided = false;
+    }, 1000);
+}
         });
 
         // Check for collision with ground or ceiling
