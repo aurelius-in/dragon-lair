@@ -157,7 +157,9 @@ function update() {
         });
 
         // Update perch
+        perch.x -= 1;  // Set the speed to match the obstacle speed
         perch.update();
+
 
         // Create new obstacles
         if (gameLoopCounter % 100 === 0) { // Every 100 frames
