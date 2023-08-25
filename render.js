@@ -1,8 +1,8 @@
 import {
-  imageWidth,
+  bg,
   backgrounds,
   dragonImages,
-  currentFrame,
+  frame,
   obstacles,
   canvas,
   context,
@@ -14,27 +14,25 @@ import {
   perchWidth,
   perchHeight,
   dragon,
-  dragonAlpha,
-  dragonScale,
   tapToFly,
   perch,
   lifeBar,
-  screenFadeAlpha
+  screenFade
 } from './init.js';
 
 // Draw objects
 export function draw() {
     // Draw the furthest back background (bgbg)
-    context.drawImage(bgbgImage, backgrounds.bgbgX, 0, imageWidth, canvas.height);
-    context.drawImage(bgbgImage, backgrounds.bgbgX + imageWidth, 0, imageWidth, canvas.height);
+    context.drawImage(bgbgImage, backgrounds.bgbgX, 0, bg.width, canvas.height);
+    context.drawImage(bgbgImage, backgrounds.bgbgX + bg.width, 0, bg.width, canvas.height);
 
     // Draw the middle background (bg)
-    context.drawImage(bgImage, backgrounds.bgX, 0, imageWidth, canvas.height);
-    context.drawImage(bgImage, backgrounds.bgX + imageWidth, 0, imageWidth, canvas.height);
+    context.drawImage(bgImage, backgrounds.bgX, 0, bg.width, canvas.height);
+    context.drawImage(bgImage, backgrounds.bgX + bg.width, 0, bg.width, canvas.height);
 
     // Draw the closest background (fg)
-    context.drawImage(fgImage, backgrounds.fgX, 0, imageWidth, canvas.height);
-    context.drawImage(fgImage, backgrounds.fgX + imageWidth, 0, imageWidth, canvas.height);
+    context.drawImage(fgImage, backgrounds.fgX, 0, bg.width, canvas.height);
+    context.drawImage(fgImage, backgrounds.fgX + bg.width, 0, bg.width, canvas.height);
     // Draw perch
     context.drawImage(perchImage, perch.x, perchY, perchWidth, perchHeight);
 
@@ -45,11 +43,11 @@ export function draw() {
 
     // Draw the dragon with scaling and fading
     context.save();
-    context.globalAlpha = dragonAlpha;
+    context.globalAlpha = dragon.alpha;
     context.translate(dragon.x + dragon.width / 2, dragon.y + dragon.height / 2);
-    context.scale(dragonScale, dragonScale);
+    context.scale(dragon.scale, dragon.scale);
     context.translate(-(dragon.x + dragon.width / 2), -(dragon.y + dragon.height / 2));
-    context.drawImage(dragonImages[currentFrame], dragon.x, dragon.y, dragon.width, dragon.height);
+    context.drawImage(dragonImages[frame.current], dragon.x, dragon.y, dragon.width, dragon.height);
     context.restore();
 
    // Draw the life bar
@@ -67,6 +65,6 @@ if (tapToFly.alpha > 0) {
 }
 
     // Draw black fade overlay
-    context.fillStyle = `rgba(0, 0, 0, ${screenFadeAlpha})`;
+    context.fillStyle = `rgba(0, 0, 0, ${screenFade.alpha})`;
     context.fillRect(0, 0, canvas.width, canvas.height);
 }
