@@ -1,5 +1,5 @@
 import {
-    canvas, context, perchY, perchWidth, perchHeight,
+    canvas, context, perchY, perchWidth, perchHeight, screenFade,
     dragon, dragonImages, perch, obstacles, lifeBar, tapToFly, backgrounds, frame
 } from './init.js';
 import { draw } from './render.js';
@@ -26,7 +26,6 @@ let endGame = false,
     dragonStartX = canvas.width * 0.1 - 50, 
     dragonStartY = canvas.height * 0.5, 
     gravity = 0.5, jump = -6,
-    screenFadeAlpha = 0,
     imageWidth = canvas.height * 4;
 
 // Input handling
@@ -192,10 +191,10 @@ function update() {
         dragon.alpha -= 0.005;
 
         // Gradually increase the alpha for screen fade to black
-        screenFadeAlpha += 0.01;
+        screenFade.alpha += 0.01;
 
         // Restart the game after 2 seconds of black screen
-        if (screenFadeAlpha >= 1) {
+        if (screenFade.alpha >= 1) {
             setTimeout(resetGame, 2000);
         }
     }
