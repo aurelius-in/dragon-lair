@@ -88,11 +88,12 @@ function createObstacle() {
             break;
     }
 
+    let spawnTimer = 0;
+    let spawnRate = 5;
     obstacles.push(obstacle);
-
     topObstacle = !topObstacle;
-
     obstacleSpawnTime *= 0.999;
+    
 }
 
 function collisionDetected(dragon, obstacle) {
@@ -145,11 +146,11 @@ function update() {
 
         perch.update();
 
-        if (obstacleSpawnTimer > obstacleSpawnRate) {
+        if (spawnTimer > spawnRate) {
             obstacles.push(new Obstacle());
-            obstacleSpawnTimer = 0;
+            spawnTimer = 0;
         } else {
-            obstacleSpawnTimer++;
+            spawnTimer++;
         }
     }
 }
