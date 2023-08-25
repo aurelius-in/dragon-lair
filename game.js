@@ -8,7 +8,7 @@ import {
     createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle
 } from './obstacles.js';
 
-let framesPerFlap = 100, gameLoopCounter = 0, gameStarted = false, jump = 8;
+let spawnTimer = 0, framesPerFlap = 100, gameLoopCounter = 0, gameStarted = false, jump = 8;
 
 function handleInput() {
     if (!gameStarted) {
@@ -88,7 +88,6 @@ function createObstacle() {
             break;
     }
 
-    let spawnTimer = 0;
     let spawnRate = 5;
     obstacles.push(obstacle);
     topObstacle = !topObstacle;
