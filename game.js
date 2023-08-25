@@ -34,6 +34,7 @@ let endGame = false,
     dragonStartX = canvas.width * 0.1 - 50, 
     dragonStartY = canvas.height * 0.5, 
     gravity = 0.5, jump = -6,
+    screenFadeAlpha = 0,
      imageWidth = canvas.height * 4;
 
 // Input handling
