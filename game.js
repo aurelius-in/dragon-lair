@@ -8,26 +8,6 @@ import {
     createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle
 } from './obstacles.js';
 
-// EndGame
-let endGame = false, 
-    gameLoopCounter = 0, 
-    endGameTime = 0, 
-    obstacleVelocity = 5, 
-    obstacleSpawnTime = 4000, 
-    lastObstacleTime = Date.now(), 
-    topObstacle = true, 
-    gameStarted = false, 
-    currentFrame = frame.current, 
-    gameTime = 0, 
-    nonTappingFrameCounter = 0, 
-    framesPerFlap = 50, 
-    dragonFrame = 0, 
-    obstacleHeight = 40, 
-    dragonStartX = canvas.width * 0.1 - 50, 
-    dragonStartY = canvas.height * 0.5, 
-    gravity = 0.5, jump = -6,
-    imageWidth = canvas.height * 4;
-
 // Input handling
 function handleInput() {
     if (!gameStarted) {
@@ -65,7 +45,6 @@ function resetGame() {
     backgrounds.fgX = 0;
     backgrounds.bgbgX = 0;
     obstacleSpawnTime = 4000; // Reset obstacle spawn time to 4 seconds
-    endGame = false;
     endGameTime = 0;
     dragon.scale = 1;
     dragon.alpha = 1;
@@ -153,83 +132,69 @@ function collisionDetected(dragon, obstacle) {
     dragonCollisionArea.y + dragonCollisionArea.height > obstacleCollisionArea.y
   );
 }
-
-
 function update() {
-    if (gameStarted) {
-        // Update dragon's velocity and position
-        dragon.velocity += gravity;
-        dragon.y += dragon.velocity;
+  if (gameStarted) {
+    // Update dragon
+    dragon.update();
 
-        // Update the positions only if the dragon has started flying
-        backgrounds.bgbgX -= 0.05; // Slowest speed for the furthest back background
-        backgrounds.bgX -= 0.1; // Slower speed for the middle background
-        backgrounds.fgX -= 0.15; // Slow speed for the closest background
-        perch.x -= obstacleVelocity; // Move the perch with the obstacles
+    // Update obstacles
+    obstacles.forEach((obstacle, index) => {
+      obstacle.update();
+      if (obstacle.x + obstacle.width < 0) {
+        obstacles.splice(index, 1);
+      }
 
-        // Check if it's time to spawn a new obstacle
-        gameTime += 1000 / 60; // Increment game time by frame duration
-        if (gameTime >= obstacleSpawnTime) {
-            createObstacle(); // Create a new obstacle
-            gameTime = 0; // Reset game time
-        }
-
-        obstacles.forEach((obstacle, index) => {
-            obstacle.update();
-            if (obstacle.x + obstacle.width < 0) {
-                obstacles.splice(index, 1);
-            }
-
-            // Check for collision with obstacles
-            const boundaryReductionX = dragon.width * 0.1;
-            const boundaryReductionY = dragon.height * 0.2;
-
-            if (
-                dragon.x + boundaryReductionX < obstacle.x + obstacle.width &&
-                dragon.x + dragon.width - boundaryReductionX > obstacle.x &&
-                dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
-                dragon.y + dragon.height - boundaryReductionY > obstacle.y
-            ) {
-             if (dragon.collided) {lifeBar.segments--;
-             if (lifeBar.segments <= 0) { resetGame();
-                  }
-                }
-    obstacles.splice(index, 1); // Remove collided obstacle
-    lifeBar.segments--; // Decrement life bar segments
-    dragon.collided = true; // Set collision state
-
-    setTimeout(() => {
-        dragon.collided = false;
-    }, 1000);
-}
-        });
-
-        // Check for collision with ground or ceiling
-        if (dragon.y <= -canvas.height - 300 || dragon.y + dragon.height >= canvas.height + 300 ) {
+      // Check for collision with obstacles using the collisionDetected function
+      if (collisionDetected(dragon, obstacle)) {
+        if (!dragon.collided) {
+          lifeBar.segments--;
+          if (lifeBar.segments <= 0) {
             resetGame();
+          }
+          obstacles.splice(index, 1); // Remove collided obstacle
+          dragon.collided = true; // Set collision state
+
+          setTimeout(() => {
+            dragon.collided = false;
+          }, 1000);
         }
+      }
+    });
+
+    // Update perch
+    perch.update();
+
+    // Spawn new obstacles
+    if (obstacleSpawnTimer > obstacleSpawnRate) {
+      obstacles.push(new Obstacle());
+      obstacleSpawnTimer = 0;
+    } else {
+      obstacleSpawnTimer++;
+    }
+  }
+}
+
+    if (backgrounds.fgX + imageWidth <= canvas.width) {
+        levelEnd();
     }
 
-    if (!endGame && backgrounds.fgX + imageWidth <= canvas.width) {
-        endGame = true;
+   function levelEnd() {
+    // Gradually increase the scale for zooming effect
+    dragon.scale += 0.005;
+
+    // Gradually decrease the alpha for fading effect
+    dragon.alpha -= 0.005;
+
+    // Gradually increase the alpha for screen fade to black
+    screenFade.alpha += 0.01;
+
+    // Restart the game after 2 seconds of black screen
+    if (screenFade.alpha >= 1) {
+        setTimeout(resetGame, 2000);
     }
+}
 
-    if (endGame) {
-        // Gradually increase the scale for zooming effect
-        dragon.scale += 0.005;
-
-        // Gradually decrease the alpha for fading effect
-        dragon.alpha -= 0.005;
-
-        // Gradually increase the alpha for screen fade to black
-        screenFade.alpha += 0.01;
-
-        // Restart the game after 2 seconds of black screen
-        if (screenFade.alpha >= 1) {
-            setTimeout(resetGame, 2000);
-        }
-    }
-    // Control the non-tapping animation speed
+     // Control the non-tapping animation speed
     if (!gameStarted) {
         framesPerFlap = 90; // 
 
