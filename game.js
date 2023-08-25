@@ -1,5 +1,5 @@
 import {
-    canvas, context, perchY, perchWidth, perchHeight, screenFade,
+    bg, canvas, context, perchY, perchWidth, perchHeight, screenFade,
     dragon, dragonImages, perch, obstacles, lifeBar, tapToFly, backgrounds, frame
 } from './init.js';
 import { draw } from './render.js';
