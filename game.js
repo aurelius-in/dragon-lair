@@ -117,8 +117,15 @@ function collisionDetected(dragon, obstacle) {
 }
 function update() {
     if (gameStarted) {
+        // Update dragon
         dragon.update();
 
+        // Update backgrounds to make the dragon appear to move forward
+        backgrounds.bgX -= 1;
+        backgrounds.fgX -= 2;
+        backgrounds.bgbgX -= 0.5;
+
+        // Update obstacles
         obstacles.forEach((obstacle, index) => {
             obstacle.update();
             if (obstacle.x + obstacle.width < 0) {
@@ -127,7 +134,7 @@ function update() {
 
             if (collisionDetected(dragon, obstacle)) {
                 if (!dragon.collided) {
-                                     lifeBar.segments--;
+                    lifeBar.segments--;
                     if (lifeBar.segments <= 0) {
                         resetGame();
                     }
@@ -141,15 +148,13 @@ function update() {
             }
         });
 
+        // Update perch
         perch.update();
 
-      if (spawnTimer > spawnRate) {
-    const obstacle = createArrowObstacle(canvas.width, obstacleY); // Call the function to create an arrow obstacle
-    obstacles.push(obstacle); // Add the obstacle to the obstacles array
-    spawnTimer = 0;
-} else {
-    spawnTimer++;
-}
+        // Create new obstacles
+        if (gameLoopCounter % 100 === 0) { // Every 100 frames
+            createObstacle();
+        }
     }
 }
 
