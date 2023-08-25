@@ -30,6 +30,8 @@ for (let i = 1; i <= 3; i++) {
     }
 }
 
+export let tapToFlyAlpha = 1;
+
 // End of game
 export let currentFrame = 0; // Corrected export
 export let life = 100;
