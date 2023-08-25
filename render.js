@@ -19,6 +19,7 @@ import {
   life,
   tapToFlyAlpha,
   perch,
+  lifeBar,
   screenFadeAlpha
 } from './init.js';
 
