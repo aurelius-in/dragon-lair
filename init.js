@@ -17,9 +17,7 @@ export const perchWidth = 150;
 export const perchHeight = 250;
 
 // Dragon
-export let dragonScale = 1;
-export let dragonAlpha = 1;
-export const dragon = { x: perch.x, y: perchY - 125, width: 150, height: 150, velocity: 0 };
+export const dragon = {alpha = 1, scale = 1, x: perch.x, y: perchY - 125, width: 150, height: 150, velocity: 0 };,
 export const dragonImages = [];
 for (let i = 1; i <= 3; i++) {
     for (let j = 1; j <= (i === 1 ? 4 : 3); j++) {
@@ -34,10 +32,9 @@ for (let i = 1; i <= 3; i++) {
 export const tapToFly = { alpha: 1 };
 
 // End of game
-export let currentFrame = 0; // Corrected export
-export let life = 100;
-export let screenFadeAlpha = 0;
-export let imageWidth = canvas.height * 4; 
+export const frame {current = 0}; // Corrected export
+export const screenFade { alpha = 0};
+export const bg {width = canvas.height * 4}; 
 
 // Obstacles
 export const obstacles = [];
@@ -50,4 +47,4 @@ export const backgrounds = {
 };
 
 // Life Bar
-export let lifeBar = { segments: 10 };
+export const lifeBar = { segments: 10 };
