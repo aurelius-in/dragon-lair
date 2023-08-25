@@ -47,3 +47,6 @@ export const backgrounds = {
     bgX: 0,
     fgX: 0
 };
+
+// Life Bar
+export let lifeBar = { segments: 10 };
