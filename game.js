@@ -163,6 +163,7 @@ function update() {
                 dragon.y + dragon.height - boundaryReductionY > obstacle.y
             ) {
                 obstacles.splice(index, 1); // Remove collided obstacle
+                lifeBar.segments--; // Decrement life bar segments
             }
         });
 
