@@ -145,7 +145,8 @@ function update() {
         perch.update();
 
       if (spawnTimer > spawnRate) {
-    createObstacle(); // Call the createObstacle function to create a new obstacle
+    const obstacle = createArrowObstacle(canvas.width, obstacleY); // Call the function to create an arrow obstacle
+    obstacles.push(obstacle); // Add the obstacle to the obstacles array
     spawnTimer = 0;
 } else {
     spawnTimer++;
