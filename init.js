@@ -36,6 +36,7 @@ export let tapToFlyAlpha = 1;
 export let currentFrame = 0; // Corrected export
 export let life = 100;
 export let screenFadeAlpha = 0;
+export let imageWidth;
 
 // Obstacles
 export const obstacles = [];
