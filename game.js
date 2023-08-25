@@ -1,5 +1,5 @@
 import {
-    bg, canvas, context, perchY, perchWidth, perchHeight, screenFade,
+    bg, canvas, context, perchY, perchWidth, perchHeight, screenFade, 
     dragon, dragonImages, perch, obstacles, lifeBar, tapToFly, backgrounds, frame
 } from './init.js';
 import { draw } from './render.js';
@@ -8,7 +8,8 @@ import {
     createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle
 } from './obstacles.js';
 
-let topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, framesPerFlap = 100, gameLoopCounter = 0, gameStarted = false, jump = 8;
+let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, framesPerFlap = 100, 
+    gameLoopCounter = 0, gameStarted = false, jump = 8;
 
 function handleInput() {
     if (!gameStarted) {
