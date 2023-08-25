@@ -39,4 +39,8 @@ export let screenFadeAlpha = 0;
 
 // Obstacles
 export const obstacles = [];
- 
+
+//Background 
+export let bgbgX = 0;
+export let bgX = 0;
+export let fgX = 0;
