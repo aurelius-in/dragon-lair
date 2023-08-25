@@ -11,7 +11,7 @@ export const fgImage = new Image(); fgImage.src = 'images/fg.png';
 export const bgbgImage = new Image(); bgbgImage.src = 'images/bgbg.png';
 
 // Perch
-export let perchX = 50;
+export const perch = { x: 50 };
 export const perchY = canvas.height - 250;
 export const perchWidth = 150;
 export const perchHeight = 250;
