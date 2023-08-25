@@ -63,10 +63,10 @@ function resetGame() {
     dragon.y = dragonStartY;
     dragon.velocity = 0;
     gameStarted = false;
-    currentFrame = 0;
-    bgX = 0; // Reset background positions
-    fgX = 0;
-    bgbgX = 0;
+    frame.current = 0;
+    backgrounds.bgX = 0; // Reset background positions
+    backgrounds.fgX = 0;
+    backgrounds.bgbgX = 0;
     obstacleSpawnTime = 4000; // Reset obstacle spawn time to 4 seconds
     endGame = false;
     endGameTime = 0;
@@ -134,15 +134,10 @@ function update() {
         dragon.y += dragon.velocity;
 
         // Update the positions only if the dragon has started flying
-        bgbgX -= 0.05; // Slowest speed for the furthest back background
-        bgX -= 0.1; // Slower speed for the middle background
-        fgX -= 0.15; // Slow speed for the closest background
+        backgrounds.bgbgX -= 0.05; // Slowest speed for the furthest back background
+        backgrounds.bgX -= 0.1; // Slower speed for the middle background
+        backgrounds.fgX -= 0.15; // Slow speed for the closest background
         perch.x -= obstacleVelocity; // Move the perch with the obstacles
-
-        // Reset positions if they go off-screen
-        if (bgbgX <= -imageWidth) bgbgX = 0;
-        if (bgX <= -imageWidth) bgX = 0;
-        if (fgX <= -imageWidth) fgX = 0;
 
         // Check if it's time to spawn a new obstacle
         gameTime += 1000 / 60; // Increment game time by frame duration
@@ -177,7 +172,7 @@ function update() {
         }
     }
 
-    if (!endGame && fgX + imageWidth <= canvas.width) {
+    if (!endGame && backgrounds.fgX + imageWidth <= canvas.width) {
         endGame = true;
     }
 
