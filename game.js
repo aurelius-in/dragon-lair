@@ -1,6 +1,6 @@
 import {
     canvas, context, perchY, perchWidth, perchHeight,
-    dragon, dragonImages, perch, obstacles, lifeBar, tapToFly
+    dragon, dragonImages, perch, obstacles, lifeBar, tapToFly, backgrounds, frame
 } from './init.js';
 import { draw } from './render.js';
 import {
@@ -19,10 +19,7 @@ let endGame = false,
     lastObstacleTime = Date.now(), 
     topObstacle = true, 
     gameStarted = false, 
-    bgX = 0, 
-    fgX = 0, 
-    bgbgX = 0, 
-    currentFrame = 0, 
+    currentFrame = frame.current, 
     gameTime = 0, 
     nonTappingFrameCounter = 0, 
     framesPerFlap = 50, 
@@ -32,7 +29,7 @@ let endGame = false,
     dragonStartY = canvas.height * 0.5, 
     gravity = 0.5, jump = -6,
     screenFadeAlpha = 0,
-     imageWidth = canvas.height * 4;
+    imageWidth = canvas.height * 4;
 
 // Input handling
 function handleInput() {
