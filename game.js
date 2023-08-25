@@ -10,7 +10,7 @@ import {
 
 // EndGame
 let endGame = false, 
-    perchX = 50;
+    perchX = 50,
     gameLoopCounter = 0, 
     endGameTime = 0, 
     obstacleVelocity = 5, 
