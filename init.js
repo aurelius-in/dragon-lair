@@ -42,6 +42,8 @@ export let imageWidth = canvas.height * 4;
 export const obstacles = [];
 
 //Background 
-export let bgbgX = 0;
-export let bgX = 0;
-export let fgX = 0;
+export const backgrounds = {
+    bgbgX: 0,
+    bgX: 0,
+    fgX: 0
+};
