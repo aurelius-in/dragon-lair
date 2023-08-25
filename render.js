@@ -64,8 +64,8 @@ for (let i = 0; i < lifeBar.segments; i++) {
   context.fillRect(dragon.x - 5, dragon.y - 5, dragon.width + 10, dragon.height + 10);
 }
  // Draw the segment
- // context.fillStyle = color;
- // context.fillRect(10 + i * 35, 10, 35, 30);
+ context.fillStyle = color;
+ context.fillRect(10 + i * 35, 10, 35, 30);
 
 }
   // Draw the "TAP TO FLY!" text
