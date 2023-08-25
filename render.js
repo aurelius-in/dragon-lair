@@ -17,7 +17,8 @@ import {
   dragonScale,
   life,
   tapToFlyAlpha,
-  screenFadeAlpha
+  screenFadeAlpha,
+  tapToFlyAlpha
 } from './init.js';
 
 // Draw objects
