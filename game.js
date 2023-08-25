@@ -1,6 +1,6 @@
 import {
     canvas, context, perchY, perchWidth, perchHeight,
-    dragon, dragonImages, obstacles, imageWidth
+    dragon, dragonImages, obstacles
 } from './init.js';
 import { draw } from './render.js';
 import {
