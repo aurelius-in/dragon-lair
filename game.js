@@ -11,7 +11,14 @@ import {
 let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, framesPerFlap = 100, 
     gameLoopCounter = 0, gameStarted = false, jump = 8;
 
+// To prevent multiple jumps
+let jumpLock = false;
+
 function handleInput() {
+    if (jumpLock) return;
+    jumpLock = true;
+    setTimeout(() => jumpLock = false, 200);  // Unlock after 200ms
+
     if (!gameStarted) {
         gameStarted = true;
     }
