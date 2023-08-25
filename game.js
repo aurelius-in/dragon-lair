@@ -160,6 +160,10 @@ function update() {
                 dragon.y + boundaryReductionY < obstacle.y + obstacle.height &&
                 dragon.y + dragon.height - boundaryReductionY > obstacle.y
             ) {
+             if (dragon.collided) {lifeBar.segments--;
+             if (lifeBar.segments <= 0) { resetGame();
+                  }
+                }
     obstacles.splice(index, 1); // Remove collided obstacle
     lifeBar.segments--; // Decrement life bar segments
     dragon.collided = true; // Set collision state
