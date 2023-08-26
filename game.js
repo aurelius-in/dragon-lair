@@ -310,4 +310,4 @@ window.onload = () => {
 screen.orientation.lock('landscape');
 
 // Hide the URL bar
-// window.scrollTo(0, 1);
+window.scrollTo(0, 1);
