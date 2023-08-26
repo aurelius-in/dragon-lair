@@ -14,7 +14,7 @@ let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spa
 // To prevent multiple jumps
 let jumpLock = false;
 
-/let flapCounter = 0;
+let flapCounter = 0;
 
 function handleInput() {
     if (jumpLock) return;
