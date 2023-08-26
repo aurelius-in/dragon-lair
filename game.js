@@ -1,15 +1,50 @@
 import {
-    bg, canvas, context, perchY, perchWidth, perchHeight, screenFade, 
-    dragon, dragonImages, perch, obstacles, lifeBar, tapToFly, backgrounds, frame
+    bg,
+    canvas,
+    context,
+    perchY,
+    perchWidth,
+    perchHeight,
+    screenFade,
+    dragon,
+    dragonImages,
+    perch,
+    obstacles,
+    lifeBar,
+    tapToFly,
+    backgrounds,
+    frame
 } from './init.js';
-import { draw } from './render.js';
+import {draw} from './render.js';
 import {
-    createArrowObstacle, createLightningStrikeObstacle, createBatSwarmObstacle, createTornadoObstacle,
-    createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle
+    createArrowObstacle,
+    createLightningStrikeObstacle,
+    createBatSwarmObstacle,
+    createTornadoObstacle,
+    createWraithObstacle,
+    createZombieDragonObstacle,
+    createThundercloudObstacle,
+    createFireballObstacle
 } from './obstacles.js';
 
-let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, gameLoopCounter = 0, 
-    gameStarted = false, jump = 8, isFlapping = false, framesPerFlap = 100, frameOrder = [2, 3, 4, 0, 1], frameIndex = 0; 
+let obstacleSpawnTime = 4000,
+    topObstacle = false,
+    obstacleY,
+    spawnRate = 5,
+    spawnTimer = 0,
+    gameLoopCounter = 0,
+    gameStarted = false,
+    jump = 8,
+    isFlapping = false,
+    framesPerFlap = 100,
+    frameOrder = [
+        2,
+        3,
+        4,
+        0,
+        1
+    ],
+    frameIndex = 0;
 
 // To prevent multiple jumps
 let jumpLock = false;
@@ -17,15 +52,17 @@ let jumpLock = false;
 let flapCounter = 0;
 
 function handleInput() {
-    if (jumpLock) return;
+    if (jumpLock) 
+        return;
+    
     jumpLock = true;
-    setTimeout(() => jumpLock = false, 200);  // Unlock after 200ms
+    setTimeout(() => jumpLock = false, 200); // Unlock after 200ms
 
-    if (!gameStarted) {
+    if (! gameStarted) {
         gameStarted = true;
         frame.current = frameOrder[0]; // Start with dragon3.png
     }
-    dragon.velocity = -jump; // Make the dragon go up
+    dragon.velocity = - jump; // Make the dragon go up
     dragon.y += dragon.velocity;
     isFlapping = true; // Set the flag to true when tapping
     flapCounter = 0; // Reset the flap counter
@@ -93,9 +130,9 @@ function createObstacle() {
     }
 
     obstacles.push(obstacle);
-    topObstacle = !topObstacle;
+    topObstacle = ! topObstacle;
     obstacleSpawnTime *= 0.999;
-    
+
 }
 
 function collisionDetected(dragon, obstacle) {
@@ -105,8 +142,8 @@ function collisionDetected(dragon, obstacle) {
     const dragonCollisionArea = {
         x: dragon.x + boundaryReductionX,
         y: dragon.y + boundaryReductionY,
-        width: dragon.width - (boundaryReductionX * 2),
-        height: dragon.height - (boundaryReductionY * 2)
+        width: dragon.width -(boundaryReductionX * 2),
+        height: dragon.height -(boundaryReductionY * 2)
     };
 
     const obstacleCollisionArea = {
@@ -116,15 +153,13 @@ function collisionDetected(dragon, obstacle) {
         height: obstacle.height
     };
 
-    return (
-        dragonCollisionArea.x < obstacleCollisionArea.x + obstacleCollisionArea.width &&
-        dragonCollisionArea.x + dragonCollisionArea.width > obstacleCollisionArea.x &&
-        dragonCollisionArea.y < obstacleCollisionArea.y + obstacleCollisionArea.height &&
-        dragonCollisionArea.y + dragonCollisionArea.height > obstacleCollisionArea.y
-    );
+    return(dragonCollisionArea.x<obstacleCollisionArea.x + obstacleCollisionArea.width &&
+        dragonCollisionArea.x + dragonCollisionArea.width>obstacleCollisionArea.x && dragonCollisionArea.y<obstacleCollisionArea.y + obstacleCollisionArea.height &&
+        dragonCollisionArea.y + dragonCollisionArea.height>obstacleCollisionArea.y);
 }
 
-let gravity = 0.3; // Gravity constant
+let gravity = 0.3;
+// Gravity constant
 
 // update function
 function update() {
@@ -138,55 +173,88 @@ function update() {
                 frame.current = frameOrder[0]; // Default to dragon3.png
             }
         }
-    if (gameStarted) {
-        // Apply gravity to dragon
-        dragon.velocity += gravity;
-        dragon.y += dragon.velocity;
-        
-        // Update dragon
-        dragon.update();
+        if (gameStarted) { // Apply gravity to dragon
+            dragon.velocity += gravity;
+            dragon.y += dragon.velocity;
 
-        // Update backgrounds to make the dragon appear to move forward
-        backgrounds.fgX -= 0.2; // slow
-        backgrounds.bgX -= 0.1; // slower
-        backgrounds.bgbgX -= 0.05; // slowest
+            // Update dragon
+            dragon.update();
 
-        
-        // Update obstacles
-        obstacles.forEach((obstacle, index) => {
-            obstacle.x -= 1;  // Obstacle speed
-            obstacle.update();
+            // Update backgrounds to make the dragon appear to move forward
+            backgrounds.fgX -= 0.2; // slow
+            backgrounds.bgX -= 0.1; // slower
+            backgrounds.bgbgX -= 0.05;
+            // slowest
 
-            if (collisionDetected(dragon, obstacle)) {
-                if (!dragon.collided) {
-                    lifeBar.segments--;
-                    if (lifeBar.segments <= 0) {
+
+            // Update obstacles
+            obstacles.forEach((obstacle, index) => {
+                obstacle.x -= 1; // Obstacle speed
+                obstacle.update();
+
+                if (collisionDetected(dragon, obstacle)) {
+                    if (!dragon.collided) {
+                        lifeBar.segments --;
+                        if (lifeBar.segments<= 0) {
                         resetGame();
                     }
                     obstacles.splice(index, 1);
                     dragon.collided = true;
 
                     setTimeout(() => {
-                        dragon.collided = false;
-                    }, 1000);
+                            dragon.collided = false;
+                        }, 1000) 
+                        
+                    }
                 }
+            });
+
+            // Update perch
+            perch.x -= 1; // Set the speed to match the obstacle speed
+            perch.update();
+
+
+            // Create new obstacles
+            if (gameLoopCounter % 100 === 0) { // Every 100 frames
+                createObstacle();
             }
-        });
-
-        // Update perch
-        perch.x -= 1;  // Set the speed to match the obstacle speed
-        perch.update();
-
-
-        // Create new obstacles
-        if (gameLoopCounter % 100 === 0) { // Every 100 frames
-            createObstacle();
         }
     }
+
+    if (backgrounds.fgX + bg.width<= canvas.width) {
+    levelEnd();
+}
+    // Check for level end condition
+        if (backgrounds.fgX + bg.width <= canvas.width) {
+            levelEnd();
+        }
+    
 }
 
-if (backgrounds.fgX + bg.width <= canvas.width) {
-    levelEnd();
+// Level end animation
+function levelEnd() {
+    let startTime = Date.now();
+    let duration = 5000; // 5 seconds
+    let initialScale = dragon.scale;
+    let initialAlpha = dragon.alpha;
+    let initialX = dragon.x;
+
+    function animateEnd() {
+        let currentTime = Date.now();
+        let elapsedTime = currentTime - startTime;
+        let progress = elapsedTime / duration;
+
+        if (progress < 1) {
+            dragon.scale = initialScale - (initialScale - 0.1) * progress;
+            dragon.alpha = initialAlpha - (initialAlpha - 0.5) * progress;
+            dragon.x = initialX + (canvas.width / 2 - initialX) * progress;
+            requestAnimationFrame(animateEnd);
+        } else {
+            screenFade.alpha = 1;
+            setTimeout(resetGame, 2000);
+        }
+    }
+    animateEnd();
 }
 
 function levelEnd() {
@@ -260,7 +328,8 @@ window.onload = () => {
         dragon.velocity = jump;
         dragon.y += dragon.velocity;
         gameStarted = true;
-    }, 2300);
+    }, 2300) 
+    
 };
 
 // Lock screen orientation to landscape
