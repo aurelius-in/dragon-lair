@@ -11,26 +11,13 @@ function resetGame() { obstacles.length = 0; perch.x = 50; dragon.x = dragonStar
 function createObstacle() { const obstacleType = ['arrow', 'lightningStrike', 'batSwarm', 'tornado', 'wraith', 'zombieDragon', 'thundercloud', 'fireball']; const randomType = obstacleType[Math.floor(Math.random() * obstacleType.length)]; const minDistance = canvas.height * 0.1, centerDistance = canvas.height * 0.5; if (topObstacle) { obstacleY = Math.random() * (centerDistance - minDistance) + minDistance; } else { obstacleY = Math.random() * (centerDistance - minDistance) + centerDistance; } let obstacle; switch (randomType) { case 'arrow': obstacle = createArrowObstacle(canvas.width, obstacleY); break; case 'lightningStrike': obstacle = createLightningStrikeObstacle(canvas.width, obstacleY); break; case 'batSwarm': obstacle = createBatSwarmObstacle(canvas.width, obstacleY); break; case 'tornado': obstacle = createTornadoObstacle(canvas.width, obstacleY); break; case 'wraith': obstacle = createWraithObstacle(canvas.width, obstacleY); break; case 'zombieDragon': obstacle = createZombieDragonObstacle(canvas.width, obstacleY); break; case 'thundercloud': obstacle = createThundercloudObstacle(canvas.width, obstacleY); break; case 'fireball': obstacle = createFireballObstacle(canvas.width, obstacleY); break; } obstacles.push(obstacle); topObstacle = !topObstacle; obstacleSpawnTime *= 0.999; }
 
 function collisionDetected(dragon, obstacle) {
-    const boundaryReductionX = dragon.width * 0.05;
-    const boundaryReductionY = dragon.height * 0.1;
+    const brX = dragon.width * 0.05, brY = dragon.height * 0.1;
+    const dca = { x: dragon.x + brX, y: dragon.y + brY, width: dragon.width - 2 * brX, height: dragon.height - 2 * brY };
+    const oca = { x: obstacle.x, y: obstacle.y, width: obstacle.width, height: obstacle.height };
 
-    const dragonCollisionArea = {
-        x: dragon.x + boundaryReductionX,
-        y: dragon.y + boundaryReductionY,
-        width: dragon.width -(boundaryReductionX * 2),
-        height: dragon.height -(boundaryReductionY * 2)
-    };
-
-    const obstacleCollisionArea = {
-        x: obstacle.x,
-        y: obstacle.y,
-        width: obstacle.width,
-        height: obstacle.height
-    };
-
-    return(dragonCollisionArea.x<obstacleCollisionArea.x + obstacleCollisionArea.width &&
-        dragonCollisionArea.x + dragonCollisionArea.width>obstacleCollisionArea.x && dragonCollisionArea.y<obstacleCollisionArea.y + obstacleCollisionArea.height &&
-        dragonCollisionArea.y + dragonCollisionArea.height>obstacleCollisionArea.y);
+    return (
+        dca.x < oca.x + oca.width && dca.x + dca.width > oca.x && dca.y < oca.y + oca.height &&  dca.y + dca.height > oca.y
+    );
 }
 
 let gravity = 0.3;
