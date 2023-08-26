@@ -23,7 +23,7 @@ for (let i = 1; i <= 3; i++) {
     for (let j = 1; j <= (i === 1 ? 4 : 3); j++) {
         const char = String.fromCharCode(96 + j);
         const image = new Image();
-        image.src = `images/dragon${i}${char}.png`;
+        image.src = `images/dragon${i}.png`;
         dragonImages.push(image);
     }
 }
