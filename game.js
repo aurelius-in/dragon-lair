@@ -132,14 +132,12 @@ function update() {
         if (isFlapping) {
             frame.current = frameOrder[frameIndex];
             frameIndex = (frameIndex + 1) % frameOrder.length;
-        } else {
-            frame.current = frameOrder[0]; // Default to dragon3.png
+            flapCounter++;
+            if (flapCounter >= 6) { // 6 frames in half a second
+                isFlapping = false;
+                frame.current = frameOrder[0]; // Default to dragon3.png
+            }
         }
-
-        if (gameLoopCounter % framesPerFlap === 0) {
-            isFlapping = false; // Reset the flag after updating the frame
-        }
-    }
     if (gameStarted) {
         // Apply gravity to dragon
         dragon.velocity += gravity;
