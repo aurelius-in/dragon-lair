@@ -207,14 +207,14 @@ function gameLoop() {
         tapToFly.alpha -= 0.01;
     }
 
-    gameLoopCounter++;
+   gameLoopCounter++;
 
     if (gameStarted) {
-        if (gameLoopCounter % framesPerFlap === 0) { // Fixed this line
+        if (gameLoopCounter % framesPerFlap === 0) {
             frame.current = (frame.current + 1) % dragonImages.length;
         }
     } else {
-        if (gameLoopCounter % framesPerFlap === 0) { // Fixed this line
+        if (gameLoopCounter % framesPerFlap === 0) {
             frame.current = (frame.current + 1) % dragonImages.length;
         }
     }
