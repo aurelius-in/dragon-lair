@@ -60,6 +60,11 @@ function handleInput() {
         gameStarted = true;
         frame.current = frameOrder[0]; // Start with dragon3.png
     }
+
+        // Prevent default behavior for touch events
+    if (event && event.type === 'touchstart') {
+        event.preventDefault();
+    }
     dragon.velocity = -jump; // Make the dragon go up
     dragon.y += dragon.velocity;
     isFlapping = true; // Set the flag to true when tapping
