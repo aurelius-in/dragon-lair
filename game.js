@@ -24,8 +24,12 @@ function handleInput() {
     }
     dragon.velocity = -jump; // Make the dragon go up
     dragon.y += dragon.velocity;
-    frame.current = (frame.current + 1) % dragonImages.length;
-    framesPerFlap = Math.floor(Math.random() * 11) + 20;
+    if (isFlapping && gameLoopCounter % framesPerFlap === 0) {
+            frame.current = (frame.current + 1) % dragonImages.length;
+            framesPerFlap = Math.floor(Math.random() * 11) + 20;
+        } 
+     isFlapping = false; // Reset the flag after updating the frame
+    
 }
 
 window.addEventListener('click', handleInput);
