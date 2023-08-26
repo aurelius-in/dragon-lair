@@ -131,7 +131,20 @@ function collisionDetected(dragon, obstacle) {
 
 let gravity = 0.3; // Gravity constant
 
+// update function
 function update() {
+    if (gameStarted) {
+        if (isFlapping) {
+            frame.current = frameOrder[frameIndex];
+            frameIndex = (frameIndex + 1) % frameOrder.length;
+        } else {
+            frame.current = frameOrder[0]; // Default to dragon3.png
+        }
+
+        if (gameLoopCounter % framesPerFlap === 0) {
+            isFlapping = false; // Reset the flag after updating the frame
+        }
+    }
     if (gameStarted) {
         // Apply gravity to dragon
         dragon.velocity += gravity;
