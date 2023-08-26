@@ -140,9 +140,9 @@ function update() {
         dragon.update();
 
         // Update backgrounds to make the dragon appear to move forward
-        backgrounds.fgX -= 0.5; // slow
-        backgrounds.bgX -= 0.25; // slower
-        backgrounds.bgbgX -= 0.125; // slowest
+        backgrounds.fgX -= 0.3; // slow
+        backgrounds.bgX -= 0.2; // slower
+        backgrounds.bgbgX -= 0.1; // slowest
 
         
         // Update obstacles
