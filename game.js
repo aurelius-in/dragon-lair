@@ -26,7 +26,7 @@ function handleInput() {
     dragon.y += dragon.velocity;
     if (isFlapping && gameLoopCounter % framesPerFlap === 0) {
             frame.current = (frame.current + 1) % dragonImages.length;
-            framesPerFlap = Math.floor(Math.random() * 11) + 20;
+            framesPerFlap = Math.floor(Math.random() * 11) + 5;
         } 
      isFlapping = false; // Reset the flag after updating the frame
     
