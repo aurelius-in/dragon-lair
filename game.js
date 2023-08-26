@@ -27,12 +27,15 @@ let gravity = 0.3;
 function update() {
     if (gameStarted) {
         if (isFlapping) {
-        frame.current = frameOrder[frameIndex];
-        frameIndex = (frameIndex + 1) % frameOrder.length;
+        if (gameLoopCounter % framesPerFlap === 0) { // Change frame every 20 frames
+            frame.current = frameOrder[frameIndex];
+            frameIndex = (frameIndex + 1) % frameOrder.length;
+        }
         flapCounter++;
-        if (flapCounter >= 6) { // 6 frames in half a second
+        if (flapCounter >= 100) { // 100 frames for a full second
             isFlapping = false;
-            frame.current = frameOrder[0]; // Default to dragon3.png
+            frame.current = frameOrder[0]; // Default to first frame
+            flapCounter = 0; // Reset counter
         }
     }
         if (gameStarted) { // Apply gravity to dragon
