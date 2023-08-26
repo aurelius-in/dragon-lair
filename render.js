@@ -21,18 +21,16 @@ import {
 } from './init.js';
 
 // Draw objects
-export function draw() {
+  export function draw() {
     // Draw the furthest back background (bgbg)
-    context.drawImage(bgbgImage, backgrounds.bgbgX, 0, bg.width, canvas.height);
-    context.drawImage(bgbgImage, backgrounds.bgbgX + bg.width, 0, bg.width, canvas.height);
+    context.drawImage(bgbgImage, backgrounds.bgbgX, 0, bg.width, backgrounds.height);
 
     // Draw the middle background (bg)
-    context.drawImage(bgImage, backgrounds.bgX, 0, bg.width, canvas.height);
-    context.drawImage(bgImage, backgrounds.bgX + bg.width, 0, bg.width, canvas.height);
+    context.drawImage(bgImage, backgrounds.bgX, 0, bg.width, backgrounds.height);
 
     // Draw the closest background (fg)
-    context.drawImage(fgImage, backgrounds.fgX, 0, bg.width, canvas.height);
-    context.drawImage(fgImage, backgrounds.fgX + bg.width, 0, bg.width, canvas.height);
+    context.drawImage(fgImage, backgrounds.fgX, 0, bg.width, backgrounds.height);
+
     // Draw perch
     context.drawImage(perchImage, perch.x, perchY, perchWidth, perchHeight);
 
