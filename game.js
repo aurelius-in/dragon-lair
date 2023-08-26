@@ -27,12 +27,12 @@ let gravity = 0.3;
 function update() {
     if (gameStarted) {
         if (isFlapping) {
-        if (gameLoopCounter % framesPerFlap === 0) { // Change frame every 20 frames
+        if (gameLoopCounter % framesPerFlap === 0) { // Change frame every 4 frames
             frame.current = frameOrder[frameIndex];
             frameIndex = (frameIndex + 1) % frameOrder.length;
         }
         flapCounter++;
-        if (flapCounter >= 100) { // 100 frames for a full second
+        if (flapCounter >= 20) { // 20 frames for a full cycle through 5 images
             isFlapping = false;
             frame.current = frameOrder[0]; // Default to first frame
             flapCounter = 0; // Reset counter
