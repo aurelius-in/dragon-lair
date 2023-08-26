@@ -307,7 +307,7 @@ window.onload = () => {
 };
 
 // Lock screen orientation to landscape
-screen.orientation.lock('landscape');
+// screen.orientation.lock('landscape');
 
 // Hide the URL bar
 window.scrollTo(0, 1);
