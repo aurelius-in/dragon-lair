@@ -190,15 +190,29 @@ if (backgrounds.fgX + bg.width <= canvas.width) {
 }
 
 function levelEnd() {
-    dragon.scale += 0.005;
-    dragon.alpha -= 0.005;
-    screenFade.alpha += 0.01;
+    let startTime = Date.now();
+    let duration = 5000; // 5 seconds
+    let initialScale = dragon.scale;
+    let initialAlpha = dragon.alpha;
+    let initialX = dragon.x;
 
-    if (screenFade.alpha >= 1) {
-        setTimeout(resetGame, 2000);
+    function animateEnd() {
+        let currentTime = Date.now();
+        let elapsedTime = currentTime - startTime;
+        let progress = elapsedTime / duration;
+
+        if (progress < 1) {
+            dragon.scale = initialScale - (initialScale - 0.1) * progress;
+            dragon.alpha = initialAlpha - (initialAlpha - 0.5) * progress;
+            dragon.x = initialX + (canvas.width / 2 - initialX) * progress;
+            requestAnimationFrame(animateEnd);
+        } else {
+            screenFade.alpha = 1;
+            setTimeout(resetGame, 2000);
+        }
     }
+    animateEnd();
 }
-
 if (!gameStarted) {
     framesPerFlap = 90;
 
