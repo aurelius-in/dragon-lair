@@ -1,50 +1,8 @@
-import {
-    bg,
-    canvas,
-    context,
-    perchY,
-    perchWidth,
-    perchHeight,
-    screenFade,
-    dragon,
-    dragonImages,
-    perch,
-    obstacles,
-    lifeBar,
-    tapToFly,
-    backgrounds,
-    frame
-} from './init.js';
-import {draw} from './render.js';
-import {
-    createArrowObstacle,
-    createLightningStrikeObstacle,
-    createBatSwarmObstacle,
-    createTornadoObstacle,
-    createWraithObstacle,
-    createZombieDragonObstacle,
-    createThundercloudObstacle,
-    createFireballObstacle
-} from './obstacles.js';
+import { bg, canvas, context, perchY, perchWidth, perchHeight, screenFade, dragon, dragonImages, perch, obstacles, lifeBar, tapToFly, backgrounds, frame } from './init.js';
+import { draw } from './render.js';
+import { createArrowObstacle, createLightningStrikeObstacle, createBatSwarmObstacle, createTornadoObstacle, createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle } from './obstacles.js';
 
-let obstacleSpawnTime = 4000,
-    topObstacle = false,
-    obstacleY,
-    spawnRate = 5,
-    spawnTimer = 0,
-    gameLoopCounter = 0,
-    gameStarted = false,
-    jump = 8,
-    isFlapping = false,
-    framesPerFlap = 100,
-    frameOrder = [
-        2,
-        3,
-        4,
-        0,
-        1
-    ],
-    frameIndex = 0;
+let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, gameLoopCounter = 0, gameStarted = false, jump = 8, isFlapping = false, framesPerFlap = 100, frameOrder = [2, 3, 4, 0, 1], frameIndex = 0;
 
 // To prevent multiple jumps
 let jumpLock = false;
