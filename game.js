@@ -52,17 +52,15 @@ let jumpLock = false;
 let flapCounter = 0;
 
 function handleInput() {
-    if (jumpLock) 
-        return;
-    
+    if (jumpLock) return;
     jumpLock = true;
-    setTimeout(() => jumpLock = false, 200); // Unlock after 200ms
+    setTimeout(() => jumpLock = false, 200);  // Unlock after 200ms
 
-    if (! gameStarted) {
+    if (!gameStarted) {
         gameStarted = true;
         frame.current = frameOrder[0]; // Start with dragon3.png
     }
-    dragon.velocity = - jump; // Make the dragon go up
+    dragon.velocity = -jump; // Make the dragon go up
     dragon.y += dragon.velocity;
     isFlapping = true; // Set the flag to true when tapping
     flapCounter = 0; // Reset the flap counter
@@ -165,14 +163,14 @@ let gravity = 0.3;
 function update() {
     if (gameStarted) {
         if (isFlapping) {
-            frame.current = frameOrder[frameIndex];
-            frameIndex = (frameIndex + 1) % frameOrder.length;
-            flapCounter++;
-            if (flapCounter >= 6) { // 6 frames in half a second
-                isFlapping = false;
-                frame.current = frameOrder[0]; // Default to dragon3.png
-            }
+        frame.current = frameOrder[frameIndex];
+        frameIndex = (frameIndex + 1) % frameOrder.length;
+        flapCounter++;
+        if (flapCounter >= 6) { // 6 frames in half a second
+            isFlapping = false;
+            frame.current = frameOrder[0]; // Default to dragon3.png
         }
+    }
         if (gameStarted) { // Apply gravity to dragon
             dragon.velocity += gravity;
             dragon.y += dragon.velocity;
