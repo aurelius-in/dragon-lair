@@ -14,6 +14,7 @@ let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spa
 // To prevent multiple jumps
 let jumpLock = false;
 
+// handleInput function
 function handleInput() {
     if (jumpLock) return;
     jumpLock = true;
@@ -26,8 +27,6 @@ function handleInput() {
     dragon.velocity = -jump; // Make the dragon go up
     dragon.y += dragon.velocity;
     isFlapping = true; // Set the flag to true when tapping
-}
-    isFlapping = false; // Reset the flag after updating the frame
 }
 
 window.addEventListener('click', handleInput);
