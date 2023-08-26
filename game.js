@@ -319,7 +319,7 @@ window.scrollTo(0, 1);
 
 // Add these lines at the end of your game.js file
 window.addEventListener('click', handleInput);
-window.addEventListener('touchstart', handleInput);
+window.addEventListener('touchstart', handleInput, { passive: false });
 window.addEventListener('keydown', (e) => {
     if (e.code === 'Space') handleInput();
 });
