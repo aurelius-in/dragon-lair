@@ -43,7 +43,8 @@ export const obstacles = [];
 export const backgrounds = {
     bgbgX: 0,
     bgX: 0,
-    fgX: 0
+    fgX: 0,
+    height: canvas.height  // Set backgrounds height match screen height
 };
 
 // Life Bar
