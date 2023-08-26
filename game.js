@@ -102,15 +102,11 @@ function createObstacle() {
     
 }
 
-function collisionDetected(dragon, obstacle) {
-    const boundaryReductionX = dragon.width * 0.05;
-    const boundaryReductionY = dragon.height * 0.1;
-
-    const dragonCollisionArea = {
+ const dragonCollisionArea = {
         x: dragon.x + boundaryReductionX,
         y: dragon.y + boundaryReductionY,
-        width: dragon.width -(boundaryReductionX * 2),
-        height: dragon.height -(boundaryReductionY * 2)
+        width: dragon.width - (boundaryReductionX * 2),
+        height: dragon.height - (boundaryReductionY * 2)
     };
 
     const obstacleCollisionArea = {
@@ -120,9 +116,12 @@ function collisionDetected(dragon, obstacle) {
         height: obstacle.height
     };
 
-    return(dragonCollisionArea.x<obstacleCollisionArea.x + obstacleCollisionArea.width &&
-    dragonCollisionArea.x + dragonCollisionArea.width>obstacleCollisionArea.x && dragonCollisionArea.y<obstacleCollisionArea.y + obstacleCollisionArea.height &&
-    dragonCollisionArea.y + dragonCollisionArea.height>obstacleCollisionArea.y);
+    return (
+        dragonCollisionArea.x < obstacleCollisionArea.x + obstacleCollisionArea.width &&
+        dragonCollisionArea.x + dragonCollisionArea.width > obstacleCollisionArea.x &&
+        dragonCollisionArea.y < obstacleCollisionArea.y + obstacleCollisionArea.height &&
+        dragonCollisionArea.y + dragonCollisionArea.height > obstacleCollisionArea.y
+    );
 }
 
 let gravity = 0.25; // Gravity constant
