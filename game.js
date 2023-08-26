@@ -18,17 +18,16 @@ let jumpLock = false;
 function handleInput() {
     if (jumpLock) return;
     jumpLock = true;
-    setTimeout(() => jumpLock = false, 200);  // Unlock after 200ms
+    setTimeout(() => jumpLock = false, 200);
 
     if (!gameStarted) {
         gameStarted = true;
         frame.current = frameOrder[0]; // Start with dragon3.png
     }
-    dragon.velocity = -jump; // Make the dragon go up
+    dragon.velocity = -jump;
     dragon.y += dragon.velocity;
-    isFlapping = true; // Set the flag to true when tapping
+    isFlapping = true;
 }
-
 window.addEventListener('click', handleInput);
 window.addEventListener('touchstart', handleInput);
 window.addEventListener('keydown', (e) => {
@@ -154,9 +153,9 @@ function update() {
         dragon.update();
 
         // Update backgrounds to make the dragon appear to move forward
-        backgrounds.fgX -= 0.3; // slow
-        backgrounds.bgX -= 0.2; // slower
-        backgrounds.bgbgX -= 0.1; // slowest
+        backgrounds.fgX -= 0.2; // slow
+        backgrounds.bgX -= 0.1; // slower
+        backgrounds.bgbgX -= 0.05; // slowest
 
         
         // Update obstacles
@@ -256,3 +255,8 @@ window.onload = () => {
     }, 2300);
 };
 
+// Lock screen orientation to landscape
+screen.orientation.lock('landscape');
+
+// Hide the URL bar
+window.scrollTo(0, 1);
