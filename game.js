@@ -2,7 +2,7 @@ import { bg, canvas, context, perchY, perchWidth, perchHeight, screenFade, drago
 import { draw } from './render.js';
 import { createArrowObstacle, createLightningStrikeObstacle, createBatSwarmObstacle, createTornadoObstacle, createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle } from './obstacles.js';
 
-let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, gameLoopCounter = 0, gameStarted = false, jump = 8, isFlapping = false, framesPerFlap = 100, frameOrder = [2, 3, 4, 0, 1], frameIndex = 0, jumpLock = false, flapCounter = 0;
+let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, gameLoopCounter = 0, gameStarted = false, jump = 8, isFlapping = false, framesPerFlap = 20, frameOrder = [2, 3, 4, 0, 1], frameIndex = 0, jumpLock = false, flapCounter = 0;
 
 function handleInput() { if (jumpLock) return; jumpLock = true; setTimeout(() => jumpLock = false, 200); if (!gameStarted) { gameStarted = true; frame.current = frameOrder[0]; } if (event && event.type === 'touchstart') { event.preventDefault(); } dragon.velocity = -jump; dragon.y += dragon.velocity; isFlapping = true; flapCounter = 0; }
 
@@ -45,8 +45,7 @@ function update() {
             // Update backgrounds to make the dragon appear to move forward
             backgrounds.fgX -= 0.2; // slow
             backgrounds.bgX -= 0.1; // slower
-            backgrounds.bgbgX -= 0.05;
-            // slowest
+            backgrounds.bgbgX -= 0.05; // slowest
 
 
             // Update obstacles
