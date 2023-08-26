@@ -14,26 +14,22 @@ let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spa
 // To prevent multiple jumps
 let jumpLock = false;
 
-// handleInput function
+/let flapCounter = 0;
+
 function handleInput() {
     if (jumpLock) return;
     jumpLock = true;
-    setTimeout(() => jumpLock = false, 200);
+    setTimeout(() => jumpLock = false, 200);  // Unlock after 200ms
 
     if (!gameStarted) {
         gameStarted = true;
         frame.current = frameOrder[0]; // Start with dragon3.png
     }
-    dragon.velocity = -jump;
+    dragon.velocity = -jump; // Make the dragon go up
     dragon.y += dragon.velocity;
-    isFlapping = true;
+    isFlapping = true; // Set the flag to true when tapping
+    flapCounter = 0; // Reset the flap counter
 }
-window.addEventListener('click', handleInput);
-window.addEventListener('touchstart', handleInput);
-window.addEventListener('keydown', (e) => {
-    if (e.code === 'Space') 
-        handleInput();
-});
 
 function resetGame() {
     obstacles.length = 0;
