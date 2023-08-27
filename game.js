@@ -7,7 +7,7 @@ let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spa
 function handleInput() {
     if (jumpLock) return;
     jumpLock = true;
-    setTimeout(() => jumpLock = false, 200);
+    setTimeout(() => jumpLock = false, 150);
     if (!gameStarted) {
         gameStarted = true;
     }
@@ -16,6 +16,9 @@ function handleInput() {
     }
     dragon.velocity = -jump;
     dragon.y += dragon.velocity;
+
+    // Reset the flapCounter to 0
+    flapCounter = 0;
 
     // Hardcoded image sequence
     frame.current = "images/dragon4.png";
