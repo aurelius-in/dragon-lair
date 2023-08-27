@@ -1,36 +1,38 @@
 import {
-  bg,
-  backgrounds,
-  dragon,
-  obstacles,
   canvas,
   context,
-  bgbgImage,
+  dragon,
+  perch,
+  obstacles,
+  lifeBar,
+  tapToFly,
+  screenFade,
+  backgrounds,
   bgImage,
   fgImage,
-  perchImage,
-  perchY,
-  perchWidth,
-  perchHeight,
-  tapToFly,
-  perch,
-  lifeBar,
-  screenFade
+  bgbgImage,
+  perchImage
 } from './init.js';
 
-// Draw objects
 export function draw() {
-  // Draw the furthest back background (bgbg)
-  context.drawImage(bgbgImage, backgrounds.bgbgX, 0, bg.width, backgrounds.height);
-
-  // Draw the middle background (bg)
-  context.drawImage(bgImage, backgrounds.bgX, 0, bg.width, backgrounds.height);
-
-  // Draw the closest background (fg)
-  context.drawImage(fgImage, backgrounds.fgX, 0, bg.width, backgrounds.height);
+  // Draw backgrounds
+  context.drawImage(bgbgImage, backgrounds.bgbgX, 0, backgrounds.height * 4, backgrounds.height);
+  context.drawImage(bgImage, backgrounds.bgX, 0, backgrounds.height * 4, backgrounds.height);
+  context.drawImage(fgImage, backgrounds.fgX, 0, backgrounds.height * 4, backgrounds.height);
 
   // Draw perch
   context.drawImage(perchImage, perch.x, perchY, perchWidth, perchHeight);
+
+  // Draw dragon
+  if (!gameStarted) {
+    context.drawImage(dragon.start, dragon.x, dragon.y, dragon.width, dragon.height);
+  } else {
+    if (isFlapping) {
+      context.drawImage(dragon.image, dragon.x, dragon.y, dragon.width, dragon.height);
+    } else {
+      context.drawImage(dragon.drop, dragon.x, dragon.y, dragon.width, dragon.height);
+    }
+  }
 
   // Drawing obstacles using functions from obstacles.js
   obstacles.forEach(obstacle => {
