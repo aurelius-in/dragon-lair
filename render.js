@@ -1,3 +1,4 @@
+// Import the loadImage function from init.js
 import {
   canvas,
   context,
@@ -11,10 +12,33 @@ import {
   bgImage,
   fgImage,
   bgbgImage,
-  perchImage
+  perchImage,
+  loadImage // <-- Import this
 } from './init.js';
 
-export function draw() {
+// Declare gameStarted and isFlapping if they are not imported
+let gameStarted = false;
+let isFlapping = false;
+
+// Function to ensure all images are loaded
+async function ensureImagesLoaded() {
+  // Use the loadImage function from init.js
+  const images = [
+    'images/perch.png',
+    'images/bg.png',
+    'images/fg.png',
+    'images/bgbg.png'
+  ];
+
+  for (const src of images) {
+    await loadImage(src).catch(console.error);
+  }
+}
+
+// Call the function before drawing
+ensureImagesLoaded().then(() => {
+  // Your existing draw function here
+  export function draw() {
   // Draw backgrounds
   context.drawImage(bgbgImage, backgrounds.bgbgX, 0, backgrounds.height * 4, backgrounds.height);
   context.drawImage(bgImage, backgrounds.bgX, 0, backgrounds.height * 4, backgrounds.height);
