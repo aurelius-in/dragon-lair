@@ -5,6 +5,11 @@ import { createArrowObstacle, createLightningStrikeObstacle, createBatSwarmObsta
 let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, gameLoopCounter = 0, gameStarted = false, jump = 8, isFlapping = false, framesPerFlap = 4, frameOrder = [2, 3, 4, 0, 1], frameIndex = 0, jumpLock = false, flapCounter = 0;
 
 function handleInput() {
+
+    isFlapping = true;
+    flapStartTime = gameLoopCounter;
+    flapSequenceIndex = 0;
+    
     if (jumpLock) return;
     jumpLock = true;
     setTimeout(() => jumpLock = false, 200);
