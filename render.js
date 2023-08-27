@@ -21,9 +21,15 @@ export function draw() {
   context.drawImage(fgImage, backgrounds.fgX, 0, backgrounds.height * 4, backgrounds.height);
 
   // Draw perch
-  context.drawImage(perchImage, perch.x, perchY, perchWidth, perchHeight);
+  context.drawImage(perchImage, perch.x, perch.y, perch.width, perch.height);
 
-  // Draw dragon
+  // Draw dragon with scaling and fading
+  context.save();
+  context.globalAlpha = dragon.alpha;
+  context.translate(dragon.x + dragon.width / 2, dragon.y + dragon.height / 2);
+  context.scale(dragon.scale, dragon.scale);
+  context.translate(-(dragon.x + dragon.width / 2), -(dragon.y + dragon.height / 2));
+
   if (!gameStarted) {
     context.drawImage(dragon.start, dragon.x, dragon.y, dragon.width, dragon.height);
   } else {
@@ -34,19 +40,12 @@ export function draw() {
     }
   }
 
-  // Drawing obstacles using functions from obstacles.js
+  context.restore();
+
+  // Draw obstacles
   obstacles.forEach(obstacle => {
     obstacle.draw(context);
   });
-
-  // Draw the dragon with scaling and fading
-  context.save();
-  context.globalAlpha = dragon.alpha;
-  context.translate(dragon.x + dragon.width / 2, dragon.y + dragon.height / 2);
-  context.scale(dragon.scale, dragon.scale);
-  context.translate(-(dragon.x + dragon.width / 2), -(dragon.y + dragon.height / 2));
-  context.drawImage(dragon.image, dragon.x, dragon.y, dragon.width, dragon.height);  // Modified line
-  context.restore();
 
   // Draw the life bar
   for (let i = 0; i < lifeBar.segments; i++) {
