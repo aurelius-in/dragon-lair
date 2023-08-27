@@ -37,9 +37,11 @@ async function ensureImagesLoaded() {
 }
 
 // Call the function before drawing
-ensureImagesLoaded().then(() => {
+ensureImagesLoaded().catch(console.error);
+
   // Your existing draw function here
   export function draw() {
+  if (!imagesLoaded) return;
   // Draw backgrounds
   context.drawImage(bgbgImage, backgrounds.bgbgX, 0, backgrounds.height * 4, backgrounds.height);
   context.drawImage(bgImage, backgrounds.bgX, 0, backgrounds.height * 4, backgrounds.height);
