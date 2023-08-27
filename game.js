@@ -59,7 +59,7 @@ let flapStartTime = 0;
 
 function update() {
     if (isFlapping) {
-        if (gameLoopCounter - flapStartTime >= 9 * flapSequenceIndex) { // 9 frames for each image
+        if (gameLoopCounter - flapStartTime >= 9 * flapSequenceIndex) {
             frame.current = flapSequence[flapSequenceIndex];
             flapSequenceIndex++;
         }
