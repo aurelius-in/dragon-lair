@@ -176,8 +176,6 @@ function levelEnd() {
 }
 
 if (!gameStarted) {
-    framesPerFlap = 90;
-
     if (gameLoopCounter % 30 === 0 && framesPerFlap < 40) {
         framesPerFlap += 2;
     }
