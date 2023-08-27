@@ -36,56 +36,34 @@ export function draw() {
   if (!imagesLoaded) return;
 
   // Draw backgrounds
-  context.drawImage(backgrounds.bgbgImage, backgrounds.bgbgX, 0, backgrounds.height * 4, backgrounds.height);
-  context.drawImage(backgrounds.bgImage, backgrounds.bgX, 0, backgrounds.height * 4, backgrounds.height);
-  context.drawImage(backgrounds.fgImage, backgrounds.fgX, 0, backgrounds.height * 4, backgrounds.height);
+  context.drawImage(backgrounds.bgbgImage, backgrounds.bgbgX, 0);
+  context.drawImage(backgrounds.bgImage, backgrounds.bgX, 0);
+  context.drawImage(backgrounds.fgImage, backgrounds.fgX, canvas.height - 50);
 
   // Draw perch
-  context.drawImage(perch.image, perch.x, perch.y, perch.width, perch.height);
+  context.drawImage(perch.image, perch.x, perch.y);
 
-  // Draw dragon with scaling and fading
-  context.save();
-  context.globalAlpha = dragon.alpha;
-  context.translate(dragon.x + dragon.width / 2, dragon.y + dragon.height / 2);
-  context.scale(dragon.scale, dragon.scale);
-  context.translate(-(dragon.x + dragon.width / 2), -(dragon.y + dragon.height / 2));
-
-  if (!gameStarted) {
-    context.drawImage(dragon.start, dragon.x, dragon.y, dragon.width, dragon.height);
-  } else {
-    if (isFlapping) {
-      context.drawImage(dragon.image, dragon.x, dragon.y, dragon.width, dragon.height);
-    } else {
-      context.drawImage(dragon.drop, dragon.x, dragon.y, dragon.width, dragon.height);
-    }
-  }
-
-  context.restore();
+  // Draw dragon
+  context.drawImage(dragon.image, dragon.x, dragon.y);
 
   // Draw obstacles
   obstacles.forEach(obstacle => {
-    obstacle.draw(context);
+    context.drawImage(obstacle.image, obstacle.x, obstacle.y);
   });
 
-  // Draw the life bar
+  // Draw life bar
   for (let i = 0; i < lifeBar.segments; i++) {
-    let color = 'green';
-    if (lifeBar.segments <= 2) {
-      color = 'red';
-    }
-    context.fillStyle = color;
-    context.fillRect(10 + i * 35, 10, 35, 30);
+    context.drawImage(lifeBar.image, 10 + i * 20, 10);
   }
 
-  // Draw the "TAP TO FLY!" text
+  // Draw "TAP TO FLY!" text
   if (tapToFly.alpha > 0) {
     context.fillStyle = `rgba(255, 255, 255, ${tapToFly.alpha})`;
-    context.font = '40px sans-serif';
-    context.textAlign = 'center';
+    context.font = '40px Arial';
     context.fillText('TAP TO FLY!', canvas.width / 2, canvas.height / 2);
   }
 
-  // Draw black fade overlay
+  // Draw screen fade
   context.fillStyle = `rgba(0, 0, 0, ${screenFade.alpha})`;
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
