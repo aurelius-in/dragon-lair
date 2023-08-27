@@ -1,20 +1,4 @@
-// Import the loadImage function from init.js
-import {
-  canvas,
-  context,
-  dragon,
-  perch,
-  obstacles,
-  lifeBar,
-  tapToFly,
-  screenFade,
-  backgrounds,
-  bgImage,
-  fgImage,
-  bgbgImage,
-  perchImage,
-  loadImage // <-- Import this
-} from './init.js';
+import * as init from './init.js';
 
 // Declare gameStarted and isFlapping if they are not imported
 let gameStarted = false;
@@ -23,7 +7,6 @@ let imagesLoaded = false;
 
 // Function to ensure all images are loaded
 async function ensureImagesLoaded() {
-  // Use the loadImage function from init.js
   const images = [
     'images/perch.png',
     'images/bg.png',
@@ -31,7 +14,7 @@ async function ensureImagesLoaded() {
     'images/bgbg.png'
   ];
   for (const src of images) {
-    await loadImage(src).catch(console.error);
+    await init.loadImage(src).catch(console.error);
   }
   imagesLoaded = true;
 }
@@ -39,16 +22,26 @@ async function ensureImagesLoaded() {
 // Call the function before drawing
 ensureImagesLoaded().catch(console.error);
 
-  // Your existing draw function here
-  export function draw() {
+export function draw() {
+  const canvas = init.getCanvas();
+  const context = init.getContext();
+  const dragon = init.getDragon();
+  const perch = init.getPerch();
+  const obstacles = init.getObstacles();
+  const lifeBar = init.getLifeBar();
+  const tapToFly = init.getTapToFly();
+  const screenFade = init.getScreenFade();
+  const backgrounds = init.getBackgrounds();
+
   if (!imagesLoaded) return;
+
   // Draw backgrounds
-  context.drawImage(bgbgImage, backgrounds.bgbgX, 0, backgrounds.height * 4, backgrounds.height);
-  context.drawImage(bgImage, backgrounds.bgX, 0, backgrounds.height * 4, backgrounds.height);
-  context.drawImage(fgImage, backgrounds.fgX, 0, backgrounds.height * 4, backgrounds.height);
+  context.drawImage(backgrounds.bgbgImage, backgrounds.bgbgX, 0, backgrounds.height * 4, backgrounds.height);
+  context.drawImage(backgrounds.bgImage, backgrounds.bgX, 0, backgrounds.height * 4, backgrounds.height);
+  context.drawImage(backgrounds.fgImage, backgrounds.fgX, 0, backgrounds.height * 4, backgrounds.height);
 
   // Draw perch
-  context.drawImage(perchImage, perch.x, perch.y, perch.width, perch.height);
+  context.drawImage(perch.image, perch.x, perch.y, perch.width, perch.height);
 
   // Draw dragon with scaling and fading
   context.save();
