@@ -1,4 +1,3 @@
-// Import statements
 import {
   bg,
   canvas,
@@ -8,13 +7,11 @@ import {
   perchHeight,
   screenFade,
   dragon,
-  dragonImages,
   perch,
   obstacles,
   lifeBar,
   tapToFly,
-  backgrounds,
-  frame,
+  backgrounds
 } from './init.js';
 import { draw } from './render.js';
 import {
