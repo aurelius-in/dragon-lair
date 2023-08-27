@@ -1,14 +1,16 @@
-import {
-  canvas,
-  context,
-  dragon,
-  perch,
-  obstacles,
-  lifeBar,
-  tapToFly,
-  backgrounds
-} from './init.js';
+import * as init from './init.js';
 import { draw } from './render.js';
+
+// Accessing variables from init.js
+const canvas = init.getCanvas();
+const context = init.getContext();
+const dragon = init.getDragon();
+const perch = init.getPerch();
+const obstacles = init.getObstacles();
+const lifeBar = init.getLifeBar();
+const tapToFly = init.getTapToFly();
+const screenFade = init.getScreenFade();
+const backgrounds = init.getBackgrounds();
 
 // Constants
 const GRAVITY = 0.3;
@@ -33,6 +35,35 @@ function handleInput(event) {
   dragon.y += dragon.velocity;
   flapCounter = 0;
   isFlapping = true;
+}
+
+function updateDragon() {
+  // Apply gravity to dragon's vertical velocity
+  dragon.velocity += dragon.gravity;
+
+  // Update dragon's vertical position based on velocity
+  dragon.y += dragon.velocity;
+
+  // Collision detection with the ground (assuming ground is at y = canvas.height - 50)
+  if (dragon.y >= canvas.height - 50 - dragon.height) {
+    dragon.y = canvas.height - 50 - dragon.height;
+    dragon.velocity = 0;
+    dragon.collided = true;
+  } else {
+    dragon.collided = false;
+  }
+
+  // Collision detection with the top of the canvas
+  if (dragon.y <= 0) {
+    dragon.y = 0;
+    dragon.velocity = 0;
+  }
+
+  // Reset velocity if dragon is flapping
+  if (dragon.isFlapping) {
+    dragon.velocity = dragon.jump;
+    dragon.isFlapping = false;  // Reset the flapping state
+  }
 }
 
 function resetGame() { obstacles.length = 0; perch.x = 50; dragon.x = dragonStartX; dragon.y = dragonStartY; dragon.velocity = 0; gameStarted = false; frame.current = 0; backgrounds.bgX = 0; backgrounds.fgX = 0; backgrounds.bgbgX = 0; obstacleSpawnTime = 4000; endGameTime = 0; dragon.scale = 1; dragon.alpha = 1; screenFade.alpha = 0; bg.width = canvas.height * 4; }
@@ -137,20 +168,20 @@ function levelEnd() {
     animateEnd();
 }
 
+// Main game loop
 function gameLoop() {
-    update();
-    draw();
+  // Clear the canvas for the new frame
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (tapToFly.alpha > 0) {
-        tapToFly.alpha -= 0.01;
-    }
+  // Update game state
+  updateDragon();
+  // ... (other update functions)
 
-    gameLoopCounter++;
+  // Render the game
+  draw();
 
-    // Removed the duplicate frame updating code
-    // as it's already handled in the update function
-
-    requestAnimationFrame(gameLoop);
+  // Request next animation frame
+  requestAnimationFrame(gameLoop);
 }
 
 // Replace window.onload with this
