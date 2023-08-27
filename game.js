@@ -51,7 +51,7 @@ let jumpLock = false;
 let flapCounter = INITIAL_FLAP_COUNTER;
 
 // Handle user input
-function handleInput() {
+function handleInput(event) {
   if (jumpLock) return;
   jumpLock = true;
   setTimeout(() => (jumpLock = false), 200);
