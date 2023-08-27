@@ -62,7 +62,10 @@ function updateDragon() {
     isFlapping = false;
   }
 }
-
+function createObstacle() {
+  // Your obstacle-creating logic here
+  console.log("Obstacle created");
+}
 function levelEnd() {
   // level-ending logic here
   console.log("Level ended");
