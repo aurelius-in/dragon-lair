@@ -188,30 +188,22 @@ if (!gameStarted) {
     }
 }
 
-
 function gameLoop() {
     update();
     draw();
-    // Removed the incorrect call to collisionDetected
 
     if (tapToFly.alpha > 0) {
         tapToFly.alpha -= 0.01;
     }
 
-   gameLoopCounter++;
+    gameLoopCounter++;
 
-    if (gameStarted) {
-        if (gameLoopCounter % framesPerFlap === 0) {
-            frame.current = (frame.current + 1) % dragonImages.length;
-        }
-    } else {
-        if (gameLoopCounter % framesPerFlap === 0) {
-            frame.current = (frame.current + 1) % dragonImages.length;
-        }
-    }
+    // Removed the duplicate frame updating code
+    // as it's already handled in the update function
+
     requestAnimationFrame(gameLoop);
 }
-   
+
 gameLoop();
 window.onload = () => {
     setTimeout(() => {
