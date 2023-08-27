@@ -30,6 +30,15 @@ for (let i = 1; i <= 3; i++) {
     }
 }
 
+// List of dragon images for animation
+export const dragonFrames = [
+  'images/dragon3.png',
+  'images/dragon4.png',
+  'images/dragon5.png',
+  'images/dragon1.png',
+  'images/dragon2.png'
+];
+
 // Fading intro text
 export const tapToFly = { alpha: 1 };
 
