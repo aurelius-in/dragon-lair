@@ -127,4 +127,6 @@ window.addEventListener('keydown', (e) => {
 });
 
 // Initialize the game loop
-gameLoop();
+window.addEventListener('load', function() {
+  gameLoop();
+});
