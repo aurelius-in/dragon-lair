@@ -7,7 +7,7 @@ let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spa
 function handleInput() {
     if (jumpLock) return;
     jumpLock = true;
-    setTimeout(() => jumpLock = false, 150);
+    setTimeout(() => jumpLock = false, 200);
     if (!gameStarted) {
         gameStarted = true;
     }
