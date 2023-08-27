@@ -27,19 +27,21 @@ export const dragon = {
   height: 150,
   velocity: 0,
   image: new Image(),
-  update: function() {}
+  drop: new Image(),
+  start: new Image(),
+  update: function() {},
+  frames: [
+    'images/dragon3.png',
+    'images/dragon4.png',
+    'images/dragon5.png',
+    'images/dragon1.png',
+    'images/dragon2.png',
+    'images/dragon3.png'
+  ]
 };
 dragon.image.src = 'images/dragon3.png';
-
-// List of dragon images for animation
-export const dragon { frames : [
-  'images/dragon3.png',
-  'images/dragon4.png',
-  'images/dragon5.png',
-  'images/dragon1.png',
-  'images/dragon2.png',
-  'images/dragon3.png'
-]; };
+dragon.drop.src = 'images/dragon3.png';
+dragon.start.src = 'images/dragon3.png';  // You can change this to a different image if you want
 
 // Fading intro text
 export const tapToFly = { alpha: 1 };
