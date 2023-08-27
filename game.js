@@ -46,9 +46,12 @@ function collisionDetected(dragon, obstacle) {
 }
 
 let gravity = 0.3;
-// Gravity constant
 
-// update function
+// Gravity constant
+let flapSequence = ["images/dragon4.png", "images/dragon5.png", "images/dragon1.png", "images/dragon2.png", "images/dragon3.png"];
+let flapSequenceIndex = 0;
+let flapStartTime = 0;
+
 function update() {
     if (gameStarted) {
         if (isFlapping) {
