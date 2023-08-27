@@ -32,7 +32,7 @@ import {
 const GRAVITY = 0.3;
 const JUMP_STRENGTH = 8;
 const INITIAL_FLAP_COUNTER = 0;
-const FLAP_DURATION = 100; // 100 frames for a full second
+const FLAP_DURATION = 5; // 100 frames for a full second
 
 // Variables
 let obstacleSpawnTime = 4000;
@@ -44,11 +44,11 @@ let gameLoopCounter = 0;
 let gameStarted = false;
 let jump = JUMP_STRENGTH;
 let isFlapping = false;
-let framesPerFlap = 20; // 20 frames for each flap image, 5 images will take 100 frames (1 second)
+let framesPerFlap = 1; // 20 frames for each flap image, 5 images will take 100 frames (1 second)
 let frameOrder = [2, 3, 4, 0, 1];
 let frameIndex = 0;
 let jumpLock = false;
-let flapCounter = INITIAL_FLAP_COUNTER;
+let flapCounter = 0;
 
 // Handle user input
 function handleInput(event) {
@@ -84,9 +84,10 @@ function collisionDetected(dragon, obstacle) {
     );
 }
 
+// Update function
 function update() {
   if (isFlapping) {
-    if (gameLoopCounter % framesPerFlap === 0) {
+    if (flapCounter % framesPerFlap === 0) {
       frame.current = frameOrder[frameIndex];
       frameIndex = (frameIndex + 1) % frameOrder.length;
     }
@@ -94,7 +95,7 @@ function update() {
     if (flapCounter >= FLAP_DURATION) {
       isFlapping = false;
       frame.current = frameOrder[0];
-      flapCounter = INITIAL_FLAP_COUNTER;
+      flapCounter = 0;
     }
   }
 
@@ -147,7 +148,6 @@ function update() {
     levelEnd();
   }
 }
-
 
 // Level end animation
 function levelEnd() {
