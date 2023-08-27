@@ -1,3 +1,6 @@
+const canvas = document.getElementById('game');
+const context = canvas.getContext('2d');
+
 import { draw } from './render.js';
 import * as init from './init.js';
 
