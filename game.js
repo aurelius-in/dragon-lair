@@ -1,6 +1,3 @@
-const canvas = document.getElementById('game');
-const context = canvas.getContext('2d');
-
 import { initializeGame } from './init.js';
 
 initializeGame();
