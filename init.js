@@ -39,9 +39,9 @@ export const dragon = {
     'images/dragon3.png'
   ]
 };
-dragon.image.src = 'images/dragon3.png';
+
 dragon.drop.src = 'images/dragon3.png';
-dragon.start.src = 'images/dragon3.png';  // You can change this to a different image if you want
+dragon.start.src = 'images/dragon2.png';
 
 // Fading intro text
 export const tapToFly = { alpha: 1 };
