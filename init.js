@@ -9,6 +9,10 @@ export const perchImage = new Image(); perchImage.src = 'images/perch.png';
 export const bgImage = new Image(); bgImage.src = 'images/bg.png';
 export const fgImage = new Image(); fgImage.src = 'images/fg.png';
 export const bgbgImage = new Image(); bgbgImage.src = 'images/bgbg.png';
+export const dragon = new Image(); dragon.src = 'images/dragon3.png';
+
+dragon.image = new Image();
+export dragon = { image.src : 'images/dragon3.png' };
 
 // Perch
 export const perch = { x: 50, update: function() {} };
@@ -17,14 +21,12 @@ export const perchWidth = 150;
 export const perchHeight = 250;
 
 // Dragon
+export const animationURLs = ['images/dragon4.png', 'images/dragon5.png','images/dragon1.png', 'images/dragon2.png', 'images/dragon3.png'];
 export const dragon = {collided: false, alpha: 1, scale: 1, x: perch.x, y: perchY - 125, width: 150, height: 150, velocity: 0, update: function() {}};
 export const dragonImages = [];
 for (let i = 1; i <= 3; i++) {
     for (let j = 1; j <= (i === 1 ? 4 : 3); j++) {
         const char = String.fromCharCode(96 + j);
-        const image = new Image();
-        image.src = `images/dragon${i}.png`;
-        dragonImages.push(image);
     }
 }
 
