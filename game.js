@@ -1,39 +1,73 @@
-import { bg, canvas, context, perchY, perchWidth, perchHeight, screenFade, dragon, dragonImages, perch, obstacles, lifeBar, tapToFly, backgrounds, frame } from './init.js';
+// Import statements
+import {
+  bg,
+  canvas,
+  context,
+  perchY,
+  perchWidth,
+  perchHeight,
+  screenFade,
+  dragon,
+  dragonImages,
+  perch,
+  obstacles,
+  lifeBar,
+  tapToFly,
+  backgrounds,
+  frame,
+} from './init.js';
 import { draw } from './render.js';
-import { createArrowObstacle, createLightningStrikeObstacle, createBatSwarmObstacle, createTornadoObstacle, createWraithObstacle, createZombieDragonObstacle, createThundercloudObstacle, createFireballObstacle } from './obstacles.js';
+import {
+  createArrowObstacle,
+  createLightningStrikeObstacle,
+  createBatSwarmObstacle,
+  createTornadoObstacle,
+  createWraithObstacle,
+  createZombieDragonObstacle,
+  createThundercloudObstacle,
+  createFireballObstacle,
+} from './obstacles.js';
 
-let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, gameLoopCounter = 0, gameStarted = false, jump = 8, isFlapping = false, framesPerFlap = 4, frameOrder = [2, 3, 4, 0, 1], frameIndex = 0, jumpLock = false, flapCounter = 0;
+// Constants
+const GRAVITY = 0.3;
+const JUMP_STRENGTH = 8;
+const INITIAL_FLAP_COUNTER = 0;
+const FLAP_DURATION = 100; // 100 frames for a full second
 
+// Variables
+let obstacleSpawnTime = 4000;
+let topObstacle = false;
+let obstacleY;
+let spawnRate = 5;
+let spawnTimer = 0;
+let gameLoopCounter = 0;
+let gameStarted = false;
+let jump = JUMP_STRENGTH;
+let isFlapping = false;
+let framesPerFlap = 20; // 20 frames for each flap image, 5 images will take 100 frames (1 second)
+let frameOrder = [2, 3, 4, 0, 1];
+let frameIndex = 0;
+let jumpLock = false;
+let flapCounter = INITIAL_FLAP_COUNTER;
+
+// Handle user input
 function handleInput() {
+  if (jumpLock) return;
+  jumpLock = true;
+  setTimeout(() => (jumpLock = false), 200);
 
-    isFlapping = true;
-    flapStartTime = gameLoopCounter;
-    flapSequenceIndex = 0;
-    
-    if (jumpLock) return;
-    jumpLock = true;
-    setTimeout(() => jumpLock = false, 200);
-    if (!gameStarted) {
-        gameStarted = true;
-    }
-    if (event && event.type === 'touchstart') {
-        event.preventDefault();
-    }
-    dragon.velocity = -jump;
-    dragon.y += dragon.velocity;
+  if (!gameStarted) {
+    gameStarted = true;
+  }
 
-    // Reset the flapCounter to 0
-    flapCounter = 0;
+  if (event && event.type === 'touchstart') {
+    event.preventDefault();
+  }
 
-    // Hardcoded image sequence
-    frame.current = "images/dragon4.png";
-    setTimeout(() => frame.current = "images/dragon5.png", 150);
-    setTimeout(() => frame.current = "images/dragon1.png", 300);
-    setTimeout(() => frame.current = "images/dragon2.png", 450);
-    setTimeout(() => {
-        frame.current = "images/dragon3.png";
-        isFlapping = false;
-    }, 600);
+  dragon.velocity = -jump;
+  dragon.y += dragon.velocity;
+  flapCounter = INITIAL_FLAP_COUNTER;
+  isFlapping = true;
 }
 
 function resetGame() { obstacles.length = 0; perch.x = 50; dragon.x = dragonStartX; dragon.y = dragonStartY; dragon.velocity = 0; gameStarted = false; frame.current = 0; backgrounds.bgX = 0; backgrounds.fgX = 0; backgrounds.bgbgX = 0; obstacleSpawnTime = 4000; endGameTime = 0; dragon.scale = 1; dragon.alpha = 1; screenFade.alpha = 0; bg.width = canvas.height * 4; }
@@ -50,25 +84,19 @@ function collisionDetected(dragon, obstacle) {
     );
 }
 
-let gravity = 0.3;
-
-// Gravity constant
-let flapSequence = ["images/dragon4.png", "images/dragon5.png", "images/dragon1.png", "images/dragon2.png", "images/dragon3.png"];
-let flapSequenceIndex = 0;
-let flapStartTime = 0;
-
 function update() {
-    if (isFlapping) {
-        if (gameLoopCounter - flapStartTime >= 9 * flapSequenceIndex) {
-            frame.current = flapSequence[flapSequenceIndex];
-            flapSequenceIndex++;
-        }
-        if (flapSequenceIndex >= flapSequence.length) {
-            isFlapping = false;
-            flapSequenceIndex = 0;
-            frame.current = "images/dragon3.png";
-        }
+  if (isFlapping) {
+    if (gameLoopCounter % framesPerFlap === 0) {
+      frame.current = frameOrder[frameIndex];
+      frameIndex = (frameIndex + 1) % frameOrder.length;
     }
+    flapCounter++;
+    if (flapCounter >= FLAP_DURATION) {
+      isFlapping = false;
+      frame.current = frameOrder[0];
+      flapCounter = INITIAL_FLAP_COUNTER;
+    }
+  }
         if (gameStarted) { // Apply gravity to dragon
             dragon.velocity += gravity;
             dragon.y += dragon.velocity;
