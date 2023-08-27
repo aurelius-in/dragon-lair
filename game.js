@@ -172,10 +172,10 @@ window.onload = () => {
 };
 
 // Lock screen orientation to landscape
-screen.orientation.lock('landscape');
+// screen.orientation.lock('landscape');
 
 // Hide the URL bar
-window.scrollTo(0, 1);
+// window.scrollTo(0, 1);
 
 // Add these lines at the end of your game.js file
 window.addEventListener('click', (e) => handleInput(e));
