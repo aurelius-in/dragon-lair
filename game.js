@@ -1,8 +1,16 @@
 import { initializeGame } from './init.js';
-initializeGame(); 
-
 import { draw } from './render.js';
 import * as init from './init.js';
+import {
+  createArrowObstacle,
+  createLightningStrikeObstacle,
+  createBatSwarmObstacle,
+  createTornadoObstacle,
+  createWraithObstacle,
+  createZombieDragonObstacle,
+  createThundercloudObstacle,
+  createFireballObstacle
+} from './obstacles.js';
 
 // Accessing variables from init.js
 const canvas = init.getCanvas();
@@ -24,6 +32,8 @@ const FLAP_DURATION = 5;
 let gameStarted = false;
 let isFlapping = false;
 let flapCounter = 0;
+
+initializeGame();
 
 // Handle user input
 function handleInput(event) {
@@ -71,6 +81,9 @@ function gameLoop() {
       dragon.image.src = dragon.drop;
       flapCounter = 0;
     }
+    if (Math.random() < 0.01) {
+  obstacles.push(createArrowObstacle(500, 300));
+}
   }
   updateDragon();
   obstacles.forEach((obstacle, index) => {
