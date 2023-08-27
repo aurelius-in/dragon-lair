@@ -19,6 +19,7 @@ import {
 // Declare gameStarted and isFlapping if they are not imported
 let gameStarted = false;
 let isFlapping = false;
+let imagesLoaded = false;
 
 // Function to ensure all images are loaded
 async function ensureImagesLoaded() {
@@ -29,10 +30,10 @@ async function ensureImagesLoaded() {
     'images/fg.png',
     'images/bgbg.png'
   ];
-
   for (const src of images) {
     await loadImage(src).catch(console.error);
   }
+  imagesLoaded = true;
 }
 
 // Call the function before drawing
