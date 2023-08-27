@@ -53,6 +53,11 @@ function updateDragon() {
   }
 }
 
+function levelEnd() {
+  // level-ending logic here
+  console.log("Level ended");
+}
+
 // Main game loop
 function gameLoop() {
   context.clearRect(0, 0, canvas.width, canvas.height);
