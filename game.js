@@ -97,62 +97,57 @@ function update() {
       flapCounter = INITIAL_FLAP_COUNTER;
     }
   }
-        if (gameStarted) { // Apply gravity to dragon
-            dragon.velocity += gravity;
-            dragon.y += dragon.velocity;
 
-            // Update dragon
-            dragon.update();
+  if (gameStarted) {
+    // Apply gravity to dragon
+    dragon.velocity += GRAVITY;
+    dragon.y += dragon.velocity;
 
-            // Update backgrounds to make the dragon appear to move forward
-            backgrounds.fgX -= 0.2; // slow
-            backgrounds.bgX -= 0.1; // slower
-            backgrounds.bgbgX -= 0.05; // slowest
+    // Update dragon
+    dragon.update();
 
+    // Update backgrounds to make the dragon appear to move forward
+    backgrounds.fgX -= 0.2; // slow
+    backgrounds.bgX -= 0.1; // slower
+    backgrounds.bgbgX -= 0.05; // slowest
 
-            // Update obstacles
-            obstacles.forEach((obstacle, index) => {
-                obstacle.x -= 1; // Obstacle speed
-                obstacle.update();
+    // Update obstacles
+    obstacles.forEach((obstacle, index) => {
+      obstacle.x -= 1; // Obstacle speed
+      obstacle.update();
 
-                if (collisionDetected(dragon, obstacle)) {
-                    if (!dragon.collided) {
-                        lifeBar.segments --;
-                        if (lifeBar.segments<= 0) {
-                        resetGame();
-                    }
-                    obstacles.splice(index, 1);
-                    dragon.collided = true;
+      if (collisionDetected(dragon, obstacle)) {
+        if (!dragon.collided) {
+          lifeBar.segments--;
+          if (lifeBar.segments <= 0) {
+            resetGame();
+          }
+          obstacles.splice(index, 1);
+          dragon.collided = true;
 
-                    setTimeout(() => {
-                            dragon.collided = false;
-                        }, 1000) 
-                        
-                    }
-                }
-            });
-
-            // Update perch
-            perch.x -= 1; // Set the speed to match the obstacle speed
-            perch.update();
-
-
-            // Create new obstacles
-            if (gameLoopCounter % 100 === 0) { // Every 100 frames
-                createObstacle();
-            }
+          setTimeout(() => {
+            dragon.collided = false;
+          }, 1000);
         }
+      }
+    });
+
+    // Update perch
+    perch.x -= 1; // Set the speed to match the obstacle speed
+    perch.update();
+
+    // Create new obstacles
+    if (gameLoopCounter % 100 === 0) { // Every 100 frames
+      createObstacle();
     }
+  }
 
-    if (backgrounds.fgX + bg.width<= canvas.width) {
+  // Removed the duplicate level end condition check
+  if (backgrounds.fgX + bg.width <= canvas.width) {
     levelEnd();
+  }
 }
-    // Check for level end condition
-        if (backgrounds.fgX + bg.width <= canvas.width) {
-            levelEnd();
-        }
-    
-}
+
 
 // Level end animation
 function levelEnd() {
