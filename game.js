@@ -153,23 +153,23 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-window.onload = () => {
-    setTimeout(() => {
-        tapToFly.alpha = 0;
-    }, 2000);
+// Replace window.onload with this
+window.addEventListener('load', function() {
+  setTimeout(() => {
+    tapToFly.alpha = 0;
+  }, 2000);
 
-    setTimeout(() => {
-        dragon.velocity = jump;
-        dragon.y += dragon.velocity;
-    }, 2100);
+  setTimeout(() => {
+    dragon.velocity = jump;
+    dragon.y += dragon.velocity;
+  }, 2100);
 
-    setTimeout(() => {
-        dragon.velocity = jump;
-        dragon.y += dragon.velocity;
-        gameStarted = true;
-    }, 2300) 
-    
-};
+  setTimeout(() => {
+    dragon.velocity = jump;
+    dragon.y += dragon.velocity;
+    gameStarted = true;
+  }, 2300);
+});
 
 // Lock screen orientation to landscape
 // screen.orientation.lock('landscape');
