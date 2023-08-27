@@ -1,5 +1,4 @@
 import { initializeGame } from './init.js';
-
 initializeGame();
 
 import { draw } from './render.js';
@@ -38,25 +37,16 @@ function handleInput(event) {
 
 // Update dragon's position and state
 function updateDragon() {
-  // Apply gravity to dragon's vertical velocity
   dragon.velocity += GRAVITY;
-
-  // Update dragon's vertical position based on velocity
   dragon.y += dragon.velocity;
-
-  // Collision detection with the ground
   if (dragon.y >= canvas.height - 50 - dragon.height) {
     dragon.y = canvas.height - 50 - dragon.height;
     dragon.velocity = 0;
   }
-
-  // Collision detection with the top of the canvas
   if (dragon.y <= 0) {
     dragon.y = 0;
     dragon.velocity = 0;
   }
-
-  // Reset velocity if dragon is flapping
   if (isFlapping) {
     dragon.velocity = -JUMP_STRENGTH;
     isFlapping = false;
@@ -65,10 +55,7 @@ function updateDragon() {
 
 // Main game loop
 function gameLoop() {
-  // Clear the canvas for the new frame
   context.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Handle flapping animation
   if (isFlapping) {
     if (flapCounter % FLAP_DURATION === 0) {
       dragon.image.src = dragon.frames[flapCounter / FLAP_DURATION];
@@ -80,13 +67,9 @@ function gameLoop() {
       flapCounter = 0;
     }
   }
-
-  // Update game state
   updateDragon();
-
-  // Update obstacles
   obstacles.forEach((obstacle, index) => {
-    obstacle.x -= 1; // Obstacle speed
+    obstacle.x -= 1;
     if (collisionDetected(dragon, obstacle)) {
       if (!dragon.collided) {
         lifeBar.segments--;
@@ -101,27 +84,16 @@ function gameLoop() {
       }
     }
   });
-
-  // Update perch
-  perch.x -= 1; // Set the speed to match the obstacle speed
-
-  // Create new obstacles
+  perch.x -= 1;
   if (Math.random() < 0.01) {
     createObstacle();
   }
-
-  // Check for level end condition
   if (backgrounds.fgX + backgrounds.width <= canvas.width) {
     levelEnd();
   }
-
-  // Render the game
   draw();
-
-  // Request next animation frame
   requestAnimationFrame(gameLoop);
 }
-
 
 // Event listeners
 window.addEventListener('click', handleInput);
