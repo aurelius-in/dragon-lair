@@ -1,5 +1,5 @@
 import { initializeGame } from './init.js';
-initializeGame();
+initializeGame(); 
 
 import { draw } from './render.js';
 import * as init from './init.js';
