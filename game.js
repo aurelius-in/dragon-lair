@@ -18,12 +18,12 @@ function handleInput() {
     dragon.y += dragon.velocity;
 
     // Hardcoded image sequence
-    frame.current = "dragon4.png";
-    setTimeout(() => frame.current = "dragon5.png", 150);
-    setTimeout(() => frame.current = "dragon1.png", 300);
-    setTimeout(() => frame.current = "dragon2.png", 450);
+    frame.current = "images/dragon4.png";
+    setTimeout(() => frame.current = "images/dragon5.png", 150);
+    setTimeout(() => frame.current = "images/dragon1.png", 300);
+    setTimeout(() => frame.current = "images/dragon2.png", 450);
     setTimeout(() => {
-        frame.current = "dragon3.png";
+        frame.current = "images/dragon3.png";
         isFlapping = false;
     }, 600);
 }
