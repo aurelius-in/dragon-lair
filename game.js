@@ -4,7 +4,29 @@ import { createArrowObstacle, createLightningStrikeObstacle, createBatSwarmObsta
 
 let obstacleSpawnTime = 4000, topObstacle = false, obstacleY, spawnRate = 5, spawnTimer = 0, gameLoopCounter = 0, gameStarted = false, jump = 8, isFlapping = false, framesPerFlap = 4, frameOrder = [2, 3, 4, 0, 1], frameIndex = 0, jumpLock = false, flapCounter = 0;
 
-function handleInput() { if (jumpLock) return; jumpLock = true; setTimeout(() => jumpLock = false, 200); if (!gameStarted) { gameStarted = true; frame.current = frameOrder[0]; } if (event && event.type === 'touchstart') { event.preventDefault(); } dragon.velocity = -jump; dragon.y += dragon.velocity; isFlapping = true; flapCounter = 0; }
+function handleInput() {
+    if (jumpLock) return;
+    jumpLock = true;
+    setTimeout(() => jumpLock = false, 200);
+    if (!gameStarted) {
+        gameStarted = true;
+    }
+    if (event && event.type === 'touchstart') {
+        event.preventDefault();
+    }
+    dragon.velocity = -jump;
+    dragon.y += dragon.velocity;
+
+    // Hardcoded image sequence
+    frame.current = "dragon4.png";
+    setTimeout(() => frame.current = "dragon5.png", 150);
+    setTimeout(() => frame.current = "dragon1.png", 300);
+    setTimeout(() => frame.current = "dragon2.png", 450);
+    setTimeout(() => {
+        frame.current = "dragon3.png";
+        isFlapping = false;
+    }, 600);
+}
 
 function resetGame() { obstacles.length = 0; perch.x = 50; dragon.x = dragonStartX; dragon.y = dragonStartY; dragon.velocity = 0; gameStarted = false; frame.current = 0; backgrounds.bgX = 0; backgrounds.fgX = 0; backgrounds.bgbgX = 0; obstacleSpawnTime = 4000; endGameTime = 0; dragon.scale = 1; dragon.alpha = 1; screenFade.alpha = 0; bg.width = canvas.height * 4; }
 
