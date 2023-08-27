@@ -33,6 +33,13 @@ const GRAVITY = 0.3;
 const JUMP_STRENGTH = 8;
 const INITIAL_FLAP_COUNTER = 0;
 const FLAP_DURATION = 5; // 100 frames for a full second
+const framePaths = [
+  'images/dragon3.png',
+  'images/dragon4.png',
+  'images/dragon5.png',
+  'images/dragon1.png',
+  'images/dragon2.png'
+];
 
 // Variables
 let obstacleSpawnTime = 4000;
@@ -87,14 +94,14 @@ function collisionDetected(dragon, obstacle) {
 // Update function
 function update() {
   if (isFlapping) {
-    if (flapCounter % framesPerFlap === 0) {
-      frame.current = frameOrder[frameIndex];
-      frameIndex = (frameIndex + 1) % frameOrder.length;
+    if (flapCounter % FLAP_DURATION === 0) {
+      dragon.image.src = framePaths[frameIndex];
+      frameIndex = (frameIndex + 1) % framePaths.length;
     }
     flapCounter++;
-    if (flapCounter >= FLAP_DURATION) {
+    if (flapCounter >= FLAP_DURATION * framePaths.length) {
       isFlapping = false;
-      frame.current = frameOrder[0];
+      dragon.image.src = 'images/dragon3.png';
       flapCounter = 0;
     }
   }
