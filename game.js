@@ -175,12 +175,6 @@ function levelEnd() {
     animateEnd();
 }
 
-if (!gameStarted) {
-    if (gameLoopCounter % 30 === 0 && framesPerFlap < 40) {
-        framesPerFlap += 2;
-    }
-}
-
 function gameLoop() {
     update();
     draw();
