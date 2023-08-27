@@ -199,7 +199,6 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-gameLoop();
 window.onload = () => {
     setTimeout(() => {
         tapToFly.alpha = 0;
@@ -231,3 +230,4 @@ window.addEventListener('keydown', (e) => {
     if (e.code === 'Space') handleInput(e);
 });
 
+gameLoop();
